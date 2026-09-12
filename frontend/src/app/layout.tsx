@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/lib/theme-context";
 import Navbar from "@/components/navbar";
 import HyperspeedBackground from "@/components/hyperspeed-background";
 import MobileBottomNav from "@/components/mobile-bottom-nav";
+import BackendKeepAlive from "@/components/backend-keep-alive";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -41,6 +42,7 @@ export default function RootLayout({
 
         <ThemeProvider>
           <AuthProvider>
+            <BackendKeepAlive />
             <Navbar />
             {/* pb-20 on mobile to account for bottom nav; lg:pb-0 resets it */}
             <div className="flex-1 flex flex-col relative z-10 pb-20 lg:pb-0">
