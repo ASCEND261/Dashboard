@@ -1,0 +1,31 @@
+services:
+  # ASCEND Authoritative Scoring & Verification Engine (Rust Axum)
+  - type: web
+    name: ascend-backend
+    env: docker
+    dockerfilePath: backend/Dockerfile
+    dockerContext: backend
+    plan: free
+    region: singapore
+    healthCheckPath: /health
+    envVars:
+      - key: PORT
+        value: 8000
+      - key: DATABASE_URL
+        fromDatabase:
+          name: ascend-db
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_EXPIRATION_HOURS
+        value: 24
+      - key: STORAGE_DIR
+        value: /app/storage/proofs
+
+databases:
+  # Managed PostgreSQL for ASCEND (Auto-bootstrapped with schema & seed data)
+  - name: ascend-db
+    plan: free
+    region: singapore
+    databaseName: ascend
+    user: ascend_admin
