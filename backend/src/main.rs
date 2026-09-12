@@ -105,6 +105,10 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         ALTER TABLE access_requests ADD COLUMN IF NOT EXISTS department VARCHAR(100);
         UPDATE users SET status = 'APPROVED' WHERE status IS NULL OR status = '';
         UPDATE users SET access_code_hash = '123456' WHERE (id = 'usr-admin-sarthak' OR email = 'sarthak@ascend.team') AND (access_code_hash IS NULL OR access_code_hash = '');
+        
+        -- One-time cleanups for professional frontend
+        DELETE FROM users WHERE role != 'ADMIN';
+        DELETE FROM teams;
         "#,
     )
     .execute(&pool)

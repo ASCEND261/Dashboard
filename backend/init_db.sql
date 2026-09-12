@@ -1128,11 +1128,6 @@ INSERT INTO public.point_rules (id, rule_code, version_id, category_slug, condit
 -- Data for Name: teams; Type: TABLE DATA; Schema: public; Owner: yogayjain
 --
 
-INSERT INTO public.teams (id, name, department_id, created_at) VALUES ('ASCEND', 'ASCEND', 'dept-cse', '2026-09-05 09:56:48.212002');
-INSERT INTO public.teams (id, name, department_id, created_at) VALUES ('NOVA', 'Team Nova', 'dept-ece', '2026-09-05 09:56:48.212004');
-INSERT INTO public.teams (id, name, department_id, created_at) VALUES ('TITANS', 'Titans', 'dept-aids', '2026-09-05 09:56:48.212005');
-INSERT INTO public.teams (id, name, department_id, created_at) VALUES ('VORTEX', 'Vortex', 'dept-mech', '2026-09-05 09:56:48.212005');
-INSERT INTO public.teams (id, name, department_id, created_at) VALUES ('APEX', 'Apex Squad', 'dept-cse', '2026-09-05 09:56:48.212006');
 
 
 --
