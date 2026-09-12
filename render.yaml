@@ -4,7 +4,7 @@ services:
     name: ascend-backend
     env: docker
     dockerfilePath: Dockerfile
-    dockerContext: .
+    dockerContext: backend
     plan: free
     region: singapore
     healthCheckPath: /health

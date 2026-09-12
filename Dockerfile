@@ -10,9 +10,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy manifests and source
-COPY backend/Cargo.toml backend/Cargo.lock ./
-COPY backend/src ./src
-COPY backend/init_db.sql ./init_db.sql
+COPY Cargo.toml Cargo.lock ./
+COPY src ./src
+COPY init_db.sql ./init_db.sql
 
 # Build release binary with controlled memory
 ENV CARGO_BUILD_JOBS=1
