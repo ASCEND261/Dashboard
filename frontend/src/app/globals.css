@@ -90,15 +90,17 @@
 .light header {
   background-color: rgba(255, 255, 255, 0.94) !important;
   border-color: #E2E8F0 !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
 }
 
 .light .prismatic-glass-body {
-  background: rgba(255, 255, 255, 0.94) !important;
+  background: rgba(255, 255, 255, 0.96) !important;
   color: #0F172A !important;
   border-color: #E2E8F0 !important;
   box-shadow: 0 10px 30px -10px rgba(148, 163, 184, 0.25) !important;
 }
 
+/* Neutral Surfaces & Deep Space Backgrounds mapped to clean whites/slates */
 .light [class*="bg-[#07080A]"],
 .light [class*="bg-[#09090B]"],
 .light [class*="bg-[#0D0F14]"],
@@ -106,31 +108,112 @@
 .light [class*="bg-[#0A0C10]"],
 .light [class*="bg-[#090A0D]"],
 .light [class*="bg-[#0E1118]"],
-.light [class*="bg-[#0D0F12]"] {
+.light [class*="bg-[#0D0F12]"],
+.light [class*="bg-[#0e0f12]"],
+.light [class*="bg-[#090b10]"],
+.light [class*="bg-[#0A0D14]"] {
   background-color: #FFFFFF !important;
   color: #0F172A !important;
 }
 
+/* Secondary cards & containers */
 .light [class*="bg-[#141418]"],
 .light [class*="bg-[#14171E]"],
 .light [class*="bg-[#12151A]"],
 .light [class*="bg-[#1B1B22]"],
+.light [class*="bg-zinc-950"],
 .light [class*="bg-zinc-900"] {
-  background-color: #F1F5F9 !important;
-  color: #1E293B !important;
-}
-
-.light [class*="bg-zinc-800"] {
-  background-color: #E2E8F0 !important;
-  color: #1E293B !important;
-}
-
-.light [class*="border-zinc-800"],
-.light [class*="border-zinc-700"],
-.light [class*="border-[#22262D]"] {
+  background-color: #F8FAFC !important;
+  color: #0F172A !important;
   border-color: #E2E8F0 !important;
 }
 
+.light [class*="bg-zinc-800"] {
+  background-color: #EDF2F7 !important;
+  color: #1E293B !important;
+  border-color: #CBD5E1 !important;
+}
+
+/* Gradients mapped to clean light tones */
+.light [class*="from-[#0e131f]"],
+.light [class*="from-[#090b11]"],
+.light [class*="from-[#08090d]"],
+.light [class*="from-[#0A0D14]"],
+.light [class*="from-[#07080A]"] {
+  --tw-gradient-from: #FFFFFF !important;
+  --tw-gradient-to: #F8FAFC !important;
+  --tw-gradient-stops: #FFFFFF, #F1F5F9, #F8FAFC !important;
+  border-color: #E2E8F0 !important;
+}
+
+/* Transparent overlays */
+.light [class*="bg-black/"],
+.light [class*="bg-zinc-950/"],
+.light [class*="bg-zinc-900/"] {
+  background-color: rgba(248, 250, 252, 0.9) !important;
+  border-color: #E2E8F0 !important;
+}
+
+/* High contrast pastel status pills in light mode */
+.light [class*="bg-red-950"] {
+  background-color: #FEF2F2 !important;
+  border-color: #FECACA !important;
+  color: #B91C1C !important;
+}
+.light [class*="text-red-300"],
+.light [class*="text-red-400"] {
+  color: #DC2626 !important;
+}
+
+.light [class*="bg-blue-950"] {
+  background-color: #EFF6FF !important;
+  border-color: #BFDBFE !important;
+  color: #1D4ED8 !important;
+}
+.light [class*="text-blue-300"],
+.light [class*="text-blue-400"] {
+  color: #2563EB !important;
+}
+
+.light [class*="bg-purple-950"] {
+  background-color: #FAF5FF !important;
+  border-color: #E9D5FF !important;
+  color: #7E22CE !important;
+}
+.light [class*="text-purple-300"],
+.light [class*="text-purple-400"] {
+  color: #7C3AED !important;
+}
+
+.light [class*="bg-emerald-950"] {
+  background-color: #ECFDF5 !important;
+  border-color: #A7F3D0 !important;
+  color: #047857 !important;
+}
+.light [class*="text-emerald-300"],
+.light [class*="text-emerald-400"] {
+  color: #059669 !important;
+}
+
+.light [class*="bg-amber-950"] {
+  background-color: #FFFBEB !important;
+  border-color: #FDE68A !important;
+  color: #B45309 !important;
+}
+.light [class*="text-amber-300"],
+.light [class*="text-amber-400"] {
+  color: #D97706 !important;
+}
+
+/* Global Light Borders */
+.light [class*="border-zinc-800"],
+.light [class*="border-zinc-700"],
+.light [class*="border-[#22262D]"],
+.light [class*="border-white/"] {
+  border-color: #E2E8F0 !important;
+}
+
+/* High-contrast Typography in light mode */
 .light .text-white,
 .light .text-zinc-100,
 .light .text-zinc-200 {
@@ -138,11 +221,13 @@
 }
 
 .light .text-zinc-300,
-.light .text-zinc-400 {
+.light .text-zinc-400,
+.light [class*="text-[#8B8B9A]"] {
   color: #475569 !important;
 }
 
-.light .text-zinc-500 {
+.light .text-zinc-500,
+.light .text-zinc-600 {
   color: #64748B !important;
 }
 

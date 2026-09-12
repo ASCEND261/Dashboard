@@ -14,7 +14,9 @@ COPY Cargo.toml Cargo.lock ./
 COPY src ./src
 COPY init_db.sql ./init_db.sql
 
-# Build release binary
+# Build release binary with controlled memory
+ENV CARGO_BUILD_JOBS=1
+ENV SQLX_OFFLINE=true
 RUN cargo build --release
 
 # Runtime stage

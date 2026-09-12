@@ -56,24 +56,24 @@ export default function AscendLogo({
           {/* Top Specular Sheen */}
           <div className="absolute top-0 inset-x-0 h-1/2 bg-gradient-to-b from-white/15 to-transparent pointer-events-none rounded-t-xl" />
 
-          {/* Actual Logo Vector SVG */}
+          {/* Actual New Logo Artwork (Preserves exact floating, glow & halo animations) */}
           <img
-            src="/logo.svg"
+            src="/logo.png"
             alt="ASCEND"
-            className="w-full h-full object-contain relative z-10 filter drop-shadow-[0_2px_8px_rgba(96,165,250,0.3)] transition-transform duration-300 group-hover:scale-105"
+            className="w-full h-full object-cover rounded-lg relative z-10 filter drop-shadow-[0_2px_8px_rgba(96,165,250,0.3)] transition-transform duration-300 group-hover:scale-105"
           />
         </div>
       </div>
 
-      {/* Brand Text */}
+      {/* Brand Text - Adapts cleanly across Dark and Light modes */}
       {showText && (
         <div className="flex flex-col leading-tight">
-          <span className={`font-mono tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-white via-zinc-100 to-blue-200 group-hover:from-white group-hover:to-blue-400 transition-colors ${dimensions.text}`}>
+          <span className={`font-mono tracking-widest text-transparent bg-clip-text bg-gradient-to-r dark:from-white dark:via-zinc-100 dark:to-blue-200 from-zinc-950 via-zinc-800 to-blue-900 group-hover:from-blue-600 group-hover:to-blue-500 transition-colors ${dimensions.text}`}>
             ASCEND
           </span>
           {showSubtitle && (
-            <span className={`font-mono text-zinc-400/80 tracking-wider mt-0.5 flex items-center gap-1 ${dimensions.sub}`}>
-              <span className="w-1 h-1 rounded-full bg-blue-400 animate-pulse"></span>
+            <span className={`font-mono dark:text-zinc-400/80 text-zinc-600 tracking-wider mt-0.5 flex items-center gap-1 font-medium ${dimensions.sub}`}>
+              <span className="w-1 h-1 rounded-full bg-blue-500 animate-pulse"></span>
               <span>TECH SPRINT 2026</span>
             </span>
           )}
