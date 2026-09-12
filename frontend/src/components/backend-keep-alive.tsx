@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
+const API_BASE = "https://ascend-backend-u64d.onrender.com/api";
 
 export default function BackendKeepAlive() {
   useEffect(() => {
