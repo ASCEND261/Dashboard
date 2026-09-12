@@ -166,9 +166,9 @@ export default function AdminMembersLeaderboardPage() {
     return (
       <div className="max-w-md mx-auto my-16 p-6">
         <PrismaticGlassCard className="p-8 text-center space-y-4 border-red-500/30">
-          <ShieldAlert className="w-8 h-8 text-red-400 mx-auto" />
-          <h2 className="text-lg font-bold text-white">Restricted Access</h2>
-          <p className="text-xs text-zinc-400 leading-relaxed">
+          <ShieldAlert className="w-8 h-8 text-red-600 dark:text-red-400 mx-auto" />
+          <h2 className="text-lg font-bold text-slate-900 dark:text-white">Restricted Access</h2>
+          <p className="text-xs text-slate-600 dark:text-zinc-400 leading-relaxed">
             Team Member Leaderboard & Points Analytics are restricted to administrators and core members.
           </p>
           <Link
@@ -319,30 +319,30 @@ export default function AdminMembersLeaderboardPage() {
           </div>
           <div className="flex items-center gap-2 shrink-0">
             {["all","CSE","AI&ML","AI&DS","VLSI","CS-CYBER","CSAM"].length > 0 && (
-              <div className="flex items-center gap-1.5 bg-[#0B0C10] border border-zinc-800 rounded-xl px-3 py-1.5 text-xs text-zinc-300">
-                <span className="text-[11px] text-zinc-500">Branch:</span>
+              <div className="flex items-center gap-1.5 bg-slate-50 dark:bg-[#0B0C10] border border-slate-200 dark:border-zinc-800 rounded-xl px-3 py-1.5 text-xs text-slate-700 dark:text-zinc-300">
+                <span className="text-[11px] text-slate-500 dark:text-zinc-500 font-semibold">Branch:</span>
                 <select
                   value={branchFilter}
                   onChange={(e) => setBranchFilter(e.target.value)}
-                  className="bg-transparent text-xs text-white focus:outline-none cursor-pointer"
+                  className="bg-transparent text-xs text-slate-900 dark:text-white font-medium focus:outline-none cursor-pointer"
                 >
-                  <option value="all" className="bg-[#111118]">All</option>
+                  <option value="all" className="bg-white text-slate-900 dark:bg-[#111118] dark:text-white">All</option>
                   {["CSE","AI&ML","AI&DS","VLSI","CS-CYBER","CSAM"].map((b) => (
-                    <option key={b} value={b} className="bg-[#111118]">{b}</option>
+                    <option key={b} value={b} className="bg-white text-slate-900 dark:bg-[#111118] dark:text-white">{b}</option>
                   ))}
                 </select>
               </div>
             )}
-            <div className="flex items-center gap-1.5 bg-[#0B0C10] border border-zinc-800 rounded-xl px-3 py-1.5 text-xs text-zinc-300">
-              <span className="text-[11px] text-zinc-500">Section:</span>
+            <div className="flex items-center gap-1.5 bg-slate-50 dark:bg-[#0B0C10] border border-slate-200 dark:border-zinc-800 rounded-xl px-3 py-1.5 text-xs text-slate-700 dark:text-zinc-300">
+              <span className="text-[11px] text-slate-500 dark:text-zinc-500 font-semibold">Section:</span>
               <select
                 value={sectionFilter}
                 onChange={(e) => setSectionFilter(e.target.value)}
-                className="bg-transparent text-xs text-white focus:outline-none cursor-pointer"
+                className="bg-transparent text-xs text-slate-900 dark:text-white font-medium focus:outline-none cursor-pointer"
               >
-                <option value="all" className="bg-[#111118]">All</option>
+                <option value="all" className="bg-white text-slate-900 dark:bg-[#111118] dark:text-white">All</option>
                 {["A","B","C"].map((s) => (
-                  <option key={s} value={s} className="bg-[#111118]">Sec {s}</option>
+                  <option key={s} value={s} className="bg-white text-slate-900 dark:bg-[#111118] dark:text-white">Sec {s}</option>
                 ))}
               </select>
             </div>
@@ -350,13 +350,13 @@ export default function AdminMembersLeaderboardPage() {
         </div>
 
         {/* Leaderboard Table */}
-        <div className="ascend-panel overflow-hidden border border-zinc-800">
-          <div className="p-4 border-b border-zinc-800 flex items-center justify-between bg-zinc-950/40">
-            <div className="flex items-center gap-2 text-xs font-bold text-white font-mono uppercase tracking-wider">
-              <Trophy className="w-4 h-4 text-amber-400" />
+        <div className="ascend-panel overflow-hidden border border-slate-200 dark:border-zinc-800 bg-white dark:bg-[#0D0F14] shadow-sm">
+          <div className="p-4 border-b border-slate-200 dark:border-zinc-800 flex items-center justify-between bg-slate-50/80 dark:bg-zinc-950/40">
+            <div className="flex items-center gap-2 text-xs font-bold text-slate-900 dark:text-white font-mono uppercase tracking-wider">
+              <Trophy className="w-4 h-4 text-amber-500" />
               <span>Rankings & Point Ledger Attribution</span>
             </div>
-            <div className="text-[11px] text-zinc-400 font-mono">
+            <div className="text-[11px] text-slate-500 dark:text-zinc-400 font-mono">
               {filtered.length} / {members.length} members
             </div>
           </div>
@@ -364,7 +364,7 @@ export default function AdminMembersLeaderboardPage() {
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="border-b border-zinc-800 bg-zinc-900/40 text-[11px] font-mono text-zinc-400 uppercase tracking-wider">
+                <tr className="border-b border-slate-200 dark:border-zinc-800 bg-slate-50 dark:bg-zinc-900/40 text-[11px] font-mono text-slate-600 dark:text-zinc-400 uppercase tracking-wider font-semibold">
                   <th className="py-3 px-4 w-16 text-center">Rank</th>
                   <th className="py-3 px-4">Member</th>
                   <th className="py-3 px-4">Academic</th>
@@ -373,11 +373,11 @@ export default function AdminMembersLeaderboardPage() {
                   <th className="py-3 px-4 text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-zinc-800/60 text-xs">
+              <tbody className="divide-y divide-slate-200 dark:divide-zinc-800/60 text-xs">
                 {filtered.length === 0 ? (
                   <tr>
-                    <td colSpan={6} className="py-12 text-center text-zinc-500">
-                      <Users className="w-8 h-8 mx-auto mb-2 opacity-40" />
+                    <td colSpan={6} className="py-12 text-center text-slate-500 dark:text-zinc-500">
+                      <Users className="w-8 h-8 mx-auto mb-2 opacity-40 text-slate-400" />
                       <p className="text-sm font-medium">No members match your search.</p>
                     </td>
                   </tr>
@@ -385,16 +385,16 @@ export default function AdminMembersLeaderboardPage() {
                   filtered.map((member, index) => {
                     const rank = index + 1;
                     const medalColor =
-                      rank === 1 ? "text-amber-400 bg-amber-950/60 border-amber-700/60"
-                      : rank === 2 ? "text-zinc-300 bg-zinc-800/60 border-zinc-600/60"
-                      : rank === 3 ? "text-amber-600 bg-amber-950/40 border-amber-800/40"
-                      : "text-zinc-500 bg-zinc-900/60 border-zinc-800";
+                      rank === 1 ? "text-amber-700 bg-amber-50 border-amber-300 dark:text-amber-400 dark:bg-amber-950/60 dark:border-amber-700/60"
+                      : rank === 2 ? "text-slate-700 bg-slate-100 border-slate-300 dark:text-zinc-300 dark:bg-zinc-800/60 dark:border-zinc-600/60"
+                      : rank === 3 ? "text-amber-800 bg-amber-100/60 border-amber-300 dark:text-amber-600 dark:bg-amber-950/40 dark:border-amber-800/40"
+                      : "text-slate-500 bg-slate-50 border-slate-200 dark:text-zinc-500 dark:bg-zinc-900/60 dark:border-zinc-800";
 
                     const isProtected = member.role?.toUpperCase().includes("ADMIN") ||
                       member.role?.toUpperCase().includes("SUPER");
 
                     return (
-                      <tr key={member.id} className="hover:bg-zinc-900/40 transition group">
+                      <tr key={member.id} className="hover:bg-slate-50/80 dark:hover:bg-zinc-900/40 transition group">
                         {/* Rank */}
                         <td className="py-3.5 px-4 text-center">
                           <span className={`inline-flex items-center justify-center w-7 h-7 rounded-full text-xs font-bold font-mono border ${medalColor}`}>
@@ -405,20 +405,20 @@ export default function AdminMembersLeaderboardPage() {
                         {/* Member Info */}
                         <td className="py-3.5 px-4">
                           <div className="flex items-center gap-2.5">
-                            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center font-bold text-white text-xs shrink-0">
+                            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center font-bold text-white text-xs shrink-0 shadow-xs">
                               {member.name.charAt(0).toUpperCase()}
                             </div>
                             <div>
-                              <div className="font-semibold text-white group-hover:text-blue-400 transition flex items-center gap-1.5">
+                              <div className="font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition flex items-center gap-1.5">
                                 <span>{member.name}</span>
                                 {member.role === "ADMIN" && (
-                                  <span className="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-red-950 text-red-400 border border-red-800">ADMIN</span>
+                                  <span className="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-rose-100 text-rose-700 border border-rose-200 dark:bg-red-950 dark:text-red-400 dark:border-red-800">ADMIN</span>
                                 )}
                                 {member.role === "CORE_MEMBER" && (
-                                  <span className="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-purple-950 text-purple-400 border border-purple-800">CORE</span>
+                                  <span className="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-purple-100 text-purple-700 border border-purple-200 dark:bg-purple-950 dark:text-purple-400 dark:border-purple-800">CORE</span>
                                 )}
                               </div>
-                              <div className="text-[11px] text-zinc-400 font-mono">{member.email}</div>
+                              <div className="text-[11px] text-slate-500 dark:text-zinc-400 font-mono">{member.email}</div>
                             </div>
                           </div>
                         </td>
@@ -426,19 +426,19 @@ export default function AdminMembersLeaderboardPage() {
                         {/* Academic Info */}
                         <td className="py-3.5 px-4">
                           <div className="space-y-1">
-                            <div className="flex items-center gap-1.5 font-mono text-[11px] text-zinc-300">
-                              <GraduationCap className="w-3.5 h-3.5 text-zinc-400" />
+                            <div className="flex items-center gap-1.5 font-mono text-[11px] text-slate-700 dark:text-zinc-300 font-semibold">
+                              <GraduationCap className="w-3.5 h-3.5 text-slate-500 dark:text-zinc-400" />
                               <span>{member.enrollment_number || "—"}</span>
                             </div>
                             <div className="flex items-center gap-1 text-[10px]">
-                              <span className="px-1.5 py-0.5 rounded bg-zinc-800 text-blue-400 font-mono font-medium border border-zinc-700">
+                              <span className="px-1.5 py-0.5 rounded bg-blue-50 text-blue-700 font-mono font-bold border border-blue-200 dark:bg-zinc-800 dark:text-blue-400 dark:border-zinc-700">
                                 {member.branch || "CSE"}
                               </span>
-                              <span className="px-1.5 py-0.5 rounded bg-zinc-800 text-zinc-300 font-mono border border-zinc-700">
+                              <span className="px-1.5 py-0.5 rounded bg-slate-100 text-slate-700 font-mono border border-slate-200 dark:bg-zinc-800 dark:text-zinc-300 dark:border-zinc-700">
                                 Sec: {member.section || "A"}
                               </span>
                               {member.department && (
-                                <span className="px-1.5 py-0.5 rounded bg-zinc-800 text-zinc-400 font-mono border border-zinc-700">
+                                <span className="px-1.5 py-0.5 rounded bg-slate-100 text-slate-600 font-mono border border-slate-200 dark:bg-zinc-800 dark:text-zinc-400 dark:border-zinc-700">
                                   {member.department}
                                 </span>
                               )}
@@ -448,17 +448,17 @@ export default function AdminMembersLeaderboardPage() {
 
                         {/* Verified */}
                         <td className="py-3.5 px-4 text-center font-mono">
-                          <span className="text-emerald-400 font-bold">{member.verified_count}</span>
-                          <span className="text-zinc-500"> / {member.total_submissions}</span>
-                          <div className="text-[10px] text-zinc-500">verified</div>
+                          <span className="text-emerald-600 dark:text-emerald-400 font-bold">{member.verified_count}</span>
+                          <span className="text-slate-400 dark:text-zinc-500"> / {member.total_submissions}</span>
+                          <div className="text-[10px] text-slate-400 dark:text-zinc-500">verified</div>
                         </td>
 
                         {/* Points */}
                         <td className="py-3.5 px-4 text-right">
-                          <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-950/40 border border-amber-600/40 text-amber-300 font-mono font-black text-sm shadow-sm">
-                            <Trophy className="w-3.5 h-3.5 text-amber-400" />
+                          <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 dark:bg-amber-950/40 dark:border-amber-600/40 dark:text-amber-300 font-mono font-black text-sm shadow-xs">
+                            <Trophy className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
                             <span>{member.points.toLocaleString()}</span>
-                            <span className="text-[10px] text-amber-400/80 font-normal">pts</span>
+                            <span className="text-[10px] text-amber-700 dark:text-amber-400/80 font-normal">pts</span>
                           </div>
                         </td>
 
@@ -467,7 +467,7 @@ export default function AdminMembersLeaderboardPage() {
                           <div className="flex items-center justify-end gap-1.5">
                             <Link
                               href={`/core/queue?search=${encodeURIComponent(member.name)}`}
-                              className="inline-flex items-center gap-1 text-[11px] font-medium text-zinc-400 hover:text-white px-2.5 py-1 rounded-lg hover:bg-zinc-800 transition"
+                              className="inline-flex items-center gap-1 text-[11px] font-semibold text-slate-600 hover:text-slate-900 dark:text-zinc-400 dark:hover:text-white px-2.5 py-1 rounded-lg hover:bg-slate-100 dark:hover:bg-zinc-800 transition"
                             >
                               <span>Inspect</span>
                               <ExternalLink className="w-3 h-3" />

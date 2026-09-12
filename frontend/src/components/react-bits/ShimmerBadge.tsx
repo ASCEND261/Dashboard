@@ -12,10 +12,10 @@ export default function ShimmerBadge({
   variant?: "zinc" | "blue" | "emerald" | "amber";
 }) {
   const variantStyles = {
-    zinc: "bg-zinc-800 text-zinc-300 border-zinc-700",
-    blue: "bg-blue-950/40 text-blue-300 border-blue-800/50",
-    emerald: "bg-emerald-950/40 text-emerald-400 border-emerald-500/30",
-    amber: "bg-amber-950/40 text-amber-300 border-amber-500/30",
+    zinc: "dark:bg-zinc-800 bg-slate-100 dark:text-zinc-300 text-slate-700 dark:border-zinc-700 border-slate-300",
+    blue: "dark:bg-blue-950/40 bg-blue-50 dark:text-blue-300 text-blue-700 dark:border-blue-800/50 border-blue-200",
+    emerald: "dark:bg-emerald-950/40 bg-emerald-50 dark:text-emerald-400 text-emerald-700 dark:border-emerald-500/30 border-emerald-200",
+    amber: "dark:bg-amber-950/40 bg-amber-50 dark:text-amber-300 text-amber-800 dark:border-amber-500/30 border-amber-200",
   }[variant];
 
   return (

@@ -27,11 +27,11 @@ export default function CoreLayout({ children }: { children: React.ReactNode }) 
     return (
       <div className="flex-1 flex items-center justify-center p-6">
         <div className="max-w-md w-full ascend-panel p-8 text-center space-y-4 border-red-500/30">
-          <div className="w-12 h-12 rounded-2xl bg-red-950/40 border border-red-800 text-red-400 flex items-center justify-center mx-auto">
+          <div className="w-12 h-12 rounded-2xl bg-red-100 dark:bg-red-950/40 border border-red-300 dark:border-red-800 text-red-600 dark:text-red-400 flex items-center justify-center mx-auto">
             <ShieldAlert className="w-6 h-6" />
           </div>
-          <h2 className="text-lg font-bold text-white">403 — Unauthorized Core Workspace</h2>
-          <p className="text-xs text-[#8B8B9A] leading-relaxed">
+          <h2 className="text-lg font-bold text-slate-900 dark:text-white">403 — Unauthorized Core Workspace</h2>
+          <p className="text-xs text-slate-600 dark:text-[#8B8B9A] leading-relaxed">
             The Core Verification Center and deterministic rules controls are restricted to verified Core Members and Administrators. Backend API authorization is strictly enforced.
           </p>
           <div className="pt-2">

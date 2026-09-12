@@ -136,28 +136,28 @@ function VerifyOtpContent() {
   };
 
   return (
-    <div className="min-h-screen bg-[#07080A]/60 text-zinc-100 flex flex-col items-center justify-center p-4 sm:p-6 relative overflow-hidden">
-      <PrismaticGlassCard className="w-full max-w-md p-6 sm:p-8 relative z-10 space-y-6" glowColor="rgba(96, 165, 250, 0.2)">
-        <BorderBeam size={200} duration={8} colorFrom="#60a5fa" colorTo="#3b82f6" />
+    <div className="min-h-screen bg-slate-50/80 dark:bg-[#07080A]/60 text-slate-900 dark:text-zinc-100 flex flex-col items-center justify-center p-4 sm:p-6 relative overflow-hidden">
+      <PrismaticGlassCard className="w-full max-w-md p-6 sm:p-8 relative z-10 space-y-6 shadow-xl dark:shadow-2xl" glowColor="rgba(96, 165, 250, 0.2)">
+        <BorderBeam size={200} duration={8} colorFrom="#3b82f6" colorTo="#60a5fa" />
         <Meteors number={12} />
 
         {/* Top Back Navigation */}
         <button
           type="button"
           onClick={() => router.push("/login")}
-          className="inline-flex items-center gap-1.5 text-xs text-zinc-400 hover:text-white transition font-mono relative z-10"
+          className="inline-flex items-center gap-1.5 text-xs text-slate-600 hover:text-slate-900 dark:text-zinc-400 dark:hover:text-white transition font-mono relative z-10 font-semibold"
         >
-          <ArrowLeft className="w-3.5 h-3.5 text-blue-400" />
+          <ArrowLeft className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
           <span>Back to email entry</span>
         </button>
 
         {/* Brand Header */}
         <div className="text-center flex flex-col items-center space-y-3 relative z-10">
           <AscendLogo size="lg" showSubtitle={true} animated={true} />
-          <h1 className="text-xl font-bold text-white tracking-tight pt-1">Enter Verification Code</h1>
-          <p className="text-xs text-zinc-400 max-w-xs leading-relaxed">
+          <h1 className="text-xl font-black text-slate-900 dark:text-white tracking-tight pt-1">Enter Verification Code</h1>
+          <p className="text-xs text-slate-600 dark:text-zinc-400 max-w-xs leading-relaxed">
             We sent a 6-digit passcode to{" "}
-            <span className="text-blue-400 font-mono font-medium">{email}</span>
+            <span className="text-blue-600 dark:text-blue-400 font-mono font-bold">{email}</span>
           </p>
         </div>
 
@@ -184,14 +184,14 @@ function VerifyOtpContent() {
                 onKeyDown={(e) => handleKeyDown(idx, e)}
                 onPaste={handlePaste}
                 disabled={loading}
-                className="w-11 h-13 sm:w-13 sm:h-15 text-center text-lg sm:text-2xl font-mono font-bold bg-[#090A0D]/90 border border-zinc-800 focus:border-blue-500 rounded-xl text-white focus:outline-none transition shadow-inner focus:ring-2 focus:ring-blue-500/20 disabled:opacity-50"
+                className="w-11 h-13 sm:w-13 sm:h-15 text-center text-lg sm:text-2xl font-mono font-black bg-white dark:bg-[#090A0D]/90 border border-slate-300 dark:border-zinc-800 focus:border-blue-600 rounded-xl text-slate-900 dark:text-white focus:outline-none transition shadow-xs focus:ring-2 focus:ring-blue-500/20 disabled:opacity-50"
               />
             ))}
           </div>
 
           {error && (
-            <div className="p-3 rounded-xl bg-red-950/40 border border-red-800/60 text-xs text-red-300 flex items-center gap-2 animate-in fade-in duration-150">
-              <AlertCircle className="w-4 h-4 text-red-400 shrink-0" />
+            <div className="p-3 rounded-xl bg-rose-50 dark:bg-red-950/40 border border-rose-200 dark:border-red-800/60 text-xs text-rose-700 dark:text-red-300 flex items-center gap-2 animate-in fade-in duration-150">
+              <AlertCircle className="w-4 h-4 text-rose-600 dark:text-red-400 shrink-0" />
               <span>{error}</span>
             </div>
           )}
@@ -199,7 +199,7 @@ function VerifyOtpContent() {
           <button
             type="submit"
             disabled={loading || digits.some((d) => d === "")}
-            className="w-full py-3 rounded-xl bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white text-xs font-semibold tracking-wide transition flex items-center justify-center gap-2 shadow-lg shadow-blue-600/20 active:scale-[0.99]"
+            className="w-full py-3 rounded-xl bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white text-xs font-bold tracking-wide transition flex items-center justify-center gap-2 shadow-md shadow-blue-600/20 active:scale-[0.99]"
           >
             {loading ? "Verifying Code..." : "Verify & Ascend"}
             <ArrowRight className="w-4 h-4" />
@@ -207,11 +207,11 @@ function VerifyOtpContent() {
         </form>
 
         {/* Resend Actions */}
-        <div className="text-center space-y-2 pt-1 border-t border-zinc-800/80 relative z-10">
-          <p className="text-xs text-zinc-400">
+        <div className="text-center space-y-2 pt-2 border-t border-slate-200 dark:border-zinc-800/80 relative z-10">
+          <p className="text-xs text-slate-600 dark:text-zinc-400">
             Didn&apos;t receive the code?{" "}
             {resendCooldown > 0 ? (
-              <span className="text-zinc-400 font-mono">
+              <span className="text-slate-500 dark:text-zinc-400 font-mono font-semibold">
                 Resend in {resendCooldown}s
               </span>
             ) : (
@@ -219,7 +219,7 @@ function VerifyOtpContent() {
                 type="button"
                 onClick={handleResend}
                 disabled={resending}
-                className="text-blue-400 hover:text-blue-300 font-medium transition inline-flex items-center gap-1"
+                className="text-blue-600 dark:text-blue-400 hover:underline font-bold transition inline-flex items-center gap-1"
               >
                 <RefreshCw className={`w-3 h-3 ${resending ? "animate-spin" : ""}`} />
                 <span>Resend Code</span>
@@ -227,8 +227,8 @@ function VerifyOtpContent() {
             )}
           </p>
 
-          <div className="text-[11px] text-zinc-400 font-mono flex items-center justify-center gap-1.5 pt-1">
-            <ShieldCheck className="w-3.5 h-3.5 text-blue-400" />
+          <div className="text-[11px] text-slate-500 dark:text-zinc-400 font-mono flex items-center justify-center gap-1.5 pt-1">
+            <ShieldCheck className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
             <span>Passcode expires in 10 minutes</span>
           </div>
         </div>
@@ -241,8 +241,8 @@ export default function VerifyOtpPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen bg-[#07080A] flex items-center justify-center">
-          <div className="w-6 h-6 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
+        <div className="min-h-screen bg-slate-50 dark:bg-[#07080A] flex items-center justify-center">
+          <div className="w-6 h-6 border-2 border-blue-600 border-t-transparent rounded-full animate-spin" />
         </div>
       }
     >

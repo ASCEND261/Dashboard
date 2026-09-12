@@ -52,9 +52,9 @@ export default function AscendLogo({
         )}
 
         {/* Outer Glass Card Housing */}
-        <div className="relative w-full h-full rounded-xl bg-[#090B10]/95 border border-blue-500/25 p-1 flex items-center justify-center shadow-lg shadow-blue-950/40 backdrop-blur-md overflow-hidden group-hover:border-blue-400/50 group-hover:shadow-[0_0_20px_rgba(96,165,250,0.3)] transition-all duration-300">
+        <div className="relative w-full h-full rounded-xl bg-white dark:bg-[#090B10]/95 border border-slate-200 dark:border-blue-500/25 p-1 flex items-center justify-center shadow-md dark:shadow-lg dark:shadow-blue-950/40 backdrop-blur-md overflow-hidden group-hover:border-blue-500/50 transition-all duration-300">
           {/* Top Specular Sheen */}
-          <div className="absolute top-0 inset-x-0 h-1/2 bg-gradient-to-b from-white/15 to-transparent pointer-events-none rounded-t-xl" />
+          <div className="absolute top-0 inset-x-0 h-1/2 bg-gradient-to-b from-white/20 to-transparent pointer-events-none rounded-t-xl" />
 
           {/* Actual New Logo Artwork (Preserves exact floating, glow & halo animations) */}
           <img
@@ -65,15 +65,15 @@ export default function AscendLogo({
         </div>
       </div>
 
-      {/* Brand Text - Adapts cleanly across Dark and Light modes */}
+      {/* Brand Text - 100% Solid & Visible in both Light and Dark modes */}
       {showText && (
         <div className="flex flex-col leading-tight">
-          <span className={`font-mono tracking-widest text-transparent bg-clip-text bg-gradient-to-r dark:from-white dark:via-zinc-100 dark:to-blue-200 from-zinc-950 via-zinc-800 to-blue-900 group-hover:from-blue-600 group-hover:to-blue-500 transition-colors ${dimensions.text}`}>
+          <span className={`font-mono tracking-widest font-black text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors ${dimensions.text}`}>
             ASCEND
           </span>
           {showSubtitle && (
-            <span className={`font-mono dark:text-zinc-400/80 text-zinc-600 tracking-wider mt-0.5 flex items-center gap-1 font-medium ${dimensions.sub}`}>
-              <span className="w-1 h-1 rounded-full bg-blue-500 animate-pulse"></span>
+            <span className={`font-mono text-slate-600 dark:text-zinc-400 tracking-wider mt-0.5 flex items-center gap-1 font-bold ${dimensions.sub}`}>
+              <span className="w-1.5 h-1.5 rounded-full bg-blue-600 dark:bg-blue-400 animate-pulse shrink-0"></span>
               <span>TECH SPRINT 2026</span>
             </span>
           )}

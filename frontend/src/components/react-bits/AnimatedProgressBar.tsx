@@ -35,11 +35,11 @@ export default function AnimatedProgressBar({
     <div className={`space-y-1.5 ${className}`}>
       {(label || showPercent || metricLabel) && (
         <div className="flex items-center justify-between text-xs font-mono">
-          {label && <span className="text-zinc-400 font-medium">{label}</span>}
+          {label && <span className="text-slate-600 dark:text-zinc-400 font-medium">{label}</span>}
           <div className="flex items-center gap-1.5 ml-auto">
-            {metricLabel && <span className="text-zinc-300 font-medium">{metricLabel}</span>}
+            {metricLabel && <span className="text-slate-700 dark:text-zinc-300 font-medium">{metricLabel}</span>}
             {showPercent && (
-              <span className={`font-semibold ${variant === "emerald" ? "text-emerald-400" : "text-zinc-200"}`}>
+              <span className={`font-semibold ${variant === "emerald" ? "text-emerald-600 dark:text-emerald-400" : "text-slate-900 dark:text-zinc-200"}`}>
                 {Math.round(percentage)}%
               </span>
             )}
@@ -47,7 +47,7 @@ export default function AnimatedProgressBar({
         </div>
       )}
 
-      <div className={`w-full ${height} rounded-full bg-zinc-900 border border-zinc-800 overflow-hidden p-0.5`}>
+      <div className={`w-full ${height} rounded-full bg-slate-100 dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 overflow-hidden p-0.5`}>
         <motion.div
           className={`h-full rounded-full ${gradientClass}`}
           initial={{ width: "0%" }}

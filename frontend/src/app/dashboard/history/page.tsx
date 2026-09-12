@@ -107,28 +107,28 @@ export default function MemberHistoryPage() {
         {/* Top Breadcrumb & Actions */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="space-y-1">
-            <div className="flex items-center gap-2 text-xs font-mono text-gray-400">
-              <Link href="/dashboard" className="hover:text-white transition flex items-center gap-1">
+            <div className="flex items-center gap-2 text-xs font-mono text-slate-500 dark:text-gray-400">
+              <Link href="/dashboard" className="hover:text-blue-600 dark:hover:text-white transition flex items-center gap-1 font-semibold">
                 <ArrowLeft className="w-3.5 h-3.5" />
                 <span>Dashboard</span>
               </Link>
               <span>/</span>
-              <span className="text-zinc-400 font-semibold">Submission History</span>
+              <span className="text-slate-800 dark:text-zinc-400 font-bold">Submission History</span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight flex items-center gap-2.5">
+            <h1 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight flex items-center gap-2.5">
               <span>My Achievement Audit History</span>
-              <span className="text-[10px] px-2.5 py-0.5 rounded-full bg-zinc-800 text-zinc-200 border border-zinc-800 font-mono font-bold">
+              <span className="text-[10px] px-2.5 py-0.5 rounded-full bg-slate-200 text-slate-800 dark:bg-zinc-800 dark:text-zinc-200 border border-slate-300 dark:border-zinc-800 font-mono font-bold">
                 {submissions.length} Records
               </span>
             </h1>
-            <p className="text-xs text-gray-400">
+            <p className="text-xs text-slate-600 dark:text-gray-400">
               Chronological log of submitted claims, verifier notes, points minted, and cryptographic proof hashes.
             </p>
           </div>
 
           <Link
             href="/dashboard/submit"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold transition shadow-lg shrink-0"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold transition shadow-md shadow-blue-600/25 shrink-0 hover:scale-[1.02] active:scale-[0.98]"
           >
             <PlusCircle className="w-4 h-4" />
             <span>Submit New Claim</span>
@@ -137,38 +137,38 @@ export default function MemberHistoryPage() {
 
         {/* Stats Row */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-          <div className="p-4 rounded-xl bg-[#0E0E11] border border-zinc-800">
-            <div className="text-[10px] font-mono uppercase text-gray-400">Total Submissions</div>
-            <div className="text-2xl font-black font-mono text-white mt-1">{submissions.length}</div>
-            <div className="text-[10px] text-gray-500 font-mono">All-time claims recorded</div>
+          <div className="p-4 rounded-xl bg-white dark:bg-[#0E0E11] border border-slate-200 dark:border-zinc-800 shadow-xs">
+            <div className="text-[10px] font-mono uppercase text-slate-500 dark:text-gray-400 font-semibold">Total Submissions</div>
+            <div className="text-2xl font-black font-mono text-slate-900 dark:text-white mt-1">{submissions.length}</div>
+            <div className="text-[10px] text-slate-400 dark:text-gray-500 font-mono">All-time claims recorded</div>
           </div>
-          <div className="p-4 rounded-xl bg-[#0E0E11] border border-emerald-500/20">
-            <div className="text-[10px] font-mono uppercase text-emerald-400">Verified & Sealed</div>
-            <div className="text-2xl font-black font-mono text-emerald-400 mt-1">{verifiedTotal.length}</div>
-            <div className="text-[10px] text-emerald-500/70 font-mono">100% Core certified</div>
+          <div className="p-4 rounded-xl bg-white dark:bg-[#0E0E11] border border-emerald-200 dark:border-emerald-500/20 shadow-xs">
+            <div className="text-[10px] font-mono uppercase text-emerald-600 dark:text-emerald-400 font-semibold">Verified & Sealed</div>
+            <div className="text-2xl font-black font-mono text-emerald-600 dark:text-emerald-400 mt-1">{verifiedTotal.length}</div>
+            <div className="text-[10px] text-emerald-600/70 dark:text-emerald-500/70 font-mono">100% Core certified</div>
           </div>
-          <div className="p-4 rounded-xl bg-[#0E0E11] border border-zinc-800">
-            <div className="text-[10px] font-mono uppercase text-zinc-400">Total Points Minted</div>
-            <div className="text-2xl font-black font-mono text-zinc-100 mt-1">+{pointsTotal}</div>
-            <div className="text-[10px] text-zinc-400/70 font-mono">Deterministic formula</div>
+          <div className="p-4 rounded-xl bg-white dark:bg-[#0E0E11] border border-slate-200 dark:border-zinc-800 shadow-xs">
+            <div className="text-[10px] font-mono uppercase text-slate-500 dark:text-zinc-400 font-semibold">Total Points Minted</div>
+            <div className="text-2xl font-black font-mono text-slate-900 dark:text-zinc-100 mt-1">+{pointsTotal}</div>
+            <div className="text-[10px] text-slate-400 dark:text-zinc-400/70 font-mono">Deterministic formula</div>
           </div>
-          <div className="p-4 rounded-xl bg-[#0E0E11] border border-amber-500/20">
-            <div className="text-[10px] font-mono uppercase text-amber-400">In Verification Triage</div>
-            <div className="text-2xl font-black font-mono text-amber-300 mt-1">{pendingTotal.length}</div>
-            <div className="text-[10px] text-amber-500/70 font-mono">Awaiting core review</div>
+          <div className="p-4 rounded-xl bg-white dark:bg-[#0E0E11] border border-amber-200 dark:border-amber-500/20 shadow-xs">
+            <div className="text-[10px] font-mono uppercase text-amber-600 dark:text-amber-400 font-semibold">In Verification Triage</div>
+            <div className="text-2xl font-black font-mono text-amber-600 dark:text-amber-300 mt-1">{pendingTotal.length}</div>
+            <div className="text-[10px] text-amber-600/70 dark:text-amber-500/70 font-mono">Awaiting core review</div>
           </div>
         </div>
 
         {/* Search & Filter Bar */}
-        <div className="p-4 rounded-xl bg-[#0E0E11] border border-zinc-800 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div className="p-4 rounded-xl bg-white dark:bg-[#0E0E11] border border-slate-200 dark:border-zinc-800 flex flex-col sm:flex-row items-center justify-between gap-3 shadow-xs">
           <div className="relative w-full sm:w-80">
-            <Search className="w-3.5 h-3.5 text-gray-500 absolute left-3 top-3" />
+            <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-3" />
             <input
               type="text"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="Search history by title, ID, category..."
-              className="w-full bg-[#141418] border border-zinc-800 rounded-xl pl-8 pr-4 py-2 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-zinc-700"
+              className="w-full bg-slate-50 dark:bg-[#141418] border border-slate-200 dark:border-zinc-800 rounded-xl pl-8 pr-4 py-2 text-xs text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder-gray-500 focus:outline-none focus:border-blue-500"
             />
           </div>
 
@@ -185,8 +185,8 @@ export default function MemberHistoryPage() {
                 onClick={() => setFilterStatus(f.id)}
                 className={`px-3 py-1.5 rounded-lg text-xs font-mono font-semibold transition shrink-0 ${
                   filterStatus === f.id
-                    ? "bg-blue-600 text-white"
-                    : "bg-[#141418] text-gray-400 hover:text-white border border-zinc-800"
+                    ? "bg-blue-600 text-white shadow-xs"
+                    : "bg-slate-100 dark:bg-[#141418] text-slate-600 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-zinc-800"
                 }`}
               >
                 {f.label}
@@ -196,40 +196,40 @@ export default function MemberHistoryPage() {
         </div>
 
         {/* History List */}
-        <div className="rounded-2xl bg-[#0E0E11] border border-zinc-800 overflow-hidden shadow-xl">
-          <div className="px-5 py-3.5 border-b border-zinc-800 flex items-center justify-between bg-[#141418]">
-            <span className="text-xs font-mono font-bold text-gray-300 uppercase">
+        <div className="rounded-2xl bg-white dark:bg-[#0E0E11] border border-slate-200 dark:border-zinc-800 overflow-hidden shadow-xs">
+          <div className="px-5 py-3.5 border-b border-slate-200 dark:border-zinc-800 flex items-center justify-between bg-slate-50 dark:bg-[#141418]">
+            <span className="text-xs font-mono font-bold text-slate-700 dark:text-gray-300 uppercase">
               Audit Records ({filtered.length})
             </span>
-            <span className="text-[10px] text-gray-500 font-mono">Immutable audit ledger</span>
+            <span className="text-[10px] text-slate-500 dark:text-gray-500 font-mono">Immutable audit ledger</span>
           </div>
 
           {loading ? (
-            <div className="p-12 text-center text-xs text-gray-400 font-mono">
+            <div className="p-12 text-center text-xs text-slate-500 dark:text-gray-400 font-mono">
               Loading submission history...
             </div>
           ) : filtered.length === 0 ? (
             <div className="p-12 text-center space-y-2">
-              <Inbox className="w-8 h-8 text-gray-500 mx-auto" />
-              <p className="text-xs text-gray-400">No matching claims found in your submission history.</p>
+              <Inbox className="w-8 h-8 text-slate-400 dark:text-gray-500 mx-auto" />
+              <p className="text-xs text-slate-600 dark:text-gray-400">No matching claims found in your submission history.</p>
               <Link
                 href="/dashboard/submit"
-                className="inline-block text-xs text-zinc-400 hover:underline pt-1"
+                className="inline-block text-xs text-blue-600 dark:text-zinc-400 hover:underline pt-1 font-semibold"
               >
                 Submit an achievement to start earning verified points
               </Link>
             </div>
           ) : (
-            <div className="divide-y divide-zinc-800/80">
+            <div className="divide-y divide-slate-100 dark:divide-zinc-800/80">
               {filtered.map((item) => (
-                <div key={item.id} className="p-5 hover:bg-[#141418]/50 transition space-y-3">
+                <div key={item.id} className="p-5 hover:bg-slate-50/70 dark:hover:bg-[#141418]/50 transition space-y-3">
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                     <div className="flex flex-wrap items-center gap-2 font-mono">
-                      <span className="text-xs font-bold text-zinc-400">{item.id}</span>
-                      <span className="text-[10px] px-2 py-0.5 rounded bg-[#141418] text-gray-300 border border-zinc-800 uppercase">
+                      <span className="text-xs font-bold text-slate-600 dark:text-zinc-400">{item.id}</span>
+                      <span className="text-[10px] px-2 py-0.5 rounded bg-slate-100 dark:bg-[#141418] text-slate-700 dark:text-gray-300 border border-slate-200 dark:border-zinc-800 uppercase">
                         {item.category}
                       </span>
-                      <span className="text-[11px] text-gray-400">Date: {item.date_of_activity}</span>
+                      <span className="text-[11px] text-slate-500 dark:text-gray-400">Date: {item.date_of_activity}</span>
                     </div>
                     <div className="flex items-center gap-2">
                       {getStatusBadge(item.status)}
@@ -237,50 +237,50 @@ export default function MemberHistoryPage() {
                   </div>
 
                   <div>
-                    <h3 className="text-sm font-bold text-white">{item.title}</h3>
-                    <p className="text-xs text-gray-400 mt-1 leading-relaxed">{item.description}</p>
+                    <h3 className="text-sm font-bold text-slate-900 dark:text-white">{item.title}</h3>
+                    <p className="text-xs text-slate-600 dark:text-gray-400 mt-1 leading-relaxed">{item.description}</p>
                   </div>
 
                   {/* Reviewer remarks if present */}
                   {item.reviewer_note && (
-                    <div className="p-3 rounded-xl bg-zinc-850 border border-zinc-800 text-xs text-zinc-100 flex items-start gap-2">
-                      <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                    <div className="p-3 rounded-xl bg-slate-100 dark:bg-zinc-850 border border-slate-200 dark:border-zinc-800 text-xs text-slate-800 dark:text-zinc-100 flex items-start gap-2">
+                      <ShieldCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
                       <div>
-                        <span className="font-bold text-zinc-200 font-mono">Verifier Note: </span>
+                        <span className="font-bold text-slate-900 dark:text-zinc-200 font-mono">Verifier Note: </span>
                         <span>{item.reviewer_note}</span>
                       </div>
                     </div>
                   )}
                   {item.proof_request_reason && (
-                    <div className="p-3 rounded-xl bg-amber-950/30 border border-amber-500/30 text-xs text-amber-200 flex items-start gap-2">
-                      <AlertCircle className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+                    <div className="p-3 rounded-xl bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-500/30 text-xs text-amber-800 dark:text-amber-200 flex items-start gap-2">
+                      <AlertCircle className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
                       <div>
-                        <span className="font-bold text-amber-300 font-mono">Clarification Needed: </span>
+                        <span className="font-bold text-amber-900 dark:text-amber-300 font-mono">Clarification Needed: </span>
                         <span>{item.proof_request_reason}</span>
                       </div>
                     </div>
                   )}
                   {item.rejection_reason && (
-                    <div className="p-3 rounded-xl bg-red-950/30 border border-red-500/30 text-xs text-red-200 flex items-start gap-2">
-                      <AlertCircle className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
+                    <div className="p-3 rounded-xl bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-500/30 text-xs text-red-800 dark:text-red-200 flex items-start gap-2">
+                      <AlertCircle className="w-4 h-4 text-red-600 dark:text-red-400 shrink-0 mt-0.5" />
                       <div>
-                        <span className="font-bold text-red-300 font-mono">Rejection Reason: </span>
+                        <span className="font-bold text-red-900 dark:text-red-300 font-mono">Rejection Reason: </span>
                         <span>{item.rejection_reason}</span>
                       </div>
                     </div>
                   )}
 
                   {/* Footer with points, rules, proof inspection */}
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-1 border-t border-zinc-800">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-1 border-t border-slate-100 dark:border-zinc-800">
                     <div className="flex items-center gap-3 text-xs font-mono">
                       {item.points_awarded !== null ? (
-                        <div className="text-emerald-400 font-bold flex items-center gap-1.5">
+                        <div className="text-emerald-600 dark:text-emerald-400 font-bold flex items-center gap-1.5">
                           <CheckCircle2 className="w-3.5 h-3.5" />
                           <span>+{item.points_awarded} Points Awarded</span>
-                          <span className="text-[10px] text-gray-500 font-normal">(Rule TSJ-2026-v1)</span>
+                          <span className="text-[10px] text-slate-400 dark:text-gray-500 font-normal">(Rule TSJ-2026-v1)</span>
                         </div>
                       ) : (
-                        <span className="text-gray-400">Score derivation in queue</span>
+                        <span className="text-slate-500 dark:text-gray-400">Score derivation in queue</span>
                       )}
                     </div>
 
@@ -294,9 +294,9 @@ export default function MemberHistoryPage() {
                               mimeType: item.proof_documents[0].mime_type || "application/pdf",
                             })
                           }
-                          className="px-3 py-1.5 rounded-lg bg-[#141418] hover:bg-zinc-800 border border-zinc-800 text-xs text-gray-200 hover:text-white transition flex items-center gap-1.5 font-mono"
+                          className="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200/80 dark:bg-[#141418] dark:hover:bg-zinc-800 border border-slate-200 dark:border-zinc-800 text-xs text-slate-800 dark:text-gray-200 hover:text-slate-900 dark:hover:text-white transition flex items-center gap-1.5 font-mono shadow-xs"
                         >
-                          <FileText className="w-3.5 h-3.5 text-zinc-400" />
+                          <FileText className="w-3.5 h-3.5 text-blue-500" />
                           <span>Inspect Proof Document</span>
                         </button>
                       )}

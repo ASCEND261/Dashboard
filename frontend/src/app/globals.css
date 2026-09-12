@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   /* ========================================================================= */
   /* ASCEND DESIGN SYSTEM — Dark Neutral Charcoal / Zinc × Minimal Blue        */
@@ -36,9 +38,16 @@
   --text-secondary: #A1A1AA;       /* zinc-400 */
   --text-muted: #71717A;           /* zinc-500 */
   --text-subtle: #52525B;          /* zinc-600 */
+}
 
-  --font-inter: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+@theme {
+  --font-sans: var(--font-plus-jakarta), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
 }
 
 .light {
@@ -213,10 +222,10 @@
   border-color: #E2E8F0 !important;
 }
 
-/* High-contrast Typography in light mode */
-.light .text-white,
-.light .text-zinc-100,
-.light .text-zinc-200 {
+/* High-contrast Typography in light mode (excluding colored buttons/badges) */
+.light :not(button):not(a):not([class*="bg-blue"]):not([class*="bg-emerald"]):not([class*="bg-red"]):not([class*="bg-purple"]):not([class*="bg-indigo"]) > .text-white,
+.light :not(button):not(a):not([class*="bg-blue"]):not([class*="bg-emerald"]):not([class*="bg-red"]):not([class*="bg-purple"]):not([class*="bg-indigo"]) > .text-zinc-100,
+.light :not(button):not(a):not([class*="bg-blue"]):not([class*="bg-emerald"]):not([class*="bg-red"]):not([class*="bg-purple"]):not([class*="bg-indigo"]) > .text-zinc-200 {
   color: #0F172A !important;
 }
 
@@ -229,6 +238,19 @@
 .light .text-zinc-500,
 .light .text-zinc-600 {
   color: #64748B !important;
+}
+
+/* Ensure all primary buttons and accent pills keep crisp pure white text */
+.light .bg-blue-600,
+.light .bg-blue-500,
+.light .bg-blue-700,
+.light button.bg-blue-600,
+.light a.bg-blue-600,
+.light .bg-blue-600 *,
+.light .bg-blue-500 *,
+.light [class*="bg-emerald-600"] *,
+.light [class*="bg-red-600"] * {
+  color: #FFFFFF !important;
 }
 
 .light input:not([type="checkbox"]):not([type="radio"]),
@@ -252,7 +274,7 @@
 body {
   background-color: var(--bg-deep-space);
   color: var(--text-primary);
-  font-family: var(--font-inter);
+  font-family: var(--font-sans);
   font-size: 13px; /* High-Density Enterprise IDE Feel */
   line-height: 1.5;
   overflow-x: hidden;
@@ -451,6 +473,56 @@ body {
   background: #F1F5F9 !important;
   color: #475569 !important;
   border-color: #CBD5E1 !important;
+}
+
+/* ========================================================================= */
+/* LIGHT THEME EXCLUSIVE ANIMATIONS & MICRO-INTERACTIONS                     */
+/* ========================================================================= */
+
+.light .ascend-card,
+.light .glass-card {
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.light .ascend-card:hover,
+.light .glass-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px -6px rgba(37, 99, 235, 0.12), 0 8px 12px -8px rgba(37, 99, 235, 0.08);
+  border-color: #BFDBFE !important;
+}
+
+.light .glass-panel:hover,
+.light .ascend-panel:hover {
+  box-shadow: 0 8px 25px -5px rgba(15, 23, 42, 0.05);
+  transform: translateY(-1px);
+  transition: all 0.3s ease;
+}
+
+/* Light Theme Exclusive Button Glow */
+.light button.bg-blue-600 {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.light button.bg-blue-600:hover {
+  box-shadow: 0 0 20px rgba(37, 99, 235, 0.35);
+  transform: translateY(-1px);
+}
+
+.light button.bg-emerald-600 {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.light button.bg-emerald-600:hover {
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.35);
+  transform: translateY(-1px);
+}
+
+@keyframes light-gradient-pan {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.light .animate-light-pan {
+  background-size: 200% 200%;
+  animation: light-gradient-pan 8s ease infinite;
 }
 
 /* ========================================================================= */

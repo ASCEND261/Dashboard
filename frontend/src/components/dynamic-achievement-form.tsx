@@ -197,14 +197,14 @@ export default function DynamicAchievementForm() {
   return (
     <div className="max-w-4xl mx-auto space-y-6">
       {/* Top Banner with AI Format CTA */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 rounded-2xl bg-[#0E0E11] border border-zinc-800 backdrop-blur-md">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 rounded-2xl bg-white dark:bg-[#0E0E11] border border-slate-200 dark:border-zinc-800 backdrop-blur-md shadow-xs">
         <div className="flex items-start gap-3">
-          <div className="p-2 rounded-xl bg-zinc-800 text-zinc-400 border border-zinc-800">
+          <div className="p-2 rounded-xl bg-blue-50 dark:bg-zinc-800 text-blue-600 dark:text-zinc-400 border border-blue-100 dark:border-zinc-800">
             <Sparkles className="w-4 h-4" />
           </div>
           <div>
-            <h3 className="text-sm font-bold text-white">Need help drafting your claim?</h3>
-            <p className="text-xs text-gray-400 mt-0.5">
+            <h3 className="text-sm font-bold text-slate-900 dark:text-white">Need help drafting your claim?</h3>
+            <p className="text-xs text-slate-600 dark:text-gray-400 mt-0.5">
               Paste rough text from your certificate or event recap. ASCEND AI formats it into official fields.
             </p>
           </div>
@@ -212,7 +212,7 @@ export default function DynamicAchievementForm() {
         <button
           type="button"
           onClick={() => setFormatModalOpen(true)}
-          className="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold tracking-wide transition shadow-md shrink-0 flex items-center gap-1.5"
+          className="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold tracking-wide transition shadow-md shrink-0 flex items-center gap-1.5 hover:scale-[1.02] active:scale-[0.98]"
         >
           <Sparkles className="w-3.5 h-3.5" />
           <span>Format For Me</span>
@@ -220,13 +220,13 @@ export default function DynamicAchievementForm() {
       </div>
 
       {/* Step 1: Category Selector */}
-      <div className="p-6 rounded-2xl bg-[#0E0E11] border border-zinc-800">
+      <div className="p-6 rounded-2xl bg-white dark:bg-[#0E0E11] border border-slate-200 dark:border-zinc-800 shadow-xs">
         <div className="flex items-center justify-between mb-4">
           <div>
-            <div className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-400">Step 01</div>
-            <h2 className="text-sm font-bold text-white mt-0.5">Select Achievement Category</h2>
+            <div className="text-xs font-mono font-bold uppercase tracking-wider text-slate-500 dark:text-zinc-400">Step 01</div>
+            <h2 className="text-sm font-bold text-slate-900 dark:text-white mt-0.5">Select Achievement Category</h2>
           </div>
-          <span className="text-xs text-gray-400 font-mono">Official Tech Journey Categories</span>
+          <span className="text-xs text-slate-500 dark:text-gray-400 font-mono">Official Tech Journey Categories</span>
         </div>
 
         <div className="flex sm:grid sm:grid-cols-3 lg:grid-cols-5 gap-2.5 overflow-x-auto pb-2 scrollbar-none snap-x">
@@ -244,14 +244,14 @@ export default function DynamicAchievementForm() {
                 }}
                 className={`flex flex-col items-center justify-center p-3 sm:p-3.5 rounded-xl border text-center transition-all duration-200 shrink-0 min-w-[130px] sm:min-w-0 snap-start ${
                   isSelected
-                    ? "bg-blue-950/25 border-blue-500/60 text-white shadow-lg shadow-blue-500/10 scale-[1.02]"
-                    : "bg-[#141418] border-zinc-800 text-gray-400 hover:text-white hover:bg-[#18181B]"
+                    ? "bg-blue-50 border-blue-500 text-blue-900 shadow-sm scale-[1.02] font-bold dark:bg-blue-950/25 dark:border-blue-500/60 dark:text-white"
+                    : "bg-slate-50 border-slate-200 text-slate-700 hover:text-slate-900 hover:bg-slate-100 dark:bg-[#141418] dark:border-zinc-800 dark:text-gray-400 dark:hover:text-white dark:hover:bg-[#18181B]"
                 }`}
               >
-                <Icon className={`w-4 h-4 mb-1.5 ${isSelected ? "text-blue-400" : "text-gray-400"}`} />
+                <Icon className={`w-4 h-4 mb-1.5 ${isSelected ? "text-blue-600 dark:text-blue-400" : "text-slate-500 dark:text-gray-400"}`} />
                 <span className="text-xs font-semibold">{cat.name}</span>
                 {isSelected && (
-                  <span className="mt-1 text-[9px] font-mono text-blue-400 font-bold uppercase tracking-wider">
+                  <span className="mt-1 text-[9px] font-mono text-blue-600 dark:text-blue-400 font-bold uppercase tracking-wider">
                     Selected World
                   </span>
                 )}
@@ -264,48 +264,48 @@ export default function DynamicAchievementForm() {
       {/* Step 2: Form & Proof Container */}
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Dynamic Category Form */}
-        <div className="p-6 rounded-2xl bg-[#0E0E11] border border-zinc-800 space-y-5">
-          <div className="flex items-center justify-between pb-3 border-b border-zinc-800">
+        <div className="p-6 rounded-2xl bg-white dark:bg-[#0E0E11] border border-slate-200 dark:border-zinc-800 space-y-5 shadow-xs">
+          <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-zinc-800">
             <div>
-              <div className="text-xs font-mono font-bold uppercase tracking-wider text-blue-400">Step 02</div>
-              <h2 className="text-sm font-bold text-white mt-0.5">
+              <div className="text-xs font-mono font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400">Step 02</div>
+              <h2 className="text-sm font-bold text-slate-900 dark:text-white mt-0.5">
                 Prove Your {selectedCategory?.name || "Achievement"}
               </h2>
             </div>
-            <span className="text-xs text-gray-400 font-mono">Official Rule Version TSJ-2026-v1</span>
+            <span className="text-xs text-slate-500 dark:text-gray-400 font-mono">Official Rule Version TSJ-2026-v1</span>
           </div>
 
           {/* Automatic Member Identity Locks */}
-          <div className="p-3.5 rounded-xl bg-[#09090B] border border-zinc-800 grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs font-mono">
+          <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-[#09090B] border border-slate-200 dark:border-zinc-800 grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs font-mono">
             <div>
-              <span className="text-gray-400 text-[10px] uppercase font-semibold flex items-center gap-1">
-                <Lock className="w-3 h-3 text-emerald-400" /> Member
+              <span className="text-slate-500 dark:text-gray-400 text-[10px] uppercase font-semibold flex items-center gap-1">
+                <Lock className="w-3 h-3 text-emerald-600 dark:text-emerald-400" /> Member
               </span>
-              <div className="font-semibold text-white mt-0.5 truncate">{user?.name || "Sarthak"}</div>
+              <div className="font-bold text-slate-900 dark:text-white mt-0.5 truncate">{user?.name || "Sarthak"}</div>
             </div>
             <div>
-              <span className="text-gray-400 text-[10px] uppercase font-semibold flex items-center gap-1">
-                <Lock className="w-3 h-3 text-emerald-400" /> Team
+              <span className="text-slate-500 dark:text-gray-400 text-[10px] uppercase font-semibold flex items-center gap-1">
+                <Lock className="w-3 h-3 text-emerald-600 dark:text-emerald-400" /> Team
               </span>
-              <div className="font-semibold text-white mt-0.5">Team ASCEND</div>
+              <div className="font-bold text-slate-900 dark:text-white mt-0.5">Team ASCEND</div>
             </div>
             <div>
-              <span className="text-gray-400 text-[10px] uppercase font-semibold flex items-center gap-1">
-                <Lock className="w-3 h-3 text-emerald-400" /> Department
+              <span className="text-slate-500 dark:text-gray-400 text-[10px] uppercase font-semibold flex items-center gap-1">
+                <Lock className="w-3 h-3 text-emerald-600 dark:text-emerald-400" /> Department
               </span>
-              <div className="font-semibold text-white mt-0.5">{user?.branch || user?.department?.code || user?.department_unit || "CSE"}</div>
+              <div className="font-bold text-slate-900 dark:text-white mt-0.5">{user?.branch || user?.department?.code || user?.department_unit || "CSE"}</div>
             </div>
             <div>
-              <span className="text-gray-400 text-[10px] uppercase font-semibold">Evaluation Mode</span>
-              <div className="font-semibold text-zinc-400 mt-0.5">Deterministic</div>
+              <span className="text-slate-500 dark:text-gray-400 text-[10px] uppercase font-semibold">Evaluation Mode</span>
+              <div className="font-semibold text-slate-700 dark:text-zinc-400 mt-0.5">Deterministic</div>
             </div>
           </div>
 
           {/* Main Title & Description */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="sm:col-span-2">
-              <label className="block text-xs font-semibold text-gray-200 mb-1.5">
-                Achievement Title <span className="text-red-400">*</span>
+              <label className="block text-xs font-semibold text-slate-700 dark:text-gray-200 mb-1.5">
+                Achievement Title <span className="text-red-500">*</span>
               </label>
               <input
                 type="text"
@@ -314,23 +314,23 @@ export default function DynamicAchievementForm() {
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder="e.g., HackMIT 2026 — 2nd Place Runner-Up"
-                className="w-full bg-[#141418] border border-zinc-800 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-zinc-700/60 focus: transition"
+                className="w-full bg-slate-50 dark:bg-[#141418] border border-slate-300 dark:border-zinc-800 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder-gray-500 focus:outline-none focus:border-blue-500 transition"
               />
-              <span className="text-[10px] text-gray-500 mt-1 block">
+              <span className="text-[10px] text-slate-500 dark:text-gray-500 mt-1 block">
                 Min 5 characters. Must describe your verifiable achievement.
               </span>
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-gray-200 mb-1.5">
-                Achievement Date <span className="text-red-400">*</span>
+              <label className="block text-xs font-semibold text-slate-700 dark:text-gray-200 mb-1.5">
+                Achievement Date <span className="text-red-500">*</span>
               </label>
               <input
                 type="date"
                 required
                 value={achievementDate}
                 onChange={(e) => setAchievementDate(e.target.value)}
-                className="w-full bg-[#141418] border border-zinc-800 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-zinc-700/60 focus: transition"
+                className="w-full bg-slate-50 dark:bg-[#141418] border border-slate-300 dark:border-zinc-800 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 transition"
               />
             </div>
 
@@ -341,18 +341,18 @@ export default function DynamicAchievementForm() {
               if (f.type === "select") {
                 return (
                   <div key={f.name}>
-                    <label className="block text-xs font-semibold text-gray-200 mb-1.5">
-                      {f.label} {f.required && <span className="text-red-400">*</span>}
+                    <label className="block text-xs font-semibold text-slate-700 dark:text-gray-200 mb-1.5">
+                      {f.label} {f.required && <span className="text-red-500">*</span>}
                     </label>
                     <select
                       required={f.required}
                       value={val}
                       onChange={(e) => handleMetadataChange(f.name, e.target.value)}
-                      className="w-full bg-[#141418] border border-zinc-800 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-zinc-700/60 focus: transition"
+                      className="w-full bg-slate-50 dark:bg-[#141418] border border-slate-300 dark:border-zinc-800 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 transition"
                     >
                       <option value="">Select official tier...</option>
                       {f.options?.map((opt) => (
-                        <option key={opt} value={opt} className="bg-[#141418]">
+                        <option key={opt} value={opt} className="bg-white dark:bg-[#141418] text-slate-900 dark:text-white">
                           {opt}
                         </option>
                       ))}
@@ -364,8 +364,8 @@ export default function DynamicAchievementForm() {
               if (f.type === "textarea") {
                 return (
                   <div key={f.name} className="sm:col-span-2">
-                    <label className="block text-xs font-semibold text-gray-200 mb-1.5">
-                      {f.label} {f.required && <span className="text-red-400">*</span>}
+                    <label className="block text-xs font-semibold text-slate-700 dark:text-gray-200 mb-1.5">
+                      {f.label} {f.required && <span className="text-red-500">*</span>}
                     </label>
                     <textarea
                       rows={2}
@@ -373,7 +373,7 @@ export default function DynamicAchievementForm() {
                       value={val}
                       onChange={(e) => handleMetadataChange(f.name, e.target.value)}
                       placeholder={f.placeholder || ""}
-                      className="w-full bg-[#141418] border border-zinc-800 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-zinc-700/60 focus: transition"
+                      className="w-full bg-slate-50 dark:bg-[#141418] border border-slate-300 dark:border-zinc-800 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder-gray-500 focus:outline-none focus:border-blue-500 transition"
                     />
                   </div>
                 );
@@ -381,8 +381,8 @@ export default function DynamicAchievementForm() {
 
               return (
                 <div key={f.name}>
-                  <label className="block text-xs font-semibold text-gray-200 mb-1.5">
-                    {f.label} {f.required && <span className="text-red-400">*</span>}
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-gray-200 mb-1.5">
+                    {f.label} {f.required && <span className="text-red-500">*</span>}
                   </label>
                   <input
                     type={f.type === "number" ? "number" : f.type === "url" ? "url" : f.type === "date" ? "date" : "text"}
@@ -390,15 +390,15 @@ export default function DynamicAchievementForm() {
                     value={val}
                     onChange={(e) => handleMetadataChange(f.name, e.target.value)}
                     placeholder={f.placeholder || ""}
-                    className="w-full bg-[#141418] border border-zinc-800 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-zinc-700/60 focus: transition"
+                    className="w-full bg-slate-50 dark:bg-[#141418] border border-slate-300 dark:border-zinc-800 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder-gray-500 focus:outline-none focus:border-blue-500 transition"
                   />
                 </div>
               );
             })}
 
             <div className="sm:col-span-2">
-              <label className="block text-xs font-semibold text-gray-200 mb-1.5">
-                Detailed Claim Description <span className="text-red-400">*</span>
+              <label className="block text-xs font-semibold text-slate-700 dark:text-gray-200 mb-1.5">
+                Detailed Claim Description <span className="text-red-500">*</span>
               </label>
               <textarea
                 rows={3}
@@ -407,9 +407,9 @@ export default function DynamicAchievementForm() {
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 placeholder="Provide specific technical context, scope, or accomplishments..."
-                className="w-full bg-[#141418] border border-zinc-800 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-zinc-700/60 focus: transition"
+                className="w-full bg-slate-50 dark:bg-[#141418] border border-slate-300 dark:border-zinc-800 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder-gray-500 focus:outline-none focus:border-blue-500 transition"
               />
-              <span className="text-[10px] text-gray-500 mt-1 block">
+              <span className="text-[10px] text-slate-500 dark:text-gray-500 mt-1 block">
                 Min 10 characters. Outline what you did and verifiable details.
               </span>
             </div>
@@ -417,16 +417,16 @@ export default function DynamicAchievementForm() {
         </div>
 
         {/* Step 3: Mandatory Proof Upload */}
-        <div className="p-6 rounded-2xl bg-[#0E0E11] border border-zinc-800 space-y-3">
-          <div className="flex items-center justify-between pb-3 border-b border-zinc-800">
+        <div className="p-6 rounded-2xl bg-white dark:bg-[#0E0E11] border border-slate-200 dark:border-zinc-800 space-y-3 shadow-xs">
+          <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-zinc-800">
             <div>
-              <div className="text-xs font-mono font-bold uppercase tracking-wider text-emerald-400">Step 03</div>
-              <h2 className="text-sm font-bold text-white mt-0.5">Mandatory Proof Document</h2>
+              <div className="text-xs font-mono font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">Step 03</div>
+              <h2 className="text-sm font-bold text-slate-900 dark:text-white mt-0.5">Mandatory Proof Document</h2>
             </div>
-            <span className="text-xs text-gray-400 font-mono">PDF, PNG, JPG (Max 10MB)</span>
+            <span className="text-xs text-slate-500 dark:text-gray-400 font-mono">PDF, PNG, JPG (Max 10MB)</span>
           </div>
 
-          <div className="border border-dashed border-zinc-800 hover:border-zinc-800 rounded-2xl p-6 text-center transition bg-[#09090B] group">
+          <div className="border border-dashed border-slate-300 dark:border-zinc-800 hover:border-blue-500 dark:hover:border-zinc-700 rounded-2xl p-6 text-center transition bg-slate-50 dark:bg-[#09090B] group">
             <input
               type="file"
               id="proof-upload"
@@ -439,13 +439,13 @@ export default function DynamicAchievementForm() {
               className="hidden"
             />
             <label htmlFor="proof-upload" className="cursor-pointer block">
-              <div className="w-10 h-10 rounded-xl bg-[#141418] border border-zinc-800 group-hover:border-zinc-800 group-hover: flex items-center justify-center mx-auto mb-2 text-zinc-400 transition">
+              <div className="w-10 h-10 rounded-xl bg-white dark:bg-[#141418] border border-slate-200 dark:border-zinc-800 group-hover:border-blue-500 flex items-center justify-center mx-auto mb-2 text-blue-600 dark:text-zinc-400 transition shadow-xs">
                 <Upload className="w-4 h-4" />
               </div>
-              <div className="text-xs font-semibold text-gray-200 group-hover:text-white">
+              <div className="text-xs font-semibold text-slate-800 dark:text-gray-200 group-hover:text-blue-600 dark:group-hover:text-white">
                 {proofFile ? proofFile.name : "Click or drag to upload verified certificate / documentation"}
               </div>
-              <p className="text-[11px] text-gray-400 mt-1">
+              <p className="text-[11px] text-slate-500 dark:text-gray-400 mt-1">
                 Files are stored in private encrypted storage with cryptographic tokens.
               </p>
             </label>
@@ -491,14 +491,14 @@ export default function DynamicAchievementForm() {
           <button
             type="button"
             onClick={() => router.push("/dashboard")}
-            className="px-4 py-2.5 rounded-xl border border-zinc-800 text-xs font-semibold text-gray-400 hover:text-white hover:bg-[#141418] transition"
+            className="px-4 py-2.5 rounded-xl border border-slate-300 dark:border-zinc-800 text-xs font-semibold text-slate-700 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-[#141418] transition shadow-xs"
           >
             Cancel
           </button>
           <button
             type="submit"
             disabled={submitting || uploadingProof || !uploadedProofId}
-            className="px-6 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 disabled:opacity-40 text-white text-xs font-bold tracking-wide transition shadow-lg flex items-center gap-2"
+            className="px-6 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 disabled:opacity-40 text-white text-xs font-bold tracking-wide transition shadow-md shadow-blue-600/25 flex items-center gap-2 hover:scale-[1.02] active:scale-[0.98]"
           >
             {submitting ? "Transmitting Claim..." : "Submit for Verification"}
             <ArrowRight className="w-3.5 h-3.5" />
@@ -508,22 +508,22 @@ export default function DynamicAchievementForm() {
 
       {/* AI "Format My Achievement" Modal */}
       {formatModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4 animate-in fade-in duration-150">
-          <div className="w-full max-w-lg bg-[#0E0E11] border border-zinc-800 rounded-2xl shadow-2xl p-6 space-y-4">
-            <div className="flex items-center justify-between pb-3 border-b border-zinc-800">
-              <div className="flex items-center gap-2 text-white font-bold text-sm font-mono">
-                <Sparkles className="w-4 h-4 text-zinc-400" />
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 dark:bg-black/80 backdrop-blur-md p-4 animate-in fade-in duration-150">
+          <div className="w-full max-w-lg bg-white dark:bg-[#0E0E11] border border-slate-200 dark:border-zinc-800 rounded-2xl shadow-2xl p-6 space-y-4">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-zinc-800">
+              <div className="flex items-center gap-2 text-slate-900 dark:text-white font-bold text-sm font-mono">
+                <Sparkles className="w-4 h-4 text-blue-500" />
                 <span>AI Draft Assistant</span>
               </div>
               <button
                 onClick={() => setFormatModalOpen(false)}
-                className="text-gray-400 hover:text-white text-xs"
+                className="text-slate-400 hover:text-slate-900 dark:text-gray-400 dark:hover:text-white text-xs font-semibold"
               >
                 Close
               </button>
             </div>
 
-            <p className="text-xs text-gray-400">
+            <p className="text-xs text-slate-600 dark:text-gray-400">
               Paste raw details about your achievement (e.g. &quot;Won 2nd place in HackZurich with our smart contract project&quot;).
             </p>
 
@@ -532,14 +532,14 @@ export default function DynamicAchievementForm() {
               value={rawAiInput}
               onChange={(e) => setRawAiInput(e.target.value)}
               placeholder="e.g., We participated in XYZ Hackathon and got second position."
-              className="w-full bg-[#09090B] border border-zinc-800 rounded-xl p-3 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-zinc-700/60 focus: transition"
+              className="w-full bg-slate-50 dark:bg-[#09090B] border border-slate-300 dark:border-zinc-800 rounded-xl p-3 text-xs text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder-gray-500 focus:outline-none focus:border-blue-500 transition"
             />
 
             <div className="flex justify-end gap-2 pt-1">
               <button
                 type="button"
                 onClick={() => setFormatModalOpen(false)}
-                className="px-3.5 py-1.5 rounded-xl text-xs text-gray-400 hover:text-white"
+                className="px-3.5 py-1.5 rounded-xl text-xs text-slate-600 hover:text-slate-900 dark:text-gray-400 dark:hover:text-white"
               >
                 Cancel
               </button>
@@ -547,7 +547,7 @@ export default function DynamicAchievementForm() {
                 type="button"
                 onClick={handleAiFormatDraft}
                 disabled={!rawAiInput.trim() || formattingAi}
-                className="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 disabled:opacity-40 text-white text-xs font-bold transition flex items-center gap-1.5 shadow-md"
+                className="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 disabled:opacity-40 text-white text-xs font-bold transition flex items-center gap-1.5 shadow-md shadow-blue-600/25 hover:scale-[1.02] active:scale-[0.98]"
               >
                 {formattingAi ? "Parsing..." : "Apply Structured Draft"}
                 <Sparkles className="w-3.5 h-3.5" />

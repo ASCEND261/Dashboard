@@ -57,22 +57,22 @@ export default function PrismaticGlassCard({
         className="absolute inset-0 rounded-2xl opacity-60 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
         style={{
           background: mousePos.isHovered
-            ? `radial-gradient(400px circle at ${mousePos.x}px ${mousePos.y}px, rgba(96, 165, 250, 0.6), rgba(168, 85, 247, 0.3), rgba(244, 63, 94, 0.2), rgba(255, 255, 255, 0.05), transparent 70%)`
-            : "linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(59,130,246,0.15) 50%, rgba(168,85,247,0.08) 100%)",
+            ? `radial-gradient(400px circle at ${mousePos.x}px ${mousePos.y}px, rgba(59, 130, 246, 0.4), rgba(147, 197, 253, 0.3), rgba(219, 234, 254, 0.2), transparent 70%)`
+            : "linear-gradient(135deg, rgba(59,130,246,0.15) 0%, rgba(203,213,225,0.4) 50%, rgba(59,130,246,0.08) 100%)",
         }}
       />
 
       {/* 2. Glass Surface Body */}
-      <div className="prismatic-glass-body relative w-full h-full rounded-[15px] bg-[#0A0C10]/85 backdrop-blur-2xl border border-white/[0.06] p-6 text-zinc-100 overflow-hidden shadow-2xl transition-colors duration-200">
-        {/* Top Edge Specular Reflection Sheen (matches reference video) */}
-        <div className="absolute top-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-white/30 to-transparent pointer-events-none" />
+      <div className="prismatic-glass-body relative w-full h-full rounded-[15px] bg-white/95 dark:bg-[#0A0C10]/85 backdrop-blur-2xl border border-slate-200/90 dark:border-white/[0.06] p-6 text-slate-900 dark:text-zinc-100 overflow-hidden shadow-lg shadow-slate-200/50 dark:shadow-2xl transition-colors duration-200">
+        {/* Top Edge Specular Reflection Sheen */}
+        <div className="absolute top-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-blue-400/20 dark:via-white/30 to-transparent pointer-events-none" />
 
         {/* Dynamic Spotlight Glare follows cursor */}
         {mousePos.isHovered && (
           <div
             className="absolute inset-0 pointer-events-none transition-opacity duration-300 opacity-25"
             style={{
-              background: `radial-gradient(320px circle at ${mousePos.x}px ${mousePos.y}px, rgba(255, 255, 255, 0.18), rgba(96, 165, 250, 0.08), transparent 70%)`,
+              background: `radial-gradient(320px circle at ${mousePos.x}px ${mousePos.y}px, rgba(59, 130, 246, 0.15), rgba(147, 197, 253, 0.08), transparent 70%)`,
             }}
           />
         )}

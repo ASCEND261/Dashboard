@@ -15,16 +15,16 @@ function SubmitContent() {
         <BorderBeam size={220} duration={8} colorFrom="#60A5FA" colorTo="#34D399" />
         <Meteors number={12} />
         <div className="relative z-10">
-          <div className="text-[11px] font-mono font-bold uppercase tracking-widest text-zinc-400 flex items-center gap-1.5 mb-1">
-            <Sparkles className="w-3 h-3 text-blue-400" />
+          <div className="text-[11px] font-mono font-bold uppercase tracking-widest text-slate-500 dark:text-zinc-400 flex items-center gap-1.5 mb-1">
+            <Sparkles className="w-3 h-3 text-blue-600 dark:text-blue-400" />
             <span>OFFICIAL TECH JOURNEY SUBMISSION</span>
           </div>
-          <h1 className="text-2xl font-black text-white tracking-tight">
+          <h1 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">
             <GradientText colors={["#FFFFFF", "#60A5FA", "#34D399", "#FFFFFF"]}>
               Submit Achievement Record
             </GradientText>
           </h1>
-          <p className="text-xs text-zinc-400 mt-0.5 max-w-xl">
+          <p className="text-xs text-slate-600 dark:text-zinc-400 mt-0.5 max-w-xl">
             Attach structured metadata and certified proof documentation. Submissions are processed by the deterministic scoring engine and queued for Core Member inspection.
           </p>
         </div>

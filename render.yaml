@@ -3,7 +3,7 @@ services:
   - type: web
     name: ascend-backend
     env: docker
-    dockerfilePath: Dockerfile
+    dockerfilePath: backend/Dockerfile
     dockerContext: backend
     plan: free
     region: singapore

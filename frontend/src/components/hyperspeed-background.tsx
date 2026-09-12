@@ -360,8 +360,11 @@ export default function HyperspeedBackground() {
       animId = requestAnimationFrame(render);
     };
 
-    // First frame clear
-    ctx.fillStyle = "#07080A";
+    // First frame clear - light or dark
+    const initialIsLight =
+      typeof document !== "undefined" &&
+      document.documentElement.classList.contains("light");
+    ctx.fillStyle = initialIsLight ? "#F8FAFC" : "#07080A";
     ctx.fillRect(0, 0, width, height);
 
     render();
@@ -378,10 +381,10 @@ export default function HyperspeedBackground() {
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
       <canvas
         ref={canvasRef}
-        className="w-full h-full block opacity-85 dark:opacity-95 transition-opacity duration-300"
+        className="w-full h-full block opacity-70 dark:opacity-95 transition-opacity duration-300"
       />
-      {/* Subtle vignette darkening towards edges */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(7,8,10,0.3)_75%,rgba(7,8,10,0.8)_100%)] pointer-events-none" />
+      {/* Subtle vignette: clean soft radial fade in light, deep space in dark */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(241,245,249,0.2)_70%,rgba(226,232,240,0.5)_100%)] dark:bg-[radial-gradient(circle_at_center,transparent_0%,rgba(7,8,10,0.3)_75%,rgba(7,8,10,0.8)_100%)] pointer-events-none" />
     </div>
   );
 }

@@ -51,12 +51,8 @@ export default function MobileBottomNav() {
 
   return (
     <nav
-      className="fixed bottom-0 left-0 right-0 z-50 lg:hidden"
+      className="fixed bottom-0 left-0 right-0 z-50 lg:hidden bg-white/95 dark:bg-[#09090B]/95 border-t border-slate-200 dark:border-zinc-800 backdrop-blur-xl shadow-lg transition-colors"
       style={{
-        background: "rgba(9, 9, 11, 0.92)",
-        backdropFilter: "blur(20px)",
-        WebkitBackdropFilter: "blur(20px)",
-        borderTop: "1px solid rgba(39,39,42,0.8)",
         paddingBottom: "env(safe-area-inset-bottom, 0px)",
       }}
     >
@@ -74,12 +70,12 @@ export default function MobileBottomNav() {
               key={item.href}
               href={item.href}
               className={`flex flex-col items-center gap-1 px-3 py-1.5 rounded-xl transition-all min-w-[56px] relative ${
-                isActive ? "text-white" : "text-zinc-600 hover:text-zinc-400"
+                isActive ? "text-blue-600 dark:text-white" : "text-slate-500 hover:text-slate-900 dark:text-zinc-500 dark:hover:text-zinc-300"
               }`}
             >
               {/* Active pill background */}
               {isActive && (
-                <span className="absolute inset-0 rounded-xl bg-zinc-800/80 border border-zinc-700/50" />
+                <span className="absolute inset-0 rounded-xl bg-blue-50 border border-blue-200 dark:bg-zinc-800/80 dark:border-zinc-700/50" />
               )}
 
               {/* Highlight dot for submit/queue */}
@@ -89,12 +85,12 @@ export default function MobileBottomNav() {
 
               <Icon
                 className={`w-5 h-5 relative z-10 transition-colors ${
-                  isActive ? "text-blue-400" : "text-zinc-600"
+                  isActive ? "text-blue-600 dark:text-blue-400" : "text-slate-500 dark:text-zinc-500"
                 }`}
               />
               <span
-                className={`text-[10px] font-medium relative z-10 ${
-                  isActive ? "text-zinc-200" : "text-zinc-600"
+                className={`text-[10px] font-semibold relative z-10 ${
+                  isActive ? "text-blue-700 dark:text-zinc-100" : "text-slate-500 dark:text-zinc-500"
                 }`}
               >
                 {item.label}

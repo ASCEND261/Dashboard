@@ -152,18 +152,18 @@ export default function SignatureAscendAnimation() {
   }, [activeScenario]);
 
   return (
-    <div className="w-full rounded-xl bg-[#0E0E11] border border-zinc-800 p-5 sm:p-7 space-y-6 shadow-xl relative overflow-hidden">
+    <div className="w-full rounded-xl bg-white dark:bg-[#0E0E11] border border-slate-200 dark:border-zinc-800 p-5 sm:p-7 space-y-6 shadow-sm dark:shadow-xl relative overflow-hidden transition-colors">
       {/* Top Header & Scenario Switcher */}
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-zinc-800 relative z-10">
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-slate-200 dark:border-zinc-800 relative z-10">
         <div>
-          <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-zinc-900 border border-zinc-800 text-zinc-300 text-[11px] font-mono font-medium uppercase tracking-wider mb-1">
-            <Cpu className="w-3.5 h-3.5 text-zinc-400" />
+          <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-blue-50 dark:bg-zinc-900 border border-blue-200 dark:border-zinc-800 text-blue-700 dark:text-zinc-300 text-[11px] font-mono font-medium uppercase tracking-wider mb-1">
+            <Cpu className="w-3.5 h-3.5 text-blue-600 dark:text-zinc-400" />
             <span>Universal AutoVerify Pipeline</span>
           </div>
-          <h3 className="text-xl sm:text-2xl font-bold text-zinc-100 tracking-tight">
+          <h3 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-zinc-100 tracking-tight">
             SUBMIT → PROVE → VERIFY → CALCULATE → ASCEND
           </h3>
-          <p className="text-xs text-zinc-400 mt-0.5 max-w-xl">
+          <p className="text-xs text-slate-600 dark:text-zinc-400 mt-0.5 max-w-xl">
             Watch how ASCEND compares claim metadata against cryptographic proof, evaluates 5 evidence dimensions, and enforces deterministic point minting.
           </p>
         </div>
@@ -172,14 +172,14 @@ export default function SignatureAscendAnimation() {
         <div className="flex items-center gap-2 shrink-0">
           <button
             onClick={() => setShowPitchGuide(!showPitchGuide)}
-            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-zinc-300 text-xs font-mono font-medium transition shrink-0"
+            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700 dark:bg-zinc-900 dark:hover:bg-zinc-800 dark:border-zinc-800 dark:text-zinc-300 text-xs font-mono font-medium transition shrink-0 shadow-xs"
           >
-            <Sparkles className="w-3.5 h-3.5 text-zinc-400" />
+            <Sparkles className="w-3.5 h-3.5 text-blue-600 dark:text-zinc-400" />
             <span>{showPitchGuide ? "Hide Pitch Script" : "2-Min Pitch Script"}</span>
           </button>
           <button
             onClick={runSimulation}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-xs font-mono font-medium transition shrink-0"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-xs font-mono font-bold transition shrink-0 shadow-sm"
           >
             <RefreshCw className={`w-3.5 h-3.5 ${step !== "ASCENDED" && step !== "IDLE" ? "animate-spin" : ""}`} />
             <span>Rerun Pipeline</span>
@@ -196,53 +196,53 @@ export default function SignatureAscendAnimation() {
             exit={{ opacity: 0, height: 0 }}
             className="overflow-hidden relative z-10"
           >
-            <div className="p-4 sm:p-5 rounded-xl bg-zinc-900 border border-zinc-800 space-y-4 shadow-lg text-xs font-mono text-zinc-300">
-              <div className="flex items-center justify-between pb-2 border-b border-zinc-800">
-                <span className="font-semibold text-zinc-100 uppercase flex items-center gap-1.5">
-                  <Award className="w-4 h-4 text-blue-500" />
+            <div className="p-4 sm:p-5 rounded-xl bg-slate-50 dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 space-y-4 shadow-sm text-xs font-mono text-slate-700 dark:text-zinc-300">
+              <div className="flex items-center justify-between pb-2 border-b border-slate-200 dark:border-zinc-800">
+                <span className="font-bold text-slate-900 dark:text-zinc-100 uppercase flex items-center gap-1.5">
+                  <Award className="w-4 h-4 text-blue-600" />
                   2-Minute High-Impact Judge Pitch Script
                 </span>
-                <span className="text-[10px] text-zinc-500">Defense Ready • Safe against cross-examination</span>
+                <span className="text-[10px] text-slate-500 dark:text-zinc-500">Defense Ready • Safe against cross-examination</span>
               </div>
 
-              <div className="space-y-2 text-zinc-200 font-sans text-xs leading-relaxed">
-                <p className="font-semibold text-zinc-100">
+              <div className="space-y-2 text-slate-800 dark:text-zinc-200 font-sans text-xs leading-relaxed">
+                <p className="font-semibold text-slate-900 dark:text-zinc-100">
                   “Judges, ASCEND has two core principles:
                 </p>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-2 font-mono text-[11px]">
-                  <div className="p-2.5 rounded-lg bg-zinc-950 border border-zinc-800">
-                    <span className="text-emerald-400 font-bold">1. Zero Deduction:</span> ASCEND never takes points away. It only prevents unsupported achievements from entering the official ledger.
+                  <div className="p-2.5 rounded-lg bg-white dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 shadow-xs">
+                    <span className="text-emerald-600 dark:text-emerald-400 font-bold">1. Zero Deduction:</span> ASCEND never takes points away. It only prevents unsupported achievements from entering the official ledger.
                   </div>
-                  <div className="p-2.5 rounded-lg bg-zinc-950 border border-zinc-800">
-                    <span className="text-blue-400 font-bold">2. Controlled Automation:</span> AI can recommend verification. AI can never manufacture points.
+                  <div className="p-2.5 rounded-lg bg-white dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 shadow-xs">
+                    <span className="text-blue-600 dark:text-blue-400 font-bold">2. Controlled Automation:</span> AI can recommend verification. AI can never manufacture points.
                   </div>
                 </div>
 
                 <div className="pt-2 space-y-2">
-                  <div className="text-[11px] font-mono text-zinc-400 uppercase font-bold">
+                  <div className="text-[11px] font-mono text-slate-500 dark:text-zinc-400 uppercase font-bold">
                     Three Demonstration Cases:
                   </div>
                   <div className="space-y-1.5 font-mono text-[11px]">
-                    <div className="p-2 rounded bg-zinc-950 border border-emerald-500/30">
-                      <span className="text-emerald-400 font-bold">Case 1 (Strong Evidence):</span> Member claims 1st place in external hackathon and submits certificate. ASCEND extracts identity, event, result and date, checks consistency & integrity, and passes gate. Rust matches rule, calculates 50 pts, atomically commits to ledger.
+                    <div className="p-2 rounded bg-white dark:bg-zinc-950 border border-emerald-200 dark:border-emerald-500/30">
+                      <span className="text-emerald-600 dark:text-emerald-400 font-bold">Case 1 (Strong Evidence):</span> Member claims 1st place in external hackathon and submits certificate. ASCEND extracts identity, event, result and date, checks consistency & integrity, and passes gate. Rust matches rule, calculates 50 pts, atomically commits to ledger.
                     </div>
-                    <div className="p-2 rounded bg-zinc-950 border border-amber-500/30">
-                      <span className="text-amber-400 font-bold">Case 2 (Ambiguous Evidence):</span> Member claims 7-day streak but submits profile showing 500 problems solved. ASCEND recognizes total problems ≠ consecutive streak. Routes to Core Review. No points while pending.
+                    <div className="p-2 rounded bg-white dark:bg-zinc-950 border border-amber-200 dark:border-amber-500/30">
+                      <span className="text-amber-600 dark:text-amber-400 font-bold">Case 2 (Ambiguous Evidence):</span> Member claims 7-day streak but submits profile showing 500 problems solved. ASCEND recognizes total problems ≠ consecutive streak. Routes to Core Review. No points while pending.
                     </div>
-                    <div className="p-2 rounded bg-zinc-950 border border-red-500/30">
-                      <span className="text-red-400 font-bold">Case 3 (Insufficient Evidence):</span> Unrelated image submitted. ASCEND identifies evidence doesn't support claim. No points awarded, existing team score strictly untouched.
+                    <div className="p-2 rounded bg-white dark:bg-zinc-950 border border-red-200 dark:border-red-500/30">
+                      <span className="text-red-600 dark:text-red-400 font-bold">Case 3 (Insufficient Evidence):</span> Unrelated image submitted. ASCEND identifies evidence doesn't support claim. No points awarded, existing team score strictly untouched.
                     </div>
                   </div>
                 </div>
 
-                <p className="pt-1 italic font-medium text-zinc-300">
-                  “We’re building a controlled verification system where AI understands evidence, Rust enforces the rules, and humans handle ambiguity. <span className="text-blue-400 font-semibold">Controlled automation beats blind AI.”</span>
+                <p className="pt-1 italic font-medium text-slate-700 dark:text-zinc-300">
+                  “We’re building a controlled verification system where AI understands evidence, Rust enforces the rules, and humans handle ambiguity. <span className="text-blue-600 dark:text-blue-400 font-semibold">Controlled automation beats blind AI.”</span>
                 </p>
               </div>
 
-              <div className="pt-2 border-t border-zinc-800 flex flex-wrap items-center justify-between text-[10px] text-zinc-400">
+              <div className="pt-2 border-t border-slate-200 dark:border-zinc-800 flex flex-wrap items-center justify-between text-[10px] text-slate-500 dark:text-zinc-400">
                 <span>Proof of Implementation (Show after pitch):</span>
-                <div className="flex items-center gap-3 text-emerald-400 font-bold">
+                <div className="flex items-center gap-3 text-emerald-600 dark:text-emerald-400 font-bold">
                   <span>✓ 21/21 Rust Tests Passed</span>
                   <span>✓ 22/22 Next.js Routes Built</span>
                 </div>
@@ -261,23 +261,23 @@ export default function SignatureAscendAnimation() {
             <button
               key={key}
               onClick={() => setActiveScenario(key)}
-              className={`p-3.5 rounded-lg border text-left transition duration-150 ${
+              className={`p-3.5 rounded-xl border text-left transition duration-150 ${
                 isSelected
-                  ? "bg-zinc-850 border-blue-500/70"
-                  : "bg-zinc-950 border-zinc-800 hover:border-zinc-700 hover:bg-zinc-900"
+                  ? "bg-blue-50/90 border-blue-400 text-slate-900 dark:bg-zinc-850 dark:border-blue-500/70 dark:text-zinc-100 shadow-sm"
+                  : "bg-slate-50 border-slate-200 hover:border-slate-300 hover:bg-slate-100 text-slate-700 dark:bg-zinc-950 dark:border-zinc-800 dark:hover:border-zinc-700 dark:hover:bg-zinc-900"
               }`}
             >
               <div className="flex items-center justify-between">
-                <span className="text-[10px] font-mono font-semibold uppercase text-zinc-400">
+                <span className="text-[10px] font-mono font-bold uppercase text-slate-500 dark:text-zinc-400">
                   {sc.claimCategory}
                 </span>
                 <span
                   className={`text-[9px] font-mono px-2 py-0.5 rounded font-bold uppercase ${
                     sc.expectedOutcome === "AUTO_VERIFIED"
-                      ? "bg-emerald-950/40 text-emerald-400 border border-emerald-500/30"
+                      ? "bg-emerald-100 text-emerald-700 border border-emerald-300 dark:bg-emerald-950/40 dark:text-emerald-400 dark:border-emerald-500/30"
                       : sc.expectedOutcome === "NEEDS_CORE_REVIEW"
-                      ? "bg-amber-950/40 text-amber-400 border border-amber-500/30"
-                      : "bg-red-950/40 text-red-400 border border-red-500/30"
+                      ? "bg-amber-100 text-amber-700 border border-amber-300 dark:bg-amber-950/40 dark:text-amber-400 dark:border-amber-500/30"
+                      : "bg-red-100 text-red-700 border border-red-300 dark:bg-red-950/40 dark:text-red-400 dark:border-red-500/30"
                   }`}
                 >
                   {sc.expectedOutcome === "AUTO_VERIFIED"
@@ -287,8 +287,8 @@ export default function SignatureAscendAnimation() {
                     : "0 PTS (Safe)"}
                 </span>
               </div>
-              <div className="text-xs font-bold text-zinc-100 mt-1 line-clamp-1">{sc.claimTitle}</div>
-              <div className="text-[11px] text-zinc-400 mt-0.5 line-clamp-1 font-sans">{sc.title.split(": ")[1]}</div>
+              <div className="text-xs font-bold text-slate-900 dark:text-zinc-100 mt-1 line-clamp-1">{sc.claimTitle}</div>
+              <div className="text-[11px] text-slate-600 dark:text-zinc-400 mt-0.5 line-clamp-1 font-sans">{sc.title.split(": ")[1]}</div>
             </button>
           );
         })}
@@ -297,19 +297,19 @@ export default function SignatureAscendAnimation() {
       {/* Main Interactive Stage */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 relative z-10">
         {/* Left Column: Proof Document Preview & Laser Scanner (5 cols) */}
-        <div className="lg:col-span-5 rounded-xl bg-zinc-950 border border-zinc-800 p-4 relative overflow-hidden flex flex-col justify-between">
-          <div className="flex items-center justify-between pb-3 border-b border-zinc-800">
-            <div className="flex items-center gap-2 text-xs font-mono text-zinc-400">
-              <FileText className="w-3.5 h-3.5 text-zinc-400" />
-              <span className="truncate max-w-[180px]">{scenario.fileName}</span>
+        <div className="lg:col-span-5 rounded-xl bg-slate-50 dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 p-4 relative overflow-hidden flex flex-col justify-between shadow-xs">
+          <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-zinc-800">
+            <div className="flex items-center gap-2 text-xs font-mono text-slate-600 dark:text-zinc-400">
+              <FileText className="w-3.5 h-3.5 text-blue-600 dark:text-zinc-400" />
+              <span className="truncate max-w-[180px] font-semibold">{scenario.fileName}</span>
             </div>
-            <span className="text-[9px] font-mono px-2 py-0.5 rounded bg-zinc-900 text-zinc-300 border border-zinc-800">
+            <span className="text-[9px] font-mono px-2 py-0.5 rounded bg-white dark:bg-zinc-900 text-slate-700 dark:text-zinc-300 border border-slate-200 dark:border-zinc-800 font-bold shadow-xs">
               SHA-256 Verified
             </span>
           </div>
 
           {/* Document Preview Card with Animated Scanning Laser Line */}
-          <div className="my-4 relative h-64 rounded-xl bg-zinc-900 border border-zinc-800 p-3 overflow-hidden flex flex-col justify-between group">
+          <div className="my-4 relative h-64 rounded-xl bg-slate-900 dark:bg-zinc-900 border border-slate-800 dark:border-zinc-800 p-3 overflow-hidden flex flex-col justify-between group">
             {/* Real Evidence Image Background with sleek dark overlay */}
             <div className="absolute inset-0 z-0">
               <img
@@ -317,39 +317,39 @@ export default function SignatureAscendAnimation() {
                 alt={scenario.claimTitle}
                 className="w-full h-full object-cover object-center opacity-40 filter brightness-90 contrast-110"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/70 to-zinc-950/40" />
+              <div className="absolute inset-0 bg-gradient-to-t from-white via-white/90 to-white/60 dark:from-zinc-950 dark:via-zinc-950/70 dark:to-zinc-950/40" />
             </div>
 
             {/* Document Header Mock */}
             <div className="space-y-1 relative z-10">
               <div className="flex items-center justify-between">
-                <span className="text-[10px] font-mono text-zinc-400 font-semibold tracking-wide">ASCEND EVIDENCE RUNTIME</span>
-                <span className="text-[9px] font-mono text-zinc-500">ID: {scenario.sha256.slice(0, 10)}</span>
+                <span className="text-[10px] font-mono text-slate-600 dark:text-zinc-400 font-semibold tracking-wide">ASCEND EVIDENCE RUNTIME</span>
+                <span className="text-[9px] font-mono text-slate-500 dark:text-zinc-500">ID: {scenario.sha256.slice(0, 10)}</span>
               </div>
-              <div className="text-sm font-bold text-zinc-100 tracking-tight line-clamp-1">{scenario.claimTitle}</div>
-              <div className="text-[11px] text-zinc-400 line-clamp-1">{scenario.documentType}</div>
+              <div className="text-sm font-bold text-slate-900 dark:text-zinc-100 tracking-tight line-clamp-1">{scenario.claimTitle}</div>
+              <div className="text-[11px] text-slate-600 dark:text-zinc-400 line-clamp-1">{scenario.documentType}</div>
             </div>
 
             {/* Document Body Overlay */}
-            <div className="space-y-1.5 p-2.5 rounded-lg bg-zinc-950/85 backdrop-blur-sm border border-zinc-800 text-xs font-mono relative z-10">
+            <div className="space-y-1.5 p-2.5 rounded-lg bg-white/95 dark:bg-zinc-950/85 backdrop-blur-sm border border-slate-200 dark:border-zinc-800 text-xs font-mono relative z-10 shadow-xs">
               <div className="flex justify-between text-[11px]">
-                <span className="text-zinc-400">Claimant:</span>
-                <span className="text-zinc-100 font-semibold">Sarthak (Admin)</span>
+                <span className="text-slate-600 dark:text-zinc-400">Claimant:</span>
+                <span className="text-slate-900 dark:text-zinc-100 font-semibold">Sarthak (Admin)</span>
               </div>
               <div className="flex justify-between text-[11px]">
-                <span className="text-zinc-400">Claimed Result:</span>
-                <span className="text-blue-400 font-semibold">{scenario.claimedResult}</span>
+                <span className="text-slate-600 dark:text-zinc-400">Claimed Result:</span>
+                <span className="text-blue-600 dark:text-blue-400 font-semibold">{scenario.claimedResult}</span>
               </div>
               <div className="flex justify-between text-[11px]">
-                <span className="text-zinc-400">Proof Hash:</span>
-                <span className="text-zinc-500 font-mono text-[9px] truncate max-w-[130px]">{scenario.sha256}</span>
+                <span className="text-slate-600 dark:text-zinc-400">Proof Hash:</span>
+                <span className="text-slate-500 dark:text-zinc-500 font-mono text-[9px] truncate max-w-[130px]">{scenario.sha256}</span>
               </div>
             </div>
 
             {/* Signature status */}
-            <div className="flex items-center justify-between text-[10px] font-mono relative z-10 pt-1.5 border-t border-zinc-800">
-              <span className="text-zinc-400">Proof Integrity:</span>
-              <span className="text-emerald-400 flex items-center gap-1 font-semibold">
+            <div className="flex items-center justify-between text-[10px] font-mono relative z-10 pt-1.5 border-t border-slate-200 dark:border-zinc-800">
+              <span className="text-slate-600 dark:text-zinc-400">Proof Integrity:</span>
+              <span className="text-emerald-600 dark:text-emerald-400 flex items-center gap-1 font-semibold">
                 <Lock className="w-3 h-3" /> Private Encrypted Proof
               </span>
             </div>
@@ -366,9 +366,9 @@ export default function SignatureAscendAnimation() {
           </div>
 
           {/* Current Step Pill */}
-          <div className="flex items-center justify-between text-xs font-mono px-3 py-2 rounded-lg bg-zinc-900 border border-zinc-800">
-            <span className="text-zinc-400">Phase:</span>
-            <span className="text-blue-400 font-semibold flex items-center gap-1.5 uppercase">
+          <div className="flex items-center justify-between text-xs font-mono px-3 py-2 rounded-lg bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 shadow-xs">
+            <span className="text-slate-500 dark:text-zinc-400">Phase:</span>
+            <span className="text-blue-600 dark:text-blue-400 font-bold flex items-center gap-1.5 uppercase">
               <span className="w-2 h-2 rounded-full bg-blue-500" />
               {step}
             </span>
@@ -378,9 +378,9 @@ export default function SignatureAscendAnimation() {
         {/* Right Column: 5 Evidence Dimensions & Deterministic Verdict (7 cols) */}
         <div className="lg:col-span-7 flex flex-col justify-between space-y-4">
           <div className="space-y-2">
-            <div className="flex items-center justify-between text-xs font-mono pb-2 border-b border-zinc-800">
-              <span className="text-zinc-400 uppercase">5-Dimensional Evidence Intelligence</span>
-              <span className="text-zinc-300 font-semibold">AI Extracts • Rust Validates</span>
+            <div className="flex items-center justify-between text-xs font-mono pb-2 border-b border-slate-200 dark:border-zinc-800">
+              <span className="text-slate-500 dark:text-zinc-400 uppercase font-bold">5-Dimensional Evidence Intelligence</span>
+              <span className="text-slate-700 dark:text-zinc-300 font-bold">AI Extracts • Rust Validates</span>
             </div>
 
             {/* Evidence Checks Matrix */}
@@ -398,39 +398,39 @@ export default function SignatureAscendAnimation() {
                       x: isIlluminated ? 0 : -4,
                     }}
                     transition={{ duration: 0.25 }}
-                    className={`p-3 rounded-lg border flex items-center justify-between transition-colors ${
+                    className={`p-3 rounded-xl border flex items-center justify-between transition-colors shadow-xs ${
                       !isIlluminated
-                        ? "bg-zinc-950 border-zinc-800"
+                        ? "bg-slate-50 border-slate-200 dark:bg-zinc-950 dark:border-zinc-800"
                         : check.matched
-                        ? "bg-zinc-900 border-emerald-500/40"
-                        : "bg-zinc-900 border-red-500/40"
+                        ? "bg-emerald-50/70 border-emerald-300 dark:bg-zinc-900 dark:border-emerald-500/40"
+                        : "bg-red-50/70 border-red-300 dark:bg-zinc-900 dark:border-red-500/40"
                     }`}
                   >
                     <div className="flex items-center gap-3">
                       <div
                         className={`w-6 h-6 rounded-md flex items-center justify-center text-xs font-bold font-mono transition-colors ${
                           !isIlluminated
-                            ? "bg-zinc-900 text-zinc-500 border border-zinc-800"
+                            ? "bg-slate-200 text-slate-500 border border-slate-300 dark:bg-zinc-900 dark:text-zinc-500 dark:border-zinc-800"
                             : check.matched
-                            ? "bg-emerald-950/50 text-emerald-400 border border-emerald-500/40"
-                            : "bg-red-950/50 text-red-400 border border-red-500/40"
+                            ? "bg-emerald-100 text-emerald-700 border border-emerald-300 dark:bg-emerald-950/50 dark:text-emerald-400 dark:border-emerald-500/40"
+                            : "bg-red-100 text-red-700 border border-red-300 dark:bg-red-950/50 dark:text-red-400 dark:border-red-500/40"
                         }`}
                       >
                         {isIlluminated ? (check.matched ? "✓" : "×") : "○"}
                       </div>
                       <div>
-                        <div className="text-xs font-bold text-zinc-100">{check.label}</div>
-                        <div className="text-[11px] text-zinc-400 font-mono mt-0.5">{check.detail}</div>
+                        <div className="text-xs font-bold text-slate-900 dark:text-zinc-100">{check.label}</div>
+                        <div className="text-[11px] text-slate-600 dark:text-zinc-400 font-mono mt-0.5">{check.detail}</div>
                       </div>
                     </div>
 
                     <span
-                      className={`text-[10px] font-mono px-2 py-0.5 rounded font-semibold uppercase ${
+                      className={`text-[10px] font-mono px-2 py-0.5 rounded font-bold uppercase ${
                         !isIlluminated
-                          ? "text-zinc-500"
+                          ? "text-slate-400 dark:text-zinc-500"
                           : check.matched
-                          ? "text-emerald-400"
-                          : "text-red-400"
+                          ? "text-emerald-700 dark:text-emerald-400"
+                          : "text-red-700 dark:text-red-400"
                       }`}
                     >
                       {isIlluminated ? (check.matched ? "MATCHED" : "FLAGGED") : "PENDING"}
@@ -451,22 +451,22 @@ export default function SignatureAscendAnimation() {
                   exit={{ opacity: 0 }}
                   className={`p-4 rounded-xl border space-y-2 ${
                     scenario.expectedOutcome === "AUTO_VERIFIED"
-                      ? "bg-emerald-950/20 border-emerald-500/40 text-emerald-300"
+                      ? "bg-emerald-50/90 border-emerald-300 text-emerald-800 dark:bg-emerald-950/20 dark:border-emerald-500/40 dark:text-emerald-300 shadow-xs"
                       : scenario.expectedOutcome === "NEEDS_CORE_REVIEW"
-                      ? "bg-amber-950/20 border-amber-500/40 text-amber-300"
-                      : "bg-red-950/20 border-red-500/40 text-red-300"
+                      ? "bg-amber-50/90 border-amber-300 text-amber-800 dark:bg-amber-950/20 dark:border-amber-500/40 dark:text-amber-300 shadow-xs"
+                      : "bg-red-50/90 border-red-300 text-red-800 dark:bg-red-950/20 dark:border-red-500/40 dark:text-red-300 shadow-xs"
                   }`}
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       {scenario.expectedOutcome === "AUTO_VERIFIED" ? (
-                        <CheckCircle2 className="w-5 h-5 text-emerald-400" />
+                        <CheckCircle2 className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
                       ) : scenario.expectedOutcome === "NEEDS_CORE_REVIEW" ? (
-                        <AlertCircle className="w-5 h-5 text-amber-400" />
+                        <AlertCircle className="w-5 h-5 text-amber-600 dark:text-amber-400" />
                       ) : (
-                        <XCircle className="w-5 h-5 text-red-400" />
+                        <XCircle className="w-5 h-5 text-red-600 dark:text-red-400" />
                       )}
-                      <span className="font-bold text-sm font-mono tracking-wide uppercase">
+                      <span className="font-bold text-sm font-mono tracking-wide uppercase text-slate-900 dark:text-white">
                         {scenario.expectedOutcome === "AUTO_VERIFIED"
                           ? "ACHIEVEMENT AUTO-VERIFIED & ASCENDED"
                           : scenario.expectedOutcome === "NEEDS_CORE_REVIEW"
@@ -475,7 +475,7 @@ export default function SignatureAscendAnimation() {
                       </span>
                     </div>
 
-                    <span className="text-xs font-bold font-mono px-2.5 py-1 rounded bg-zinc-950 border border-current">
+                    <span className="text-xs font-bold font-mono px-2.5 py-1 rounded bg-white dark:bg-zinc-950 border border-current shadow-xs">
                       {scenario.expectedOutcome === "AUTO_VERIFIED"
                         ? "+50 OFFICIAL PTS"
                         : scenario.expectedOutcome === "NEEDS_CORE_REVIEW"
@@ -484,42 +484,42 @@ export default function SignatureAscendAnimation() {
                     </span>
                   </div>
 
-                  <p className="text-xs text-zinc-200 leading-relaxed font-sans">
+                  <p className="text-xs text-slate-700 dark:text-zinc-200 leading-relaxed font-sans">
                     {scenario.explanation}
                   </p>
 
                   {/* Core Principle Quote */}
-                  <div className="text-[11px] font-mono text-zinc-300 bg-zinc-950/70 px-3 py-1.5 rounded-lg border border-zinc-800 flex items-center justify-between">
-                    <span className="text-zinc-400">Architectural Boundary:</span>
-                    <span className="font-semibold text-blue-400">“AI can recommend verification. AI can never manufacture points.”</span>
+                  <div className="text-[11px] font-mono text-slate-700 dark:text-zinc-300 bg-white/80 dark:bg-zinc-950/70 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-zinc-800 flex items-center justify-between shadow-xs">
+                    <span className="text-slate-500 dark:text-zinc-400">Architectural Boundary:</span>
+                    <span className="font-semibold text-blue-600 dark:text-blue-400">“AI can recommend verification. AI can never manufacture points.”</span>
                   </div>
 
                   {/* Scenario-Specific Authoritative Execution Sequence */}
                   <div className="pt-2.5 border-t border-current/20 space-y-1.5">
-                    <div className="text-[10px] font-mono text-zinc-400 uppercase tracking-wider font-bold flex items-center gap-1.5">
-                      <Cpu className="w-3 h-3 text-zinc-400" />
+                    <div className="text-[10px] font-mono text-slate-600 dark:text-zinc-400 uppercase tracking-wider font-bold flex items-center gap-1.5">
+                      <Cpu className="w-3 h-3 text-slate-500 dark:text-zinc-400" />
                       <span>Authoritative Execution Sequence:</span>
                     </div>
 
                     {scenario.expectedOutcome === "AUTO_VERIFIED" && (
                       <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 text-[10px] sm:text-[11px] font-mono font-bold">
-                        <span className="px-2 py-0.5 rounded bg-zinc-950 border border-emerald-500/40 text-emerald-400 flex items-center gap-1">
-                          <CheckCircle2 className="w-3 h-3 text-emerald-400" /> EVIDENCE CHECK ✓
+                        <span className="px-2 py-0.5 rounded bg-white dark:bg-zinc-950 border border-emerald-300 dark:border-emerald-500/40 text-emerald-700 dark:text-emerald-400 flex items-center gap-1 shadow-xs">
+                          <CheckCircle2 className="w-3 h-3 text-emerald-600 dark:text-emerald-400" /> EVIDENCE CHECK ✓
                         </span>
-                        <ArrowRight className="w-3 h-3 text-zinc-500" />
-                        <span className="px-2 py-0.5 rounded bg-zinc-950 border border-zinc-700 text-zinc-300 flex items-center gap-1">
-                          <Cpu className="w-3 h-3 text-zinc-400" /> RULE MATCHED ✓
+                        <ArrowRight className="w-3 h-3 text-slate-400 dark:text-zinc-500" />
+                        <span className="px-2 py-0.5 rounded bg-white dark:bg-zinc-950 border border-slate-200 dark:border-zinc-700 text-slate-700 dark:text-zinc-300 flex items-center gap-1 shadow-xs">
+                          <Cpu className="w-3 h-3 text-slate-500 dark:text-zinc-400" /> RULE MATCHED ✓
                         </span>
-                        <ArrowRight className="w-3 h-3 text-zinc-500" />
-                        <span className="px-2 py-0.5 rounded bg-zinc-950 border border-zinc-700 text-blue-400 flex items-center gap-1">
-                          <Zap className="w-3 h-3 text-blue-400" /> POINTS CALCULATED +50
+                        <ArrowRight className="w-3 h-3 text-slate-400 dark:text-zinc-500" />
+                        <span className="px-2 py-0.5 rounded bg-white dark:bg-zinc-950 border border-blue-200 dark:border-zinc-700 text-blue-600 dark:text-blue-400 flex items-center gap-1 shadow-xs">
+                          <Zap className="w-3 h-3 text-blue-600 dark:text-blue-400" /> POINTS CALCULATED +50
                         </span>
-                        <ArrowRight className="w-3 h-3 text-zinc-500" />
-                        <span className="px-2 py-0.5 rounded bg-zinc-950 border border-emerald-500/50 text-emerald-400 flex items-center gap-1">
+                        <ArrowRight className="w-3 h-3 text-slate-400 dark:text-zinc-500" />
+                        <span className="px-2 py-0.5 rounded bg-white dark:bg-zinc-950 border border-emerald-300 dark:border-emerald-500/50 text-emerald-700 dark:text-emerald-400 flex items-center gap-1 shadow-xs">
                           <Lock className="w-3 h-3" /> LEDGER COMMITTED
                         </span>
-                        <ArrowRight className="w-3 h-3 text-zinc-500" />
-                        <span className="px-2 py-0.5 rounded bg-emerald-950/30 border border-emerald-500/40 text-emerald-400">
+                        <ArrowRight className="w-3 h-3 text-slate-400 dark:text-zinc-500" />
+                        <span className="px-2 py-0.5 rounded bg-emerald-100 dark:bg-emerald-950/30 border border-emerald-300 dark:border-emerald-500/40 text-emerald-700 dark:text-emerald-400 shadow-xs">
                           TEAM SCORE +50
                         </span>
                       </div>
@@ -527,23 +527,23 @@ export default function SignatureAscendAnimation() {
 
                     {scenario.expectedOutcome === "NEEDS_CORE_REVIEW" && (
                       <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 text-[10px] sm:text-[11px] font-mono font-bold">
-                        <span className="px-2 py-0.5 rounded bg-zinc-950 border border-amber-500/40 text-amber-400 flex items-center gap-1">
-                          <AlertCircle className="w-3 h-3 text-amber-400" /> EVIDENCE CHECK
+                        <span className="px-2 py-0.5 rounded bg-white dark:bg-zinc-950 border border-amber-300 dark:border-amber-500/40 text-amber-700 dark:text-amber-400 flex items-center gap-1 shadow-xs">
+                          <AlertCircle className="w-3 h-3 text-amber-600 dark:text-amber-400" /> EVIDENCE CHECK
                         </span>
-                        <ArrowRight className="w-3 h-3 text-zinc-500" />
-                        <span className="px-2 py-0.5 rounded bg-zinc-950 border border-amber-500/40 text-amber-400">
+                        <ArrowRight className="w-3 h-3 text-slate-400 dark:text-zinc-500" />
+                        <span className="px-2 py-0.5 rounded bg-white dark:bg-zinc-950 border border-amber-300 dark:border-amber-500/40 text-amber-700 dark:text-amber-400 shadow-xs">
                           PARTIAL / AMBIGUOUS MATCH
                         </span>
-                        <ArrowRight className="w-3 h-3 text-zinc-500" />
-                        <span className="px-2 py-0.5 rounded bg-zinc-950 border border-amber-500/50 text-amber-400 flex items-center gap-1">
+                        <ArrowRight className="w-3 h-3 text-slate-400 dark:text-zinc-500" />
+                        <span className="px-2 py-0.5 rounded bg-white dark:bg-zinc-950 border border-amber-300 dark:border-amber-500/50 text-amber-700 dark:text-amber-400 flex items-center gap-1 shadow-xs">
                           <Lock className="w-3 h-3" /> CORE REVIEW
                         </span>
-                        <ArrowRight className="w-3 h-3 text-zinc-500" />
-                        <span className="px-2 py-0.5 rounded bg-zinc-950 border border-zinc-800 text-zinc-400">
+                        <ArrowRight className="w-3 h-3 text-slate-400 dark:text-zinc-500" />
+                        <span className="px-2 py-0.5 rounded bg-white dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 text-slate-500 dark:text-zinc-400 shadow-xs">
                           NO POINTS YET
                         </span>
-                        <ArrowRight className="w-3 h-3 text-zinc-500" />
-                        <span className="px-2 py-0.5 rounded bg-amber-950/30 border border-amber-500/40 text-amber-400">
+                        <ArrowRight className="w-3 h-3 text-slate-400 dark:text-zinc-500" />
+                        <span className="px-2 py-0.5 rounded bg-amber-100 dark:bg-amber-950/30 border border-amber-300 dark:border-amber-500/40 text-amber-700 dark:text-amber-400 shadow-xs">
                           LEDGER UNCHANGED
                         </span>
                       </div>
@@ -551,23 +551,23 @@ export default function SignatureAscendAnimation() {
 
                     {scenario.expectedOutcome === "INVALID_EVIDENCE" && (
                       <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 text-[10px] sm:text-[11px] font-mono font-bold">
-                        <span className="px-2 py-0.5 rounded bg-zinc-950 border border-red-500/40 text-red-400 flex items-center gap-1">
-                          <XCircle className="w-3 h-3 text-red-400" /> EVIDENCE CHECK
+                        <span className="px-2 py-0.5 rounded bg-white dark:bg-zinc-950 border border-red-300 dark:border-red-500/40 text-red-700 dark:text-red-400 flex items-center gap-1 shadow-xs">
+                          <XCircle className="w-3 h-3 text-red-600 dark:text-red-400" /> EVIDENCE CHECK
                         </span>
-                        <ArrowRight className="w-3 h-3 text-zinc-500" />
-                        <span className="px-2 py-0.5 rounded bg-zinc-950 border border-red-500/40 text-red-400">
+                        <ArrowRight className="w-3 h-3 text-slate-400 dark:text-zinc-500" />
+                        <span className="px-2 py-0.5 rounded bg-white dark:bg-zinc-950 border border-red-300 dark:border-red-500/40 text-red-700 dark:text-red-400 shadow-xs">
                           CATEGORY / CLAIM MATCH ✕
                         </span>
-                        <ArrowRight className="w-3 h-3 text-zinc-500" />
-                        <span className="px-2 py-0.5 rounded bg-zinc-950 border border-red-500/50 text-red-400 flex items-center gap-1">
+                        <ArrowRight className="w-3 h-3 text-slate-400 dark:text-zinc-500" />
+                        <span className="px-2 py-0.5 rounded bg-white dark:bg-zinc-950 border border-red-300 dark:border-red-500/50 text-red-700 dark:text-red-400 flex items-center gap-1 shadow-xs">
                           EVIDENCE INSUFFICIENT
                         </span>
-                        <ArrowRight className="w-3 h-3 text-zinc-500" />
-                        <span className="px-2 py-0.5 rounded bg-zinc-950 border border-zinc-800 text-zinc-400">
+                        <ArrowRight className="w-3 h-3 text-slate-400 dark:text-zinc-500" />
+                        <span className="px-2 py-0.5 rounded bg-white dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 text-slate-500 dark:text-zinc-400 shadow-xs">
                           NO POINTS AWARDED
                         </span>
-                        <ArrowRight className="w-3 h-3 text-zinc-500" />
-                        <span className="px-2 py-0.5 rounded bg-emerald-950/30 border border-emerald-500/40 text-emerald-400">
+                        <ArrowRight className="w-3 h-3 text-slate-400 dark:text-zinc-500" />
+                        <span className="px-2 py-0.5 rounded bg-emerald-100 dark:bg-emerald-950/30 border border-emerald-300 dark:border-emerald-500/40 text-emerald-700 dark:text-emerald-400 shadow-xs">
                           LEDGER UNCHANGED
                         </span>
                       </div>
@@ -576,8 +576,8 @@ export default function SignatureAscendAnimation() {
 
                   {/* Anti-Deduction Guarantee Banner */}
                   <div className="pt-2 border-t border-current/20 flex items-center justify-between text-[11px] font-mono">
-                    <span className="text-zinc-200">Team Score Impact:</span>
-                    <span className="font-bold">
+                    <span className="text-slate-700 dark:text-zinc-200 font-semibold">Team Score Impact:</span>
+                    <span className="font-bold text-slate-900 dark:text-white">
                       {scenario.expectedOutcome === "AUTO_VERIFIED"
                         ? "1,420 PTS → 1,470 PTS (+50 PTS Applied to Immutable Ledger)"
                         : scenario.expectedOutcome === "NEEDS_CORE_REVIEW"
@@ -587,12 +587,12 @@ export default function SignatureAscendAnimation() {
                   </div>
                 </motion.div>
               ) : (
-                <div className="p-4 rounded-xl bg-zinc-950 border border-zinc-800 text-xs font-mono text-zinc-400 flex items-center justify-between">
+                <div className="p-4 rounded-xl bg-slate-50 dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 text-xs font-mono text-slate-600 dark:text-zinc-400 flex items-center justify-between shadow-xs">
                   <div className="flex items-center gap-2">
-                    <Zap className="w-4 h-4 text-blue-500 animate-pulse" />
+                    <Zap className="w-4 h-4 text-blue-600 dark:text-blue-500 animate-pulse" />
                     <span>Deterministic evaluation executing in Rust runtime...</span>
                   </div>
-                  <span className="text-[10px] text-zinc-500">TSJ-2026-v1 Engine</span>
+                  <span className="text-[10px] text-slate-500 dark:text-zinc-500 font-semibold">TSJ-2026-v1 Engine</span>
                 </div>
               )}
             </AnimatePresence>

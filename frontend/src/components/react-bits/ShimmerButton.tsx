@@ -47,7 +47,7 @@ export default function ShimmerButton({
       </div>
 
       {/* Backdrop Surface */}
-      <div className="absolute inset-[1px] -z-20 rounded-[inherit] bg-[#0E1118]/90 backdrop-blur-xl group-hover:bg-[#121620]/95 transition-colors duration-200" />
+      <div className="absolute inset-[1px] -z-20 rounded-[inherit] bg-slate-900 dark:bg-[#0E1118]/90 backdrop-blur-xl group-hover:bg-slate-800 dark:group-hover:bg-[#121620]/95 transition-colors duration-200" />
 
       {/* Content */}
       <div className="relative z-10 flex items-center justify-center gap-2">

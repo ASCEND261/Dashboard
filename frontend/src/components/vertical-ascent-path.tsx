@@ -97,18 +97,18 @@ export default function VerticalAscentPath() {
     <div className="w-full max-w-xl mx-auto py-6 px-3">
       {/* Top Header */}
       <div className="text-center mb-8">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-950/20 border border-blue-800/30 text-blue-400 text-[10px] font-mono uppercase tracking-wider mb-2">
-          <ArrowUp className="w-3 h-3 text-blue-400" />
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800/30 text-blue-700 dark:text-blue-400 text-[10px] font-mono uppercase tracking-wider mb-2 font-bold">
+          <ArrowUp className="w-3 h-3 text-blue-600 dark:text-blue-400" />
           <span>Vertical Ascent Path</span>
         </div>
-        <h2 className="text-xl font-bold text-white tracking-tight">Team Ascent Constellation</h2>
-        <p className="text-xs text-zinc-400 mt-1 max-w-sm mx-auto">
+        <h2 className="text-xl font-black text-slate-900 dark:text-white tracking-tight">Team Ascent Constellation</h2>
+        <p className="text-xs text-slate-600 dark:text-zinc-400 mt-1 max-w-sm mx-auto">
           Scroll upward through the team&apos;s journey. Every milestone physically anchors verified points into the official ledger.
         </p>
       </div>
 
       {/* The Ascent Spine */}
-      <div className="relative pl-6 sm:pl-8 space-y-8 before:absolute before:left-[27px] sm:before:left-[35px] before:top-4 before:bottom-4 before:w-0.5 before:bg-gradient-to-t before:from-blue-600/40 before:via-blue-500 before:to-zinc-800">
+      <div className="relative pl-6 sm:pl-8 space-y-8 before:absolute before:left-[27px] sm:before:left-[35px] before:top-4 before:bottom-4 before:w-0.5 before:bg-gradient-to-t before:from-blue-600/40 before:via-blue-500 before:to-slate-300 dark:before:to-zinc-800">
         {MILESTONES.map((node, index) => {
           const isSelected = selectedNodeId === node.id;
           const isVerified = node.status === "VERIFIED";
@@ -125,16 +125,16 @@ export default function VerticalAscentPath() {
               <div
                 className={`absolute -left-[27px] sm:-left-[35px] top-3.5 w-6 h-6 rounded-full flex items-center justify-center border-2 transition-transform duration-300 ${
                   isVerified
-                    ? "bg-blue-600 border-[#0D0F12] text-white shadow-[0_0_12px_rgba(91,140,255,0.8)] scale-110"
+                    ? "bg-blue-600 border-white dark:border-[#0D0F12] text-white shadow-[0_0_12px_rgba(37,99,235,0.6)] scale-110"
                     : isInProgress
-                    ? "bg-[#0D0F12] border-blue-400 text-blue-400 animate-pulse"
-                    : "bg-[#0D0F12] border-zinc-700 text-zinc-500"
+                    ? "bg-white dark:bg-[#0D0F12] border-blue-500 text-blue-600 dark:text-blue-400 animate-pulse"
+                    : "bg-slate-100 dark:bg-[#0D0F12] border-slate-300 dark:border-zinc-700 text-slate-400 dark:text-zinc-500"
                 }`}
               >
                 {isVerified ? (
                   <CheckCircle2 className="w-3.5 h-3.5 stroke-[2.5]" />
                 ) : isInProgress ? (
-                  <div className="w-2 h-2 rounded-full bg-blue-400" />
+                  <div className="w-2 h-2 rounded-full bg-blue-500" />
                 ) : (
                   <Lock className="w-2.5 h-2.5" />
                 )}
@@ -144,17 +144,17 @@ export default function VerticalAscentPath() {
               <div
                 className={`ml-4 p-4 rounded-2xl border transition-all duration-300 ${
                   isSelected
-                    ? "bg-[#12151A] border-blue-500/50 shadow-xl shadow-blue-500/5"
-                    : "bg-[#0D0F12] hover:bg-[#12151A] border-zinc-800"
+                    ? "bg-blue-50/80 dark:bg-[#12151A] border-blue-300 dark:border-blue-500/50 shadow-md shadow-blue-500/5"
+                    : "bg-white hover:bg-slate-50 border-slate-200 dark:bg-[#0D0F12] dark:hover:bg-[#12151A] dark:border-zinc-800 shadow-xs"
                 }`}
               >
                 {/* Header row */}
                 <div className="flex items-center justify-between gap-2 mb-1.5">
                   <div className="flex items-center gap-1.5">
-                    <div className="p-1 rounded-lg bg-zinc-800 text-zinc-300">
+                    <div className="p-1 rounded-lg bg-slate-100 dark:bg-zinc-800 text-slate-600 dark:text-zinc-300">
                       <Icon className="w-3.5 h-3.5" />
                     </div>
-                    <span className="text-[10px] font-mono uppercase tracking-wider text-zinc-400">
+                    <span className="text-[10px] font-mono uppercase tracking-wider text-slate-500 dark:text-zinc-400 font-semibold">
                       {node.category}
                     </span>
                   </div>
@@ -162,8 +162,8 @@ export default function VerticalAscentPath() {
                   <span
                     className={`text-xs font-mono font-bold px-2 py-0.5 rounded-md ${
                       isVerified
-                        ? "bg-emerald-950/30 text-emerald-400 border border-emerald-800/40"
-                        : "bg-blue-950/30 text-blue-400 border border-blue-800/40"
+                        ? "bg-emerald-50 text-emerald-700 border border-emerald-200 dark:bg-emerald-950/30 dark:text-emerald-400 dark:border-emerald-800/40"
+                        : "bg-blue-50 text-blue-700 border border-blue-200 dark:bg-blue-950/30 dark:text-blue-400 dark:border-blue-800/40"
                     }`}
                   >
                     +{node.points} PTS
@@ -171,28 +171,28 @@ export default function VerticalAscentPath() {
                 </div>
 
                 {/* Title */}
-                <h3 className="text-sm font-semibold text-white group-hover:text-blue-300 transition">
+                <h3 className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-300 transition">
                   {node.title}
                 </h3>
 
                 {/* Expanded Details when selected */}
                 {isSelected && (
-                  <div className="mt-3 pt-3 border-t border-zinc-800/80 text-[11px] font-mono grid grid-cols-2 gap-2 animate-in fade-in duration-200">
+                  <div className="mt-3 pt-3 border-t border-slate-200 dark:border-zinc-800/80 text-[11px] font-mono grid grid-cols-2 gap-2 animate-in fade-in duration-200">
                     <div>
-                      <span className="text-zinc-500 block">EVIDENCE</span>
-                      <span className="text-zinc-300">{node.proofType}</span>
+                      <span className="text-slate-500 dark:text-zinc-500 block font-semibold">EVIDENCE</span>
+                      <span className="text-slate-800 dark:text-zinc-300">{node.proofType}</span>
                     </div>
                     <div>
-                      <span className="text-zinc-500 block">RULE CODE</span>
-                      <span className="text-blue-400">{node.ruleCode}</span>
+                      <span className="text-slate-500 dark:text-zinc-500 block font-semibold">RULE CODE</span>
+                      <span className="text-blue-600 dark:text-blue-400 font-bold">{node.ruleCode}</span>
                     </div>
                     <div>
-                      <span className="text-zinc-500 block">SCOPE</span>
-                      <span className="text-zinc-300">{node.scope}</span>
+                      <span className="text-slate-500 dark:text-zinc-500 block font-semibold">SCOPE</span>
+                      <span className="text-slate-800 dark:text-zinc-300">{node.scope}</span>
                     </div>
                     <div>
-                      <span className="text-zinc-500 block">TIMELOCK</span>
-                      <span className="text-zinc-300">{node.date}</span>
+                      <span className="text-slate-500 dark:text-zinc-500 block font-semibold">TIMELOCK</span>
+                      <span className="text-slate-800 dark:text-zinc-300">{node.date}</span>
                     </div>
                   </div>
                 )}
