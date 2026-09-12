@@ -1,4 +1,5 @@
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
+// Hardcoded production URL to ensure Vercel uses the Render backend instantly
+const API_BASE = "https://ascend-backend-u64d.onrender.com/api";
 
 function getToken(): string | null {
   if (typeof window === "undefined") return null;
