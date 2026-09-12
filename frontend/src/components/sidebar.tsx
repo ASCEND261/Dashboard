@@ -70,7 +70,7 @@ export default function Sidebar() {
           <AscendLogo size="xs" showText={false} />
         </div>
         <div className="text-xs font-semibold text-slate-900 dark:text-zinc-200 mt-1.5 flex items-center justify-between">
-          <span className="font-sans font-bold">Team ASCEND</span>
+          <span className="font-sans font-bold truncate pr-2">{user?.name || "Team ASCEND"}</span>
           <div className="flex items-center gap-1">
             <span className={`text-[10px] px-1.5 py-0.5 rounded font-mono font-bold ${
               (user?.branch || "").includes("AI")
@@ -104,11 +104,11 @@ export default function Sidebar() {
               href={item.href}
               className={`flex items-center gap-3 px-3 py-2 rounded-lg text-xs font-medium transition-all duration-300 ${
                 isActive
-                  ? "bg-blue-600 text-white dark:bg-zinc-800 dark:text-zinc-100 border border-transparent dark:border-zinc-700 font-semibold shadow-md translate-x-1"
+                  ? "bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400 border border-blue-200 dark:border-blue-800 font-bold shadow-sm translate-x-1"
                   : "text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-zinc-100 hover:bg-slate-50 dark:hover:bg-zinc-850 hover:translate-x-1"
               }`}
             >
-              <Icon className={`w-4 h-4 transition-colors ${isActive ? "text-white dark:text-blue-400" : "text-slate-500 dark:text-zinc-400"}`} />
+              <Icon className={`w-4 h-4 transition-colors ${isActive ? "text-blue-600 dark:text-blue-400" : "text-slate-500 dark:text-zinc-400"}`} />
               <span className="flex-1">{item.label}</span>
               {item.highlight && !isActive && (
                 <span className="w-1.5 h-1.5 rounded-full bg-blue-500"></span>

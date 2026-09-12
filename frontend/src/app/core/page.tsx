@@ -113,7 +113,7 @@ export default function CoreOverviewPage() {
               <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
             </div>
             <div className="text-3xl font-black font-mono text-emerald-600 dark:text-emerald-400 mt-1">
-              <AnimatedCounter value={analytics?.verified_count || 47} />
+              <AnimatedCounter value={analytics?.verified_count || 0} />
             </div>
             <div className="text-[11px] text-slate-500 dark:text-gray-400 mt-1 flex items-center gap-1 font-semibold">
               <span>Consensus ledger certified</span>
