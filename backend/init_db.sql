@@ -30,7 +30,6 @@ CREATE TYPE public.achievementstatusenum AS ENUM (
 );
 
 
-ALTER TYPE public.achievementstatusenum OWNER TO yogayjain;
 
 --
 -- Name: ledgerscopeenum; Type: TYPE; Schema: public; Owner: yogayjain
@@ -42,7 +41,6 @@ CREATE TYPE public.ledgerscopeenum AS ENUM (
 );
 
 
-ALTER TYPE public.ledgerscopeenum OWNER TO yogayjain;
 
 --
 -- Name: ledgerstatusenum; Type: TYPE; Schema: public; Owner: yogayjain
@@ -54,7 +52,6 @@ CREATE TYPE public.ledgerstatusenum AS ENUM (
 );
 
 
-ALTER TYPE public.ledgerstatusenum OWNER TO yogayjain;
 
 --
 -- Name: roleenum; Type: TYPE; Schema: public; Owner: yogayjain
@@ -67,7 +64,6 @@ CREATE TYPE public.roleenum AS ENUM (
 );
 
 
-ALTER TYPE public.roleenum OWNER TO yogayjain;
 
 --
 -- Name: sprinttrackenum; Type: TYPE; Schema: public; Owner: yogayjain
@@ -81,7 +77,6 @@ CREATE TYPE public.sprinttrackenum AS ENUM (
 );
 
 
-ALTER TYPE public.sprinttrackenum OWNER TO yogayjain;
 
 --
 -- Name: syncstatusenum; Type: TYPE; Schema: public; Owner: yogayjain
@@ -95,7 +90,6 @@ CREATE TYPE public.syncstatusenum AS ENUM (
 );
 
 
-ALTER TYPE public.syncstatusenum OWNER TO yogayjain;
 
 --
 -- Name: verificationdecisionenum; Type: TYPE; Schema: public; Owner: yogayjain
@@ -108,7 +102,6 @@ CREATE TYPE public.verificationdecisionenum AS ENUM (
 );
 
 
-ALTER TYPE public.verificationdecisionenum OWNER TO yogayjain;
 
 SET default_tablespace = '';
 
@@ -135,7 +128,6 @@ CREATE TABLE public.access_requests (
 );
 
 
-ALTER TABLE public.access_requests OWNER TO yogayjain;
 
 --
 -- Name: achievement_categories; Type: TABLE; Schema: public; Owner: yogayjain
@@ -153,7 +145,6 @@ CREATE TABLE public.achievement_categories (
 );
 
 
-ALTER TABLE public.achievement_categories OWNER TO yogayjain;
 
 --
 -- Name: achievement_proofs; Type: TABLE; Schema: public; Owner: yogayjain
@@ -173,7 +164,6 @@ CREATE TABLE public.achievement_proofs (
 );
 
 
-ALTER TABLE public.achievement_proofs OWNER TO yogayjain;
 
 --
 -- Name: achievements; Type: TABLE; Schema: public; Owner: yogayjain
@@ -194,7 +184,6 @@ CREATE TABLE public.achievements (
 );
 
 
-ALTER TABLE public.achievements OWNER TO yogayjain;
 
 --
 -- Name: audit_logs; Type: TABLE; Schema: public; Owner: yogayjain
@@ -213,7 +202,6 @@ CREATE TABLE public.audit_logs (
 );
 
 
-ALTER TABLE public.audit_logs OWNER TO yogayjain;
 
 --
 -- Name: departments; Type: TABLE; Schema: public; Owner: yogayjain
@@ -227,7 +215,6 @@ CREATE TABLE public.departments (
 );
 
 
-ALTER TABLE public.departments OWNER TO yogayjain;
 
 --
 -- Name: email_otps; Type: TABLE; Schema: public; Owner: yogayjain
@@ -245,7 +232,6 @@ CREATE TABLE public.email_otps (
 );
 
 
-ALTER TABLE public.email_otps OWNER TO yogayjain;
 
 --
 -- Name: integration_events; Type: TABLE; Schema: public; Owner: yogayjain
@@ -264,7 +250,6 @@ CREATE TABLE public.integration_events (
 );
 
 
-ALTER TABLE public.integration_events OWNER TO yogayjain;
 
 --
 -- Name: meetup_attendance; Type: TABLE; Schema: public; Owner: yogayjain
@@ -281,7 +266,6 @@ CREATE TABLE public.meetup_attendance (
 );
 
 
-ALTER TABLE public.meetup_attendance OWNER TO yogayjain;
 
 --
 -- Name: penalty_records; Type: TABLE; Schema: public; Owner: yogayjain
@@ -301,7 +285,6 @@ CREATE TABLE public.penalty_records (
 );
 
 
-ALTER TABLE public.penalty_records OWNER TO yogayjain;
 
 --
 -- Name: point_calculations; Type: TABLE; Schema: public; Owner: yogayjain
@@ -317,7 +300,6 @@ CREATE TABLE public.point_calculations (
 );
 
 
-ALTER TABLE public.point_calculations OWNER TO yogayjain;
 
 --
 -- Name: point_ledger; Type: TABLE; Schema: public; Owner: yogayjain
@@ -343,7 +325,6 @@ CREATE TABLE public.point_ledger (
 );
 
 
-ALTER TABLE public.point_ledger OWNER TO yogayjain;
 
 --
 -- Name: point_rule_versions; Type: TABLE; Schema: public; Owner: yogayjain
@@ -360,7 +341,6 @@ CREATE TABLE public.point_rule_versions (
 );
 
 
-ALTER TABLE public.point_rule_versions OWNER TO yogayjain;
 
 --
 -- Name: point_rules; Type: TABLE; Schema: public; Owner: yogayjain
@@ -382,7 +362,6 @@ CREATE TABLE public.point_rules (
 );
 
 
-ALTER TABLE public.point_rules OWNER TO yogayjain;
 
 --
 -- Name: teams; Type: TABLE; Schema: public; Owner: yogayjain
@@ -396,7 +375,6 @@ CREATE TABLE public.teams (
 );
 
 
-ALTER TABLE public.teams OWNER TO yogayjain;
 
 --
 -- Name: users; Type: TABLE; Schema: public; Owner: yogayjain
@@ -421,7 +399,6 @@ CREATE TABLE public.users (
 );
 
 
-ALTER TABLE public.users OWNER TO yogayjain;
 
 --
 -- Name: verification_records; Type: TABLE; Schema: public; Owner: yogayjain
@@ -438,7 +415,6 @@ CREATE TABLE public.verification_records (
 );
 
 
-ALTER TABLE public.verification_records OWNER TO yogayjain;
 
 --
 -- Name: access_requests access_requests_pkey; Type: CONSTRAINT; Schema: public; Owner: yogayjain
