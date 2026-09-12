@@ -1,0 +1,207 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 700" fill="none">
+  <defs>
+    <!-- Background Glow -->
+    <radialGradient id="full-bg-glow" cx="50%" cy="40%" r="50%">
+      <stop offset="0%" stop-color="#00D2FF" stop-opacity="0.14"/>
+      <stop offset="55%" stop-color="#0044FF" stop-opacity="0.04"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Chrome Left Facet Gradient -->
+    <linearGradient id="full-chrome-left" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="35%" stop-color="#E2E8F0"/>
+      <stop offset="70%" stop-color="#94A3B8"/>
+      <stop offset="100%" stop-color="#475569"/>
+    </linearGradient>
+
+    <!-- Chrome Left Shadow Gradient -->
+    <linearGradient id="full-chrome-dark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#CBD5E1"/>
+      <stop offset="40%" stop-color="#64748B"/>
+      <stop offset="85%" stop-color="#1E293B"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </linearGradient>
+
+    <!-- Chrome Right Facet Gradient -->
+    <linearGradient id="full-chrome-right" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="30%" stop-color="#F1F5F9"/>
+      <stop offset="65%" stop-color="#94A3B8"/>
+      <stop offset="100%" stop-color="#334155"/>
+    </linearGradient>
+
+    <!-- Chrome Right Shadow Gradient -->
+    <linearGradient id="full-chrome-right-dark" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#94A3B8"/>
+      <stop offset="50%" stop-color="#475569"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </linearGradient>
+
+    <!-- Orbital Ring Glowing Cyan Gradient -->
+    <linearGradient id="full-orbit-cyan" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00D2FF" stop-opacity="0"/>
+      <stop offset="25%" stop-color="#00E5FF" stop-opacity="0.8"/>
+      <stop offset="50%" stop-color="#FFFFFF" stop-opacity="1"/>
+      <stop offset="80%" stop-color="#00B4D8" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#0077B6" stop-opacity="0.2"/>
+    </linearGradient>
+
+    <linearGradient id="full-orbit-core" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38BDF8"/>
+      <stop offset="50%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#0EA5E9"/>
+    </linearGradient>
+
+    <!-- Central Radiant Spark Gradient -->
+    <radialGradient id="full-spark-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="30%" stop-color="#38BDF8"/>
+      <stop offset="70%" stop-color="#0284C7" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#00D2FF" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Text Chrome Gradient -->
+    <linearGradient id="text-chrome" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="50%" stop-color="#E2E8F0"/>
+      <stop offset="100%" stop-color="#FFFFFF"/>
+    </linearGradient>
+
+    <!-- Glowing Cyan for E -->
+    <linearGradient id="e-cyan" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38BDF8"/>
+      <stop offset="100%" stop-color="#00E5FF"/>
+    </linearGradient>
+
+    <!-- Glow Filters -->
+    <filter id="full-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="full-intense" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="12" result="blur2"/>
+      <feGaussianBlur stdDeviation="4" result="blur1"/>
+      <feMerge>
+        <feMergeNode in="blur2"/>
+        <feMergeNode in="blur1"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background Ambient Glow -->
+  <circle cx="300" cy="240" r="230" fill="url(#full-bg-glow)" />
+
+  <!-- Outer Celestial Reticle Rings -->
+  <circle cx="300" cy="240" r="200" stroke="#38BDF8" stroke-opacity="0.3" stroke-width="1.2" stroke-dasharray="2 6" />
+  <circle cx="300" cy="240" r="185" stroke="#94A3B8" stroke-opacity="0.22" stroke-width="1" />
+
+  <!-- Compass Cardinal Line Ticks -->
+  <line x1="300" y1="35" x2="300" y2="85" stroke="#38BDF8" stroke-opacity="0.6" stroke-width="1.5"/>
+  <line x1="300" y1="395" x2="300" y2="445" stroke="#38BDF8" stroke-opacity="0.6" stroke-width="1.5"/>
+  <line x1="95" y1="240" x2="145" y2="240" stroke="#38BDF8" stroke-opacity="0.6" stroke-width="1.5"/>
+  <line x1="455" y1="240" x2="505" y2="240" stroke="#38BDF8" stroke-opacity="0.6" stroke-width="1.5"/>
+
+  <!-- Compass Cardinal Pips -->
+  <circle cx="300" cy="45" r="3.5" fill="#FFFFFF" filter="url(#full-glow)"/>
+  <circle cx="300" cy="435" r="3.5" fill="#FFFFFF" filter="url(#full-glow)"/>
+  <circle cx="105" cy="240" r="3.5" fill="#FFFFFF" filter="url(#full-glow)"/>
+  <circle cx="495" cy="240" r="3.5" fill="#FFFFFF" filter="url(#full-glow)"/>
+
+  <!-- Back Half of Orbital Ring -->
+  <path d="M 180 292 C 150 225, 230 150, 350 128 C 410 116, 450 134, 455 160 C 458 180, 435 204, 400 226"
+        stroke="#00D2FF" stroke-width="5" stroke-opacity="0.4" fill="none" filter="url(#full-glow)"/>
+
+  <!-- MAIN EMBLEM: THE ASCEND "A" -->
+  <!-- Left Leg - Outer Specular Bevel -->
+  <path d="M 300 80 L 300 205 L 195 338 L 168 322 Z"
+        fill="url(#full-chrome-left)" />
+
+  <!-- Left Leg - Inner Shaded Facet -->
+  <path d="M 300 205 L 300 80 L 230 270 L 262 270 Z"
+        fill="url(#full-chrome-dark)" />
+
+  <!-- Left Leg - Lower Cutout Edge -->
+  <path d="M 195 338 L 228 352 L 244 298 L 212 298 Z"
+        fill="url(#full-chrome-left)" opacity="0.9"/>
+
+  <!-- Right Leg - Outer Specular Bevel -->
+  <path d="M 300 80 L 432 322 L 405 338 L 300 205 Z"
+        fill="url(#full-chrome-right)" />
+
+  <!-- Right Leg - Inner Shaded Facet -->
+  <path d="M 300 80 L 300 205 L 338 270 L 370 270 Z"
+        fill="url(#full-chrome-right-dark)" />
+
+  <!-- Right Leg - Lower Cutout Edge -->
+  <path d="M 405 338 L 372 352 L 356 298 L 388 298 Z"
+        fill="url(#full-chrome-right-dark)" opacity="0.9"/>
+
+  <!-- Center Triangular Cutout Void -->
+  <polygon points="300,172 268,258 332,258" fill="#06080D" />
+
+  <!-- Chrome Crest Spine Ridge Highlight -->
+  <line x1="300" y1="80" x2="300" y2="205" stroke="#FFFFFF" stroke-width="2" opacity="0.95" />
+  <line x1="300" y1="80" x2="195" y2="338" stroke="#FFFFFF" stroke-width="1.2" opacity="0.8" />
+  <line x1="300" y1="80" x2="405" y2="338" stroke="#E2E8F0" stroke-width="1.2" opacity="0.8" />
+
+  <!-- Front Dynamic Sweeping Planetary Orbital Ring -->
+  <path d="M 160 295 C 156 316, 176 330, 214 334 C 272 340, 352 312, 420 252 C 470 208, 498 156, 482 136 C 472 125, 452 123, 422 129 C 390 135, 350 149, 316 169 C 276 191, 228 226, 190 262 C 170 280, 162 290, 160 295 Z"
+        fill="url(#full-orbit-cyan)" filter="url(#full-intense)" opacity="0.75" />
+
+  <path d="M 164 294 C 168 280, 194 250, 234 218 C 278 180, 344 142, 406 130 C 448 122, 470 132, 464 148 C 458 166, 428 202, 380 238 C 324 282, 258 320, 208 322 C 180 322, 162 310, 164 294 Z"
+        fill="url(#full-orbit-core)" />
+
+  <path d="M 178 290 C 210 254, 276 204, 350 164 C 398 138, 444 130, 456 140 C 462 146, 452 164, 424 192 C 374 244, 286 298, 224 306 C 198 310, 184 302, 178 290 Z"
+        fill="#FFFFFF" opacity="0.9" />
+
+  <!-- Radiant Nexus 4-Point Star -->
+  <g filter="url(#full-intense)">
+    <circle cx="300" cy="198" r="28" fill="url(#full-spark-glow)" />
+    <path d="M 300 144 Q 300 198, 295 198 Q 300 198, 300 252 Q 300 198, 305 198 Q 300 198, 300 144 Z" fill="#FFFFFF" />
+    <path d="M 256 198 Q 300 198, 300 194 Q 300 198, 344 198 Q 300 198, 300 202 Q 300 198, 256 198 Z" fill="#FFFFFF" />
+    <circle cx="300" cy="198" r="4" fill="#FFFFFF" />
+  </g>
+
+  <!-- WORDMARK: A S C E N D -->
+  <g id="wordmark" transform="translate(0, 520)">
+    <!-- Letter A -->
+    <path d="M 92 65 L 115 15 L 128 15 L 151 65 L 137 65 L 131 51 L 112 51 L 106 65 Z M 115 41 L 128 41 L 121.5 25 Z" fill="url(#text-chrome)"/>
+
+    <!-- Letter S -->
+    <path d="M 170 60 C 163 56, 160 50, 160 43 C 160 30, 172 26, 184 24 C 196 22, 202 20, 202 16 C 202 13, 198 11, 192 11 C 182 11, 173 15, 167 19 L 162 10 C 170 5, 182 1, 193 1 C 210 1, 218 9, 218 20 C 218 33, 205 37, 194 39 C 182 41, 175 43, 175 48 C 175 52, 180 54, 187 54 C 198 54, 208 49, 215 44 L 220 53 C 211 60, 199 64, 186 64 C 179 64, 174 62, 170 60 Z" transform="translate(5, 2)" fill="url(#text-chrome)"/>
+
+    <!-- Letter C -->
+    <path d="M 288 23 L 278 28 C 274 20, 266 15, 256 15 C 242 15, 232 26, 232 40 C 232 54, 242 65, 256 65 C 266 65, 274 60, 278 52 L 288 57 C 282 68, 270 75, 256 75 C 236 75, 220 60, 220 40 C 220 20, 236 5, 256 5 C 270 5, 282 12, 288 23 Z" transform="translate(10, -5)" fill="url(#text-chrome)"/>
+
+    <!-- Letter E (with Glowing Cyan Electric Bars) -->
+    <g transform="translate(308, 12)">
+      <!-- Top Bar -->
+      <rect x="0" y="3" width="46" height="7.5" rx="3" fill="#FFFFFF"/>
+      <!-- Middle Bar (Cyan Glowing) -->
+      <rect x="0" y="22" width="38" height="7.5" rx="3" fill="url(#e-cyan)" filter="url(#full-glow)"/>
+      <!-- Bottom Bar -->
+      <rect x="0" y="41" width="46" height="7.5" rx="3" fill="#FFFFFF"/>
+    </g>
+
+    <!-- Letter N -->
+    <path d="M 378 15 L 391 15 L 420 50 L 420 15 L 432 15 L 432 65 L 419 65 L 390 30 L 390 65 L 378 65 Z" fill="url(#text-chrome)"/>
+
+    <!-- Letter D -->
+    <path d="M 456 15 L 485 15 C 504 15, 518 26, 518 40 C 518 54, 504 65, 485 65 L 456 65 Z M 470 26 L 470 54 L 485 54 C 496 54, 504 48, 504 40 C 504 32, 496 26, 485 26 Z" fill="url(#text-chrome)"/>
+  </g>
+
+  <!-- SUBTITLE / MOTTO: BUILD • INNOVATE • ELEVATE -->
+  <g transform="translate(0, 640)">
+    <line x1="80" y1="12" x2="135" y2="12" stroke="#475569" stroke-width="1.5"/>
+    <text x="300" y="16" fill="#94A3B8" font-family="'JetBrains Mono', 'Roboto Mono', 'SF Pro Text', monospace" font-size="12" font-weight="600" letter-spacing="4" text-anchor="middle">
+      BUILD  •  INNOVATE  •  ELEVATE
+    </text>
+    <line x1="465" y1="12" x2="520" y2="12" stroke="#475569" stroke-width="1.5"/>
+  </g>
+</svg>

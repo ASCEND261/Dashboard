@@ -1,0 +1,488 @@
+@import "tailwindcss";
+
+:root {
+  /* ========================================================================= */
+  /* ASCEND DESIGN SYSTEM — Dark Neutral Charcoal / Zinc × Minimal Blue        */
+  /* Clean, restrained, institutional engineering aesthetic ("Bland & Blue")   */
+  /* ========================================================================= */
+  
+  /* Minimal Classic Blue Accent (Used strictly where required: ~5%) */
+  --accent-primary: #2563EB;        /* blue-600 */
+  --accent-bright: #3B82F6;         /* blue-500 */
+  --accent-subtle: rgba(37, 99, 235, 0.08);
+  --accent-border: rgba(37, 99, 235, 0.25);
+
+  /* Surface Backgrounds (Bland, Neutral Dark Charcoal / Zinc) */
+  --bg-deep-space: #09090B;        /* zinc-950 */
+  --bg-canvas: #09090B;
+  --bg-panel: #0E0E11;             /* clean dark panel */
+  --bg-drawer: #0E0E11;
+  --bg-card: #141418;              /* clean dark card */
+  --bg-card-node: #141418;
+  --bg-card-elevated: #1B1B22;
+
+  /* Neutral Borders & Dividers */
+  --border-subtle: #27272A;        /* zinc-800 */
+  --border-muted: #1F1F23;
+  --border-accent: rgba(37, 99, 235, 0.35);
+
+  /* Restrained Status Colors (strictly for status pills) */
+  --accent-success: #10B981;       /* emerald-500 */
+  --accent-warning: #F59E0B;       /* amber-500 */
+  --accent-danger: #EF4444;        /* red-500 */
+
+  /* High-Density Typography */
+  --text-primary: #FAFAFA;         /* zinc-50 */
+  --text-secondary: #A1A1AA;       /* zinc-400 */
+  --text-muted: #71717A;           /* zinc-500 */
+  --text-subtle: #52525B;          /* zinc-600 */
+
+  --font-inter: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+.light {
+  /* Minimal Classic Blue Accent */
+  --accent-primary: #2563EB;
+  --accent-bright: #1D4ED8;
+  --accent-subtle: rgba(37, 99, 235, 0.06);
+  --accent-border: rgba(37, 99, 235, 0.2);
+
+  /* Clean Institutional Crisp Light Surfaces */
+  --bg-deep-space: #F8FAFC;        /* slate-50 */
+  --bg-canvas: #F8FAFC;
+  --bg-panel: #FFFFFF;             /* crisp white panel */
+  --bg-drawer: #FFFFFF;
+  --bg-card: #FFFFFF;              /* crisp white card */
+  --bg-card-node: #F1F5F9;
+  --bg-card-elevated: #FFFFFF;
+
+  /* Neutral Borders & Dividers */
+  --border-subtle: #E2E8F0;        /* slate-200 */
+  --border-muted: #CBD5E1;
+  --border-accent: rgba(37, 99, 235, 0.3);
+
+  /* Restrained Status Colors */
+  --accent-success: #059669;
+  --accent-warning: #D97706;
+  --accent-danger: #DC2626;
+
+  /* High-Density Typography */
+  --text-primary: #0F172A;         /* slate-900 */
+  --text-secondary: #475569;       /* slate-600 */
+  --text-muted: #64748B;           /* slate-500 */
+  --text-subtle: #94A3B8;          /* slate-400 */
+}
+
+/* ========================================================================= */
+/* ASCEND LIGHT THEME OVERRIDES — High-Contrast Clean Slate / Blue Aesthetic  */
+/* ========================================================================= */
+
+.light {
+  color-scheme: light;
+}
+
+.light body {
+  background-color: #F8FAFC !important;
+  color: #0F172A !important;
+}
+
+.light header {
+  background-color: rgba(255, 255, 255, 0.94) !important;
+  border-color: #E2E8F0 !important;
+}
+
+.light .prismatic-glass-body {
+  background: rgba(255, 255, 255, 0.94) !important;
+  color: #0F172A !important;
+  border-color: #E2E8F0 !important;
+  box-shadow: 0 10px 30px -10px rgba(148, 163, 184, 0.25) !important;
+}
+
+.light [class*="bg-[#07080A]"],
+.light [class*="bg-[#09090B]"],
+.light [class*="bg-[#0D0F14]"],
+.light [class*="bg-[#0E0E11]"],
+.light [class*="bg-[#0A0C10]"],
+.light [class*="bg-[#090A0D]"],
+.light [class*="bg-[#0E1118]"],
+.light [class*="bg-[#0D0F12]"] {
+  background-color: #FFFFFF !important;
+  color: #0F172A !important;
+}
+
+.light [class*="bg-[#141418]"],
+.light [class*="bg-[#14171E]"],
+.light [class*="bg-[#12151A]"],
+.light [class*="bg-[#1B1B22]"],
+.light [class*="bg-zinc-900"] {
+  background-color: #F1F5F9 !important;
+  color: #1E293B !important;
+}
+
+.light [class*="bg-zinc-800"] {
+  background-color: #E2E8F0 !important;
+  color: #1E293B !important;
+}
+
+.light [class*="border-zinc-800"],
+.light [class*="border-zinc-700"],
+.light [class*="border-[#22262D]"] {
+  border-color: #E2E8F0 !important;
+}
+
+.light .text-white,
+.light .text-zinc-100,
+.light .text-zinc-200 {
+  color: #0F172A !important;
+}
+
+.light .text-zinc-300,
+.light .text-zinc-400 {
+  color: #475569 !important;
+}
+
+.light .text-zinc-500 {
+  color: #64748B !important;
+}
+
+.light input:not([type="checkbox"]):not([type="radio"]),
+.light select,
+.light textarea {
+  background-color: #FFFFFF !important;
+  color: #0F172A !important;
+  border-color: #CBD5E1 !important;
+}
+
+.light table thead tr {
+  background-color: #F8FAFC !important;
+  color: #475569 !important;
+  border-color: #E2E8F0 !important;
+}
+
+.light table tbody tr:hover {
+  background-color: #F1F5F9 !important;
+}
+
+body {
+  background-color: var(--bg-deep-space);
+  color: var(--text-primary);
+  font-family: var(--font-inter);
+  font-size: 13px; /* High-Density Enterprise IDE Feel */
+  line-height: 1.5;
+  overflow-x: hidden;
+  selection-background-color: #2563EB;
+  selection-color: #FFFFFF;
+}
+
+/* Precision dark scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #09090B;
+}
+::-webkit-scrollbar-thumb {
+  background: #27272A;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3F3F46;
+}
+
+/* ========================================================================= */
+/* NEUTRAL SURFACE ARCHITECTURE                                              */
+/* ========================================================================= */
+
+.glass-panel {
+  background: #0E0E11;
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  transition: border-color 0.15s ease;
+}
+
+.glass-panel:hover {
+  border-color: #3F3F46;
+}
+
+.glass-card {
+  background: #141418;
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  transition: border-color 0.15s ease;
+}
+
+.glass-card:hover {
+  border-color: #3F3F46;
+}
+
+/* Panels & Drawers */
+.ascend-panel {
+  background: #0E0E11;
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  transition: border-color 0.15s ease;
+}
+
+.ascend-panel:hover {
+  border-color: #3F3F46;
+}
+
+.ascend-panel-glow {
+  background: #141418;
+  border: 1px solid var(--border-subtle);
+}
+
+/* Cards / Nodes */
+.ascend-card {
+  background: #141418;
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  transition: border-color 0.15s ease;
+}
+
+.ascend-card:hover {
+  border-color: #3F3F46;
+}
+
+.ascend-node {
+  background: #141418;
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+}
+
+/* ========================================================================= */
+/* SUBTLE BACKGROUND MATRIX                                                  */
+/* ========================================================================= */
+
+.dot-grid {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.horizon-grid {
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* ========================================================================= */
+/* KEYFRAMES                                                                 */
+/* ========================================================================= */
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.animate-shimmer {
+  animation: shimmer 2.5s infinite linear;
+}
+
+/* ========================================================================= */
+/* STATUS PILLS & BADGES (Compact Monospace)                                 */
+/* ========================================================================= */
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  font-family: var(--font-mono);
+}
+
+.status-submitted {
+  background: rgba(255, 255, 255, 0.05);
+  color: #A1A1AA;
+  border: 1px solid #27272A;
+}
+
+.status-under_review {
+  background: rgba(245, 158, 11, 0.1);
+  color: #F59E0B;
+  border: 1px solid rgba(245, 158, 11, 0.25);
+}
+
+.status-needs_more_proof {
+  background: rgba(245, 158, 11, 0.1);
+  color: #F59E0B;
+  border: 1px solid rgba(245, 158, 11, 0.25);
+}
+
+/* Emerald strictly for Verified */
+.status-verified {
+  background: rgba(16, 185, 129, 0.1);
+  color: #10B981;
+  border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+.status-rejected {
+  background: rgba(239, 68, 68, 0.1);
+  color: #EF4444;
+  border: 1px solid rgba(239, 68, 68, 0.25);
+}
+
+/* ========================================================================= */
+/* LIGHT MODE CLASS OVERRIDES                                                */
+/* ========================================================================= */
+
+.light body {
+  background-color: #F8FAFC !important;
+  color: #0F172A !important;
+}
+
+.light .glass-panel,
+.light .ascend-panel {
+  background: #FFFFFF !important;
+  border-color: #E2E8F0 !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.light .glass-card,
+.light .ascend-card,
+.light .ascend-panel-glow {
+  background: #FFFFFF !important;
+  border-color: #E2E8F0 !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.light .dot-grid {
+  background-image: radial-gradient(rgba(0, 0, 0, 0.08) 1px, transparent 1px) !important;
+}
+
+.light .horizon-grid {
+  background-image: 
+    linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px) !important;
+}
+
+.light .status-submitted {
+  background: #F1F5F9 !important;
+  color: #475569 !important;
+  border-color: #CBD5E1 !important;
+}
+
+/* ========================================================================= */
+/* REACT BITS & ACETERNITY / MAGIC UI ANIMATION KEYFRAMES                     */
+/* ========================================================================= */
+
+@keyframes border-beam {
+  100% {
+    offset-distance: 100%;
+  }
+}
+
+@keyframes laser-sweep {
+  0% {
+    transform: translateX(-100%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(300%) rotate(45deg);
+  }
+}
+
+@keyframes prismatic-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes float-gentle {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.animate-float-gentle {
+  animation: float-gentle 4s ease-in-out infinite;
+}
+
+.animate-prismatic-text {
+  background-size: 200% 200%;
+  animation: prismatic-shift 6s ease infinite;
+}
+
+@keyframes meteor {
+  0% {
+    transform: rotate(215deg) translateX(0);
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(215deg) translateX(-500px);
+    opacity: 0;
+  }
+}
+
+.animate-meteor {
+  animation: meteor 5s linear infinite;
+}
+
+/* ========================================================================= */
+/* MOBILE-FIRST UTILITIES                                                    */
+/* ========================================================================= */
+
+/* Safe area padding for iPhone X+ notch / home indicator */
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+.pt-safe {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
+/* Optimize touch targets — minimum 44px per Apple HIG */
+.touch-target {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Mobile stat cards */
+.mobile-stat-card {
+  background: #141418;
+  border: 1px solid #27272A;
+  border-radius: 16px;
+  padding: 16px;
+  transition: border-color 0.15s ease;
+}
+
+/* Mobile card press animation */
+.mobile-press {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  user-select: none;
+}
+.mobile-press:active {
+  transform: scale(0.97);
+  transition: transform 0.08s ease;
+}
+
+/* Section label style */
+.mobile-section-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #52525B;
+  padding: 0 4px;
+}
+
+/* Body font size adjustment for mobile */
+@media (max-width: 640px) {
+  body {
+    font-size: 14px;
+  }
+}
