@@ -1,5 +1,5 @@
 # Build stage
-FROM rust:1.80-slim-bullseye AS builder
+FROM rust:1.80-slim-bookworm AS builder
 
 WORKDIR /usr/src/ascend-backend
 
@@ -20,14 +20,14 @@ ENV SQLX_OFFLINE=true
 RUN cargo build --release
 
 # Runtime stage
-FROM debian:bullseye-slim
+FROM debian:bookworm-slim
 
 WORKDIR /app
 
 # Install runtime dependencies for TLS and networking
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
-    libssl1.1 \
+    libssl3 \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
