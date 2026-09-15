@@ -176,14 +176,15 @@ function VerificationQueueContent() {
                     </td>
                     <td className="py-3.5 px-4">
                       <div className="flex items-center gap-1.5">
-                        {item.proof_count > 0 ? (
+                        {item.has_proof ? (
                           <span className="text-[10px] px-2 py-0.5 rounded bg-slate-100 text-slate-800 border border-slate-200 dark:bg-zinc-800 dark:text-zinc-200 dark:border-zinc-800 flex items-center gap-1 font-mono font-medium">
                             <FileText className="w-3 h-3 text-slate-500 dark:text-zinc-400" />
-                            <span>{item.proof_count} Proof</span>
+                            <span>Proof Attached</span>
                           </span>
                         ) : (
                           <span className="text-[10px] px-2 py-0.5 rounded bg-rose-50 text-rose-700 border border-rose-200 dark:bg-red-950/40 dark:text-red-400 dark:border-red-800/40 font-mono font-medium">
                             Missing
+
                           </span>
                         )}
                         {item.has_ai_flags && (
