@@ -46,7 +46,7 @@ function VerificationQueueContent() {
   ];
 
   const getStatusBadge = (status: string) => {
-    switch (status) {
+    switch (status?.toUpperCase()) {
       case "VERIFIED":
         return <span className="status-pill status-verified"><CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" /> Verified</span>;
       case "NEEDS_MORE_PROOF":
