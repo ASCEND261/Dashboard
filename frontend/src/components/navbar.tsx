@@ -26,7 +26,7 @@ import { useTheme } from "@/lib/theme-context";
 export default function Navbar() {
   const router = useRouter();
   const pathname = usePathname();
-  const { user, logout, demoAccounts, loginWithDemo } = useAuth();
+  const { user, logout } = useAuth();
   const { theme, toggleTheme } = useTheme();
   const [guideOpen, setGuideOpen] = useState(false);
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
@@ -55,16 +55,6 @@ export default function Navbar() {
     }
   };
 
-  const handleSelectDemo = (account: any) => {
-    loginWithDemo(account);
-    setUserDropdownOpen(false);
-    setMobileMenuOpen(false);
-    if (account.role === "CORE_MEMBER" || account.role === "ADMIN") {
-      router.push("/core");
-    } else {
-      router.push("/dashboard");
-    }
-  };
 
   const workspaceUrl = user
     ? user.role === "CORE_MEMBER" || user.role === "ADMIN"
@@ -243,28 +233,6 @@ export default function Navbar() {
                         </button>
                       </div>
 
-                      {/* Demo Persona Switcher Section */}
-                      {demoAccounts.filter((a) => a.email !== user?.email).length > 0 && (
-                        <div className="mt-1 pt-1.5 border-t border-zinc-800/80">
-                          <div className="px-3 py-1 text-[10px] font-mono text-zinc-500 uppercase tracking-wider">
-                            Switch Account
-                          </div>
-                          <div className="space-y-0.5">
-                            {demoAccounts
-                              .filter((a) => a.email !== user?.email)
-                              .map((acc) => (
-                                <button
-                                  key={acc.id}
-                                  onClick={() => handleSelectDemo(acc)}
-                                  className="w-full flex items-center justify-between px-3 py-1.5 rounded-lg text-left text-[11px] text-zinc-400 hover:text-zinc-200 hover:bg-zinc-850 transition"
-                                >
-                                  <span className="truncate">{acc.name}</span>
-                                  {getRoleBadge(acc.role)}
-                                </button>
-                              ))}
-                          </div>
-                        </div>
-                      )}
 
                       {/* Sign Out */}
                       <div className="mt-1.5 pt-1.5 border-t border-zinc-800/80">
