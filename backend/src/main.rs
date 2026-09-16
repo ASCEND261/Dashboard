@@ -119,6 +119,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         config: Arc::new(config.clone()),
     };
 
+    // Clone pool for the background worker before state moves into the router
+    let sync_pool = state.db.clone();
+
     let cors = CorsLayer::new()
         .allow_origin(Any)
         .allow_methods(Any)
@@ -135,6 +138,11 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     tracing::info!("  Health Check: http://{}/health", addr);
     tracing::info!("  API Endpoint Base: http://{}/api", addr);
     tracing::info!("============================================================");
+
+    // Spawn central sync background worker (polls every 30s)
+    tokio::spawn(async move {
+        ascend_backend::services::central_sync::start_central_sync_worker(sync_pool).await;
+    });
 
     let listener = tokio::net::TcpListener::bind(addr).await?;
     axum::serve(listener, app).await?;

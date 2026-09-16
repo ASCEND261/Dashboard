@@ -1,6 +1,7 @@
 pub mod achievement_service;
 pub mod audit_service;
 pub mod auth_service;
+pub mod central_sync;
 pub mod ledger_service;
 pub mod point_engine;
 pub mod proof_service;
