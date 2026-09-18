@@ -69,6 +69,7 @@ pub fn create_api_router() -> Router<AppState> {
         // Proofs
         .route("/proofs/upload", post(proofs::upload_proof))
         .route("/proofs/view/:token", get(proofs::view_proof))
+        .route("/proofs/public/:filename", get(proofs::public_view_proof))
         .route("/proofs/:id/signed-token", get(proofs::get_proof_signed_token))
         // Audit Logs
         .route("/audit-logs", get(audit::list_audit_logs))

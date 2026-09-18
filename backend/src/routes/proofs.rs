@@ -192,3 +192,44 @@ pub async fn get_proof_signed_token(
         view_token: token,
     }))
 }
+
+pub async fn public_view_proof(
+    State(state): State<AppState>,
+    Path(filename): Path<String>,
+) -> Result<Response, AppError> {
+    if filename.contains('/') || filename.contains('\\') || filename.contains("..") {
+        return Err(AppError::BadRequest("Invalid filename".to_string()));
+    }
+
+    let proof = sqlx::query_as::<_, AchievementProof>(
+        "SELECT * FROM achievement_proofs WHERE file_path = $1"
+    )
+    .bind(&filename)
+    .fetch_optional(&state.db)
+    .await?;
+
+    let mime_type = match &proof {
+        Some(p) => p.mime_type.clone(),
+        None => "application/octet-stream".to_string(),
+    };
+
+    let file_path = StdPath::new(&state.config.storage_dir).join(&filename);
+    if !file_path.exists() {
+        return Err(AppError::NotFound("Proof file not found on disk.".to_string()));
+    }
+
+    let contents = tokio::fs::read(&file_path)
+        .await
+        .map_err(|e| AppError::Internal(format!("Failed to read file: {}", e)))?;
+
+    let mut headers = HeaderMap::new();
+    if let Ok(val) = HeaderValue::from_str(&mime_type) {
+        headers.insert(header::CONTENT_TYPE, val);
+    }
+    let disp = format!("inline; filename=\"{}\"", filename);
+    if let Ok(val) = HeaderValue::from_str(&disp) {
+        headers.insert(header::CONTENT_DISPOSITION, val);
+    }
+
+    Ok((StatusCode::OK, headers, Body::from(contents)).into_response())
+}
