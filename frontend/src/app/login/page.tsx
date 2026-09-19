@@ -82,6 +82,7 @@ export default function LoginPage() {
     try {
       const res = await api.resetPassword({
         email: fpEmail.trim(),
+        otp: "",
         new_password: fpNewPw,
       });
       setSuccess(res.message);
