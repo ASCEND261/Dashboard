@@ -9,8 +9,9 @@ pub async fn start_central_sync_worker(pool: PgPool) {
         .map(|s| format!("{}/functions/v1/ingest", s))
         .unwrap_or_else(|_| "https://maekkuqaazfjujtokobl.supabase.co/functions/v1/ingest".to_string());
     
-    let central_key = std::env::var("CENTRAL_ANON_KEY")
-        .unwrap_or_else(|_| "sb_publishable_2pCYB_tSDWn8FXG94OHjg_1zYWSaQx".to_string());
+    let central_key = std::env::var("CENTRAL_API_KEY")
+        .or_else(|_| std::env::var("CENTRAL_ANON_KEY"))
+        .unwrap_or_else(|_| "tsj_7eec44d1c598ec72f73b2b907891d1397622c02fa3e38d5f".to_string());
 
     let central_team_id = std::env::var("CENTRAL_TEAM_ID")
         .unwrap_or_else(|_| "8f7af888-7dca-467c-86a0-f4500bc1c0ed".to_string());
