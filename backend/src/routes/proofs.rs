@@ -70,7 +70,14 @@ pub async fn upload_proof(
     let file_hash = validate_and_hash_file(&data, &content_type, max_size)?;
 
     let stored_filename = format!("{}_{}", &file_hash[..12], filename.replace(' ', "_"));
-    save_proof_file(&state.config.storage_dir, &stored_filename, &data)?;
+    save_proof_file(
+        &state.config.supabase_url,
+        &state.config.supabase_key,
+        &stored_filename,
+        &data,
+        &content_type,
+    )
+    .await?;
 
     let proof_id = format!("PRF-{}", Uuid::new_v4().simple());
     let now = Utc::now().naive_utc();
@@ -123,25 +130,8 @@ pub async fn view_proof(
     .await?
     .ok_or_else(|| AppError::NotFound("Proof record not found.".to_string()))?;
 
-    let file_path = StdPath::new(&state.config.storage_dir).join(&proof.file_path);
-    if !file_path.exists() {
-        return Err(AppError::NotFound("Proof file not found on disk.".to_string()));
-    }
-
-    let contents = tokio::fs::read(&file_path)
-        .await
-        .map_err(|e| AppError::Internal(format!("Failed to read file: {}", e)))?;
-
-    let mut headers = HeaderMap::new();
-    if let Ok(val) = HeaderValue::from_str(&proof.mime_type) {
-        headers.insert(header::CONTENT_TYPE, val);
-    }
-    let disp = format!("inline; filename=\"{}\"", proof.file_name);
-    if let Ok(val) = HeaderValue::from_str(&disp) {
-        headers.insert(header::CONTENT_DISPOSITION, val);
-    }
-
-    Ok((StatusCode::OK, headers, Body::from(contents)).into_response())
+    let url = format!("{}/storage/v1/object/public/proofs/{}", state.config.supabase_url, proof.file_path);
+    Ok(axum::response::Redirect::temporary(&url).into_response())
 }
 
 #[derive(Debug, Serialize)]
@@ -201,35 +191,6 @@ pub async fn public_view_proof(
         return Err(AppError::BadRequest("Invalid filename".to_string()));
     }
 
-    let proof = sqlx::query_as::<_, AchievementProof>(
-        "SELECT * FROM achievement_proofs WHERE file_path = $1"
-    )
-    .bind(&filename)
-    .fetch_optional(&state.db)
-    .await?;
-
-    let mime_type = match &proof {
-        Some(p) => p.mime_type.clone(),
-        None => "application/octet-stream".to_string(),
-    };
-
-    let file_path = StdPath::new(&state.config.storage_dir).join(&filename);
-    if !file_path.exists() {
-        return Err(AppError::NotFound("Proof file not found on disk.".to_string()));
-    }
-
-    let contents = tokio::fs::read(&file_path)
-        .await
-        .map_err(|e| AppError::Internal(format!("Failed to read file: {}", e)))?;
-
-    let mut headers = HeaderMap::new();
-    if let Ok(val) = HeaderValue::from_str(&mime_type) {
-        headers.insert(header::CONTENT_TYPE, val);
-    }
-    let disp = format!("inline; filename=\"{}\"", filename);
-    if let Ok(val) = HeaderValue::from_str(&disp) {
-        headers.insert(header::CONTENT_DISPOSITION, val);
-    }
-
-    Ok((StatusCode::OK, headers, Body::from(contents)).into_response())
+    let url = format!("{}/storage/v1/object/public/proofs/{}", state.config.supabase_url, filename);
+    Ok(axum::response::Redirect::temporary(&url).into_response())
 }

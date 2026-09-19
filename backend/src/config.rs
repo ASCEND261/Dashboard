@@ -10,6 +10,8 @@ pub struct Config {
     pub max_file_size_bytes: usize,
     pub cors_origins: Vec<String>,
     pub ai_service_url: String,
+    pub supabase_url: String,
+    pub supabase_key: String,
 }
 
 impl Config {
@@ -50,6 +52,12 @@ impl Config {
             "http://127.0.0.1:3001".to_string(),
         ];
 
+        let supabase_url = env::var("SUPABASE_URL")
+            .unwrap_or_else(|_| "https://rgcxulamrmfypswxibdp.supabase.co".to_string());
+
+        let supabase_key = env::var("SUPABASE_KEY")
+            .unwrap_or_else(|_| "sb_publishable_RR-O8V_dzr_W2o59AgXr_Q_mOYRRluP".to_string());
+
         Self {
             database_url,
             port,
@@ -59,6 +67,8 @@ impl Config {
             max_file_size_bytes,
             cors_origins,
             ai_service_url,
+            supabase_url,
+            supabase_key,
         }
     }
 }

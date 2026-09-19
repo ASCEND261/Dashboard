@@ -32,17 +32,29 @@ pub fn validate_and_hash_file(
     Ok(hash)
 }
 
-pub fn save_proof_file(
-    storage_dir: &str,
+pub async fn save_proof_file(
+    supabase_url: &str,
+    supabase_key: &str,
     filename: &str,
     data: &[u8],
+    mime_type: &str,
 ) -> Result<String, AppError> {
-    fs::create_dir_all(storage_dir)
-        .map_err(|e| AppError::Internal(format!("Failed to create storage directory: {}", e)))?;
+    let client = reqwest::Client::new();
+    let url = format!("{}/storage/v1/object/proofs/{}", supabase_url, filename);
 
-    let path = Path::new(storage_dir).join(filename);
-    fs::write(&path, data)
-        .map_err(|e| AppError::Internal(format!("Failed to write proof file: {}", e)))?;
+    let res = client
+        .post(&url)
+        .header("Authorization", format!("Bearer {}", supabase_key))
+        .header("Content-Type", mime_type)
+        .body(data.to_vec())
+        .send()
+        .await
+        .map_err(|e| AppError::Internal(format!("Failed to connect to Supabase: {}", e)))?;
+
+    if !res.status().is_success() {
+        let err_text = res.text().await.unwrap_or_default();
+        return Err(AppError::Internal(format!("Failed to upload to Supabase: {}", err_text)));
+    }
 
     Ok(filename.to_string())
 }
