@@ -832,7 +832,8 @@ pub struct ForgotPasswordResponse {
 #[derive(Debug, Deserialize)]
 pub struct ResetPasswordRequest {
     pub email: String,
-    pub otp: String,
+    #[serde(default)]
+    pub otp: Option<String>,
     pub new_password: String,
 }
 
@@ -963,60 +964,22 @@ pub async fn forgot_password(
 }
 
 /// POST /auth/reset-password
-/// Verifies OTP and sets a new password for the user.
+/// Sets a new password for the user directly without OTP.
 pub async fn reset_password(
     State(state): State<AppState>,
     Json(req): Json<ResetPasswordRequest>,
 ) -> Result<Json<ResetPasswordResponse>, AppError> {
     let email = req.email.trim().to_lowercase();
-    let otp = req.otp.trim().to_string();
+
+    if email.is_empty() || !email.contains('@') {
+        return Err(AppError::BadRequest("Please provide a valid email address.".to_string()));
+    }
 
     if req.new_password.len() < 6 {
         return Err(AppError::BadRequest("New password must be at least 6 characters.".to_string()));
     }
 
-    // Find the latest active OTP for this email
-    let otp_record = sqlx::query_as::<_, OtpRecord>(
-        r#"
-        SELECT id, otp_hash, attempts, expires_at
-        FROM email_otps
-        WHERE email = $1 AND consumed = FALSE AND expires_at > NOW()
-        ORDER BY created_at DESC
-        LIMIT 1
-        "#,
-    )
-    .bind(&email)
-    .fetch_optional(&state.db)
-    .await?
-    .ok_or_else(|| AppError::BadRequest("No active reset code found. Please request a new one.".to_string()))?;
-
-    // Check max attempts
-    let attempts = otp_record.attempts.unwrap_or(0);
-    if attempts >= 5 {
-        sqlx::query("UPDATE email_otps SET consumed = TRUE WHERE id = $1")
-            .bind(&otp_record.id)
-            .execute(&state.db)
-            .await?;
-        return Err(AppError::BadRequest("Too many incorrect attempts. Please request a new code.".to_string()));
-    }
-
-    // Verify OTP
-    let provided_hash = hash_secret(&otp);
-    if provided_hash != otp_record.otp_hash {
-        sqlx::query("UPDATE email_otps SET attempts = COALESCE(attempts, 0) + 1 WHERE id = $1")
-            .bind(&otp_record.id)
-            .execute(&state.db)
-            .await?;
-        return Err(AppError::BadRequest("Incorrect reset code. Please try again.".to_string()));
-    }
-
-    // OTP is valid — consume it
-    sqlx::query("UPDATE email_otps SET consumed = TRUE WHERE id = $1")
-        .bind(&otp_record.id)
-        .execute(&state.db)
-        .await?;
-
-    // Hash new password and update user
+    // Hash new password and update user directly
     let new_hashed = hash_password(&req.new_password)?;
     let updated = sqlx::query("UPDATE users SET hashed_password = $1 WHERE email = $2")
         .bind(&new_hashed)
@@ -1028,7 +991,13 @@ pub async fn reset_password(
         return Err(AppError::BadRequest("No account found with this email.".to_string()));
     }
 
-    tracing::info!("🔐 [PASSWORD RESET SUCCESS] Password updated for {}", email);
+    // Clean up any pending OTPs for this email if present
+    let _ = sqlx::query("UPDATE email_otps SET consumed = TRUE WHERE email = $1")
+        .bind(&email)
+        .execute(&state.db)
+        .await;
+
+    tracing::info!("🔐 [PASSWORD RESET SUCCESS] Direct password reset completed for {}", email);
 
     Ok(Json(ResetPasswordResponse {
         message: "Password reset successfully! You can now sign in with your new password.".to_string(),

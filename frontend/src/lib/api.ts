@@ -113,7 +113,7 @@ export const api = {
       method: "POST",
       body: JSON.stringify({ email }),
     }),
-  resetPassword: (data: { email: string; otp: string; new_password: string }) =>
+  resetPassword: (data: { email: string; otp?: string; new_password: string }) =>
     request<{ message: string }>("/auth/reset-password", {
       method: "POST",
       body: JSON.stringify(data),

@@ -53,9 +53,7 @@ export default function LoginPage() {
 
   // Forgot Password
   const [forgotMode, setForgotMode] = useState(false);
-  const [fpStep, setFpStep] = useState<1 | 2>(1);
   const [fpEmail, setFpEmail] = useState("");
-  const [fpOtp, setFpOtp] = useState("");
   const [fpNewPw, setFpNewPw] = useState("");
   const [fpConfirmPw, setFpConfirmPw] = useState("");
   const [fpShowPw, setFpShowPw] = useState(false);
@@ -64,26 +62,18 @@ export default function LoginPage() {
   const [success, setSuccess] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
-  const handleForgotRequest = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError(null);
-    setSuccess(null);
-    setLoading(true);
-    try {
-      const res = await api.forgotPassword(fpEmail.trim());
-      setSuccess(res.message + (res.dev_otp ? ` (Dev code: ${res.dev_otp})` : ""));
-      setFpStep(2);
-    } catch (err: any) {
-      setError(err.message || "Failed to send reset code.");
-    } finally {
-      setLoading(false);
-    }
-  };
-
   const handleResetPassword = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
     setSuccess(null);
+    if (!fpEmail.trim()) {
+      setError("Please enter your account email.");
+      return;
+    }
+    if (fpNewPw.length < 6) {
+      setError("Password must be at least 6 characters.");
+      return;
+    }
     if (fpNewPw !== fpConfirmPw) {
       setError("Passwords do not match.");
       return;
@@ -92,21 +82,18 @@ export default function LoginPage() {
     try {
       const res = await api.resetPassword({
         email: fpEmail.trim(),
-        otp: fpOtp.trim(),
         new_password: fpNewPw,
       });
       setSuccess(res.message);
       setTimeout(() => {
         setForgotMode(false);
-        setFpStep(1);
-        setFpOtp("");
+        setSiEmail(fpEmail.trim());
+        setSiPassword(fpNewPw);
         setFpNewPw("");
         setFpConfirmPw("");
-        setSiEmail(fpEmail.trim());
-        setSiPassword("");
         setSuccess(null);
         setTab("signin");
-      }, 2000);
+      }, 1500);
     } catch (err: any) {
       setError(err.message || "Failed to reset password.");
     } finally {
@@ -325,7 +312,6 @@ export default function LoginPage() {
                     type="button"
                     onClick={() => {
                       setForgotMode(true);
-                      setFpStep(1);
                       setFpEmail(siEmail);
                       setError(null);
                       setSuccess(null);
@@ -338,14 +324,13 @@ export default function LoginPage() {
               </form>
             )}
 
-            {/* ─────────────── FORGOT PASSWORD FLOW ─────────────── */}
+            {/* ─────────────── FORGOT PASSWORD FLOW (DIRECT RESET) ─────────────── */}
             {forgotMode && tab === "signin" && (
               <div className="space-y-4">
                 <button
                   type="button"
                   onClick={() => {
                     setForgotMode(false);
-                    setFpStep(1);
                     setError(null);
                     setSuccess(null);
                   }}
@@ -362,132 +347,87 @@ export default function LoginPage() {
                   <div>
                     <h2 className="text-sm font-bold text-slate-900 dark:text-white">Reset Password</h2>
                     <p className="text-[10px] text-slate-500 dark:text-zinc-400 font-mono">
-                      {fpStep === 1 ? "Step 1 — Enter your email" : "Step 2 — Enter code & new password"}
+                      Enter your email & set a new password
                     </p>
                   </div>
                 </div>
 
-                {/* Step indicator */}
-                <div className="flex gap-2">
-                  <div className={`h-1 flex-1 rounded-full transition-all ${fpStep >= 1 ? 'bg-amber-500' : 'bg-slate-200 dark:bg-zinc-800'}`} />
-                  <div className={`h-1 flex-1 rounded-full transition-all ${fpStep >= 2 ? 'bg-amber-500' : 'bg-slate-200 dark:bg-zinc-800'}`} />
-                </div>
-
-                {fpStep === 1 && (
-                  <form onSubmit={handleForgotRequest} className="space-y-3.5">
-                    <div>
-                      <label className="block text-[11px] font-semibold text-slate-700 dark:text-zinc-300 mb-1.5">
-                        Email Address
-                      </label>
-                      <div className="relative">
-                        <Mail className="w-3.5 h-3.5 text-slate-400 dark:text-zinc-500 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
-                        <input
-                          type="email"
-                          required
-                          value={fpEmail}
-                          onChange={(e) => setFpEmail(e.target.value)}
-                          placeholder="you@college.edu"
-                          className="w-full bg-white dark:bg-[#090A0D] border border-slate-300 dark:border-zinc-800 focus:border-amber-500 rounded-xl pl-8 pr-4 py-2.5 text-sm text-slate-900 dark:text-zinc-100 placeholder-slate-400 dark:placeholder-zinc-500 focus:outline-none transition shadow-xs"
-                        />
-                      </div>
+                <form onSubmit={handleResetPassword} className="space-y-3.5">
+                  <div>
+                    <label className="block text-[11px] font-semibold text-slate-700 dark:text-zinc-300 mb-1.5">
+                      Account Email
+                    </label>
+                    <div className="relative">
+                      <Mail className="w-3.5 h-3.5 text-slate-400 dark:text-zinc-500 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+                      <input
+                        type="email"
+                        required
+                        value={fpEmail}
+                        onChange={(e) => setFpEmail(e.target.value)}
+                        placeholder="you@college.edu"
+                        className="w-full bg-white dark:bg-[#090A0D] border border-slate-300 dark:border-zinc-800 focus:border-amber-500 rounded-xl pl-8 pr-4 py-2.5 text-sm text-slate-900 dark:text-zinc-100 placeholder-slate-400 dark:placeholder-zinc-500 focus:outline-none transition shadow-xs"
+                      />
                     </div>
-                    <button
-                      type="submit"
-                      disabled={loading}
-                      className="w-full py-2.5 rounded-xl bg-amber-600 hover:bg-amber-500 active:bg-amber-700 disabled:opacity-50 disabled:cursor-not-allowed text-white text-xs font-bold tracking-wide transition-all flex items-center justify-center gap-2 shadow-md shadow-amber-600/25"
-                    >
-                      {loading ? (
-                        <span className="flex items-center gap-2">
-                          <span className="w-3.5 h-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                          Sending code…
-                        </span>
-                      ) : (
-                        <>Send Reset Code <ArrowRight className="w-3.5 h-3.5" /></>
-                      )}
-                    </button>
-                  </form>
-                )}
+                  </div>
 
-                {fpStep === 2 && (
-                  <form onSubmit={handleResetPassword} className="space-y-3.5">
-                    <div>
-                      <label className="block text-[11px] font-semibold text-slate-700 dark:text-zinc-300 mb-1.5">
-                        6-Digit Reset Code
-                      </label>
-                      <div className="relative">
-                        <ShieldCheck className="w-3.5 h-3.5 text-slate-400 dark:text-zinc-500 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
-                        <input
-                          type="text"
-                          required
-                          maxLength={6}
-                          inputMode="numeric"
-                          value={fpOtp}
-                          onChange={(e) => setFpOtp(e.target.value.replace(/\D/g, ""))}
-                          placeholder="Enter 6-digit code"
-                          className="w-full bg-white dark:bg-[#090A0D] border border-slate-300 dark:border-zinc-800 focus:border-amber-500 rounded-xl pl-8 pr-4 py-2.5 text-center text-lg font-mono font-bold tracking-[0.3em] text-amber-600 dark:text-amber-400 placeholder-slate-300 dark:placeholder-zinc-700 focus:outline-none transition shadow-xs"
-                        />
-                      </div>
+                  <div>
+                    <label className="block text-[11px] font-semibold text-slate-700 dark:text-zinc-300 mb-1.5">
+                      New Password
+                    </label>
+                    <div className="relative">
+                      <Lock className="w-3.5 h-3.5 text-slate-400 dark:text-zinc-500 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+                      <input
+                        type={fpShowPw ? "text" : "password"}
+                        required
+                        minLength={6}
+                        value={fpNewPw}
+                        onChange={(e) => setFpNewPw(e.target.value)}
+                        placeholder="Min 6 characters"
+                        className="w-full bg-white dark:bg-[#090A0D] border border-slate-300 dark:border-zinc-800 focus:border-amber-500 rounded-xl pl-8 pr-10 py-2.5 text-sm text-slate-900 dark:text-zinc-100 placeholder-slate-400 dark:placeholder-zinc-500 focus:outline-none transition shadow-xs"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setFpShowPw(!fpShowPw)}
+                        className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 dark:text-zinc-500 dark:hover:text-zinc-300 transition-colors"
+                      >
+                        {fpShowPw ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
+                      </button>
                     </div>
+                  </div>
 
-                    <div>
-                      <label className="block text-[11px] font-semibold text-slate-700 dark:text-zinc-300 mb-1.5">
-                        New Password
-                      </label>
-                      <div className="relative">
-                        <Lock className="w-3.5 h-3.5 text-slate-400 dark:text-zinc-500 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
-                        <input
-                          type={fpShowPw ? "text" : "password"}
-                          required
-                          minLength={6}
-                          value={fpNewPw}
-                          onChange={(e) => setFpNewPw(e.target.value)}
-                          placeholder="Min 6 characters"
-                          className="w-full bg-white dark:bg-[#090A0D] border border-slate-300 dark:border-zinc-800 focus:border-amber-500 rounded-xl pl-8 pr-10 py-2.5 text-sm text-slate-900 dark:text-zinc-100 placeholder-slate-400 dark:placeholder-zinc-500 focus:outline-none transition shadow-xs"
-                        />
-                        <button
-                          type="button"
-                          onClick={() => setFpShowPw(!fpShowPw)}
-                          className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 dark:text-zinc-500 dark:hover:text-zinc-300 transition-colors"
-                        >
-                          {fpShowPw ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
-                        </button>
-                      </div>
+                  <div>
+                    <label className="block text-[11px] font-semibold text-slate-700 dark:text-zinc-300 mb-1.5">
+                      Confirm New Password
+                    </label>
+                    <div className="relative">
+                      <RotateCcw className="w-3.5 h-3.5 text-slate-400 dark:text-zinc-500 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+                      <input
+                        type={fpShowPw ? "text" : "password"}
+                        required
+                        minLength={6}
+                        value={fpConfirmPw}
+                        onChange={(e) => setFpConfirmPw(e.target.value)}
+                        placeholder="Re-enter new password"
+                        className="w-full bg-white dark:bg-[#090A0D] border border-slate-300 dark:border-zinc-800 focus:border-amber-500 rounded-xl pl-8 pr-4 py-2.5 text-sm text-slate-900 dark:text-zinc-100 placeholder-slate-400 dark:placeholder-zinc-500 focus:outline-none transition shadow-xs"
+                      />
                     </div>
+                  </div>
 
-                    <div>
-                      <label className="block text-[11px] font-semibold text-slate-700 dark:text-zinc-300 mb-1.5">
-                        Confirm New Password
-                      </label>
-                      <div className="relative">
-                        <RotateCcw className="w-3.5 h-3.5 text-slate-400 dark:text-zinc-500 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
-                        <input
-                          type={fpShowPw ? "text" : "password"}
-                          required
-                          minLength={6}
-                          value={fpConfirmPw}
-                          onChange={(e) => setFpConfirmPw(e.target.value)}
-                          placeholder="Re-enter new password"
-                          className="w-full bg-white dark:bg-[#090A0D] border border-slate-300 dark:border-zinc-800 focus:border-amber-500 rounded-xl pl-8 pr-4 py-2.5 text-sm text-slate-900 dark:text-zinc-100 placeholder-slate-400 dark:placeholder-zinc-500 focus:outline-none transition shadow-xs"
-                        />
-                      </div>
-                    </div>
-
-                    <button
-                      type="submit"
-                      disabled={loading || fpOtp.length !== 6}
-                      className="w-full py-2.5 rounded-xl bg-amber-600 hover:bg-amber-500 active:bg-amber-700 disabled:opacity-50 disabled:cursor-not-allowed text-white text-xs font-bold tracking-wide transition-all flex items-center justify-center gap-2 shadow-md shadow-amber-600/25"
-                    >
-                      {loading ? (
-                        <span className="flex items-center gap-2">
-                          <span className="w-3.5 h-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                          Resetting…
-                        </span>
-                      ) : (
-                        <>Reset Password <KeyRound className="w-3.5 h-3.5" /></>
-                      )}
-                    </button>
-                  </form>
-                )}
+                  <button
+                    type="submit"
+                    disabled={loading || !fpEmail || fpNewPw.length < 6}
+                    className="w-full py-2.5 rounded-xl bg-amber-600 hover:bg-amber-500 active:bg-amber-700 disabled:opacity-50 disabled:cursor-not-allowed text-white text-xs font-bold tracking-wide transition-all flex items-center justify-center gap-2 shadow-md shadow-amber-600/25"
+                  >
+                    {loading ? (
+                      <span className="flex items-center gap-2">
+                        <span className="w-3.5 h-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                        Resetting…
+                      </span>
+                    ) : (
+                      <>Update & Reset Password <KeyRound className="w-3.5 h-3.5" /></>
+                    )}
+                  </button>
+                </form>
               </div>
             )}
 
