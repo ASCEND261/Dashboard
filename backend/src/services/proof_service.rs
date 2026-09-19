@@ -56,7 +56,7 @@ pub async fn save_proof_file(
         return Err(AppError::Internal(format!("Failed to upload to Supabase: {}", err_text)));
     }
 
-    Ok(filename.to_string())
+    Ok(format!("{}/storage/v1/object/public/proofs/{}", supabase_url, filename))
 }
 
 pub fn generate_signed_view_token(proof_id: &str, user_id: &str, secret: &str) -> String {

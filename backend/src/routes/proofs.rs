@@ -130,8 +130,7 @@ pub async fn view_proof(
     .await?
     .ok_or_else(|| AppError::NotFound("Proof record not found.".to_string()))?;
 
-    let url = format!("{}/storage/v1/object/public/proofs/{}", state.config.supabase_url, proof.file_path);
-    Ok(axum::response::Redirect::temporary(&url).into_response())
+    Ok(axum::response::Redirect::temporary(&proof.file_path).into_response())
 }
 
 #[derive(Debug, Serialize)]
