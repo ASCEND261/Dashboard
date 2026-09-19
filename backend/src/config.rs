@@ -56,7 +56,7 @@ impl Config {
             .unwrap_or_else(|_| "https://rgcxulamrmfypswxibdp.supabase.co".to_string());
 
         let supabase_key = env::var("SUPABASE_KEY")
-            .unwrap_or_else(|_| "sb_publishable_RR-O8V_dzr_W2o59AgXr_Q_mOYRRluP".to_string());
+            .unwrap_or_else(|_| "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJnY3h1bGFtcm1meXBzd3hpYmRwIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4OTc5ODEzMSwiZXhwIjoyMTA1Mzc0MTMxfQ.mJP_yssY40n2XOZZ6qLjKbdVStsZGmya8lTo9jAZfj8".to_string());
 
         Self {
             database_url,
