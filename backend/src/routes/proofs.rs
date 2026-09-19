@@ -71,7 +71,7 @@ pub async fn upload_proof(
 
     let sanitized_filename = filename.replace(' ', "_").replace('\u{202f}', "_").replace('\u{200b}', "_");
     let stored_filename = format!("{}_{}", &file_hash[..12], sanitized_filename);
-    save_proof_file(
+    let public_url = save_proof_file(
         &state.config.supabase_url,
         &state.config.supabase_key,
         &stored_filename,
@@ -98,7 +98,7 @@ pub async fn upload_proof(
     )
     .bind(&proof_id)
     .bind(&filename)
-    .bind(&stored_filename)
+    .bind(&public_url)
     .bind(&content_type)
     .bind(file_size)
     .bind(&file_hash)
