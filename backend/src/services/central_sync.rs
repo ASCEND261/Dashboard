@@ -5,10 +5,15 @@ use std::time::Duration;
 /// Background worker that syncs READY integration_events to Aarvak Central
 /// every 30 seconds. Follows the exact protocol from ASCEND_INTEGRATION.md.
 pub async fn start_central_sync_worker(pool: PgPool) {
-    let central_url = std::env::var("CENTRAL_INGEST_URL")
+    let central_url = std::env::var("CENTRAL_SUPABASE_URL")
+        .map(|s| format!("{}/functions/v1/ingest", s))
         .unwrap_or_else(|_| "https://maekkuqaazfjujtokobl.supabase.co/functions/v1/ingest".to_string());
-    let central_key = std::env::var("CENTRAL_API_KEY")
-        .unwrap_or_else(|_| "tsj_7eec44d1c598ec72f73b2b907891d1397622c02fa3e38d5f".to_string());
+    
+    let central_key = std::env::var("CENTRAL_ANON_KEY")
+        .unwrap_or_else(|_| "sb_publishable_2pCYB_tSDWn8FXG94OHjg_1zYWSaQx".to_string());
+
+    let central_team_id = std::env::var("CENTRAL_TEAM_ID")
+        .unwrap_or_else(|_| "8f7af888-7dca-467c-86a0-f4500bc1c0ed".to_string());
 
     let http = Client::builder()
         .timeout(Duration::from_secs(15))
@@ -20,7 +25,7 @@ pub async fn start_central_sync_worker(pool: PgPool) {
     loop {
         tokio::time::sleep(Duration::from_secs(30)).await;
 
-        if let Err(e) = sync_tick(&pool, &http, &central_url, &central_key).await {
+        if let Err(e) = sync_tick(&pool, &http, &central_url, &central_key, &central_team_id).await {
             tracing::error!("Central sync tick error: {}", e);
         }
     }
@@ -31,6 +36,7 @@ async fn sync_tick(
     http: &Client,
     url: &str,
     key: &str,
+    team_id: &str,
 ) -> Result<(), Box<dyn std::error::Error>> {
     // Pick up to 25 READY/FAILED rows that have a resolved central code
     let rows = sqlx::query_as::<_, SyncRow>(
@@ -69,6 +75,7 @@ async fn sync_tick(
             "event_id": row.id,
             "event_type": "submission.upserted",
             "occurred_at": chrono::Utc::now().to_rfc3339(),
+            "team_id": team_id,
             "payload": payload
         });
 
