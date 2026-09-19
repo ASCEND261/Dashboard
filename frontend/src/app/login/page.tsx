@@ -7,7 +7,8 @@ import { useAuth } from "@/lib/auth-context";
 import { api } from "@/lib/api";
 import {
   Mail, Lock, User, Eye, EyeOff, ArrowRight, ShieldCheck,
-  AlertCircle, CheckCircle2, BookOpen, ChevronDown, Sparkles
+  AlertCircle, CheckCircle2, BookOpen, ChevronDown, Sparkles,
+  KeyRound, ArrowLeft, RotateCcw
 } from "lucide-react";
 import AscendLogo from "@/components/ascend-logo";
 import PrismaticGlassCard from "@/components/react-bits/PrismaticGlassCard";
@@ -50,9 +51,68 @@ export default function LoginPage() {
   const [regSection, setRegSection]       = useState("A");
   const [regDept, setRegDept]             = useState("TECHNICAL");
 
+  // Forgot Password
+  const [forgotMode, setForgotMode] = useState(false);
+  const [fpStep, setFpStep] = useState<1 | 2>(1);
+  const [fpEmail, setFpEmail] = useState("");
+  const [fpOtp, setFpOtp] = useState("");
+  const [fpNewPw, setFpNewPw] = useState("");
+  const [fpConfirmPw, setFpConfirmPw] = useState("");
+  const [fpShowPw, setFpShowPw] = useState(false);
+
   const [error, setError]     = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+
+  const handleForgotRequest = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+    setSuccess(null);
+    setLoading(true);
+    try {
+      const res = await api.forgotPassword(fpEmail.trim());
+      setSuccess(res.message + (res.dev_otp ? ` (Dev code: ${res.dev_otp})` : ""));
+      setFpStep(2);
+    } catch (err: any) {
+      setError(err.message || "Failed to send reset code.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleResetPassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+    setSuccess(null);
+    if (fpNewPw !== fpConfirmPw) {
+      setError("Passwords do not match.");
+      return;
+    }
+    setLoading(true);
+    try {
+      const res = await api.resetPassword({
+        email: fpEmail.trim(),
+        otp: fpOtp.trim(),
+        new_password: fpNewPw,
+      });
+      setSuccess(res.message);
+      setTimeout(() => {
+        setForgotMode(false);
+        setFpStep(1);
+        setFpOtp("");
+        setFpNewPw("");
+        setFpConfirmPw("");
+        setSiEmail(fpEmail.trim());
+        setSiPassword("");
+        setSuccess(null);
+        setTab("signin");
+      }, 2000);
+    } catch (err: any) {
+      setError(err.message || "Failed to reset password.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -202,7 +262,7 @@ export default function LoginPage() {
             )}
 
             {/* ─────────────── SIGN IN FORM ─────────────── */}
-            {tab === "signin" && (
+            {tab === "signin" && !forgotMode && (
               <form onSubmit={handleSignIn} className="space-y-4">
                 <div>
                   <label className="block text-[11px] font-semibold text-slate-700 dark:text-zinc-300 mb-1.5">
@@ -259,7 +319,176 @@ export default function LoginPage() {
                     <>Sign In <ArrowRight className="w-3.5 h-3.5" /></>
                   )}
                 </button>
+
+                <div className="text-center">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setForgotMode(true);
+                      setFpStep(1);
+                      setFpEmail(siEmail);
+                      setError(null);
+                      setSuccess(null);
+                    }}
+                    className="text-[11px] font-medium text-blue-600 hover:text-blue-500 dark:text-blue-400 dark:hover:text-blue-300 transition-colors"
+                  >
+                    Forgot your password?
+                  </button>
+                </div>
               </form>
+            )}
+
+            {/* ─────────────── FORGOT PASSWORD FLOW ─────────────── */}
+            {forgotMode && tab === "signin" && (
+              <div className="space-y-4">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setForgotMode(false);
+                    setFpStep(1);
+                    setError(null);
+                    setSuccess(null);
+                  }}
+                  className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-slate-500 hover:text-slate-700 dark:text-zinc-400 dark:hover:text-zinc-200 transition-colors"
+                >
+                  <ArrowLeft className="w-3 h-3" />
+                  Back to Sign In
+                </button>
+
+                <div className="flex items-center gap-2">
+                  <div className="p-2 rounded-lg bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800/50">
+                    <KeyRound className="w-4 h-4 text-amber-600 dark:text-amber-400" />
+                  </div>
+                  <div>
+                    <h2 className="text-sm font-bold text-slate-900 dark:text-white">Reset Password</h2>
+                    <p className="text-[10px] text-slate-500 dark:text-zinc-400 font-mono">
+                      {fpStep === 1 ? "Step 1 — Enter your email" : "Step 2 — Enter code & new password"}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Step indicator */}
+                <div className="flex gap-2">
+                  <div className={`h-1 flex-1 rounded-full transition-all ${fpStep >= 1 ? 'bg-amber-500' : 'bg-slate-200 dark:bg-zinc-800'}`} />
+                  <div className={`h-1 flex-1 rounded-full transition-all ${fpStep >= 2 ? 'bg-amber-500' : 'bg-slate-200 dark:bg-zinc-800'}`} />
+                </div>
+
+                {fpStep === 1 && (
+                  <form onSubmit={handleForgotRequest} className="space-y-3.5">
+                    <div>
+                      <label className="block text-[11px] font-semibold text-slate-700 dark:text-zinc-300 mb-1.5">
+                        Email Address
+                      </label>
+                      <div className="relative">
+                        <Mail className="w-3.5 h-3.5 text-slate-400 dark:text-zinc-500 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+                        <input
+                          type="email"
+                          required
+                          value={fpEmail}
+                          onChange={(e) => setFpEmail(e.target.value)}
+                          placeholder="you@college.edu"
+                          className="w-full bg-white dark:bg-[#090A0D] border border-slate-300 dark:border-zinc-800 focus:border-amber-500 rounded-xl pl-8 pr-4 py-2.5 text-sm text-slate-900 dark:text-zinc-100 placeholder-slate-400 dark:placeholder-zinc-500 focus:outline-none transition shadow-xs"
+                        />
+                      </div>
+                    </div>
+                    <button
+                      type="submit"
+                      disabled={loading}
+                      className="w-full py-2.5 rounded-xl bg-amber-600 hover:bg-amber-500 active:bg-amber-700 disabled:opacity-50 disabled:cursor-not-allowed text-white text-xs font-bold tracking-wide transition-all flex items-center justify-center gap-2 shadow-md shadow-amber-600/25"
+                    >
+                      {loading ? (
+                        <span className="flex items-center gap-2">
+                          <span className="w-3.5 h-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                          Sending code…
+                        </span>
+                      ) : (
+                        <>Send Reset Code <ArrowRight className="w-3.5 h-3.5" /></>
+                      )}
+                    </button>
+                  </form>
+                )}
+
+                {fpStep === 2 && (
+                  <form onSubmit={handleResetPassword} className="space-y-3.5">
+                    <div>
+                      <label className="block text-[11px] font-semibold text-slate-700 dark:text-zinc-300 mb-1.5">
+                        6-Digit Reset Code
+                      </label>
+                      <div className="relative">
+                        <ShieldCheck className="w-3.5 h-3.5 text-slate-400 dark:text-zinc-500 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+                        <input
+                          type="text"
+                          required
+                          maxLength={6}
+                          inputMode="numeric"
+                          value={fpOtp}
+                          onChange={(e) => setFpOtp(e.target.value.replace(/\D/g, ""))}
+                          placeholder="Enter 6-digit code"
+                          className="w-full bg-white dark:bg-[#090A0D] border border-slate-300 dark:border-zinc-800 focus:border-amber-500 rounded-xl pl-8 pr-4 py-2.5 text-center text-lg font-mono font-bold tracking-[0.3em] text-amber-600 dark:text-amber-400 placeholder-slate-300 dark:placeholder-zinc-700 focus:outline-none transition shadow-xs"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-[11px] font-semibold text-slate-700 dark:text-zinc-300 mb-1.5">
+                        New Password
+                      </label>
+                      <div className="relative">
+                        <Lock className="w-3.5 h-3.5 text-slate-400 dark:text-zinc-500 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+                        <input
+                          type={fpShowPw ? "text" : "password"}
+                          required
+                          minLength={6}
+                          value={fpNewPw}
+                          onChange={(e) => setFpNewPw(e.target.value)}
+                          placeholder="Min 6 characters"
+                          className="w-full bg-white dark:bg-[#090A0D] border border-slate-300 dark:border-zinc-800 focus:border-amber-500 rounded-xl pl-8 pr-10 py-2.5 text-sm text-slate-900 dark:text-zinc-100 placeholder-slate-400 dark:placeholder-zinc-500 focus:outline-none transition shadow-xs"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setFpShowPw(!fpShowPw)}
+                          className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 dark:text-zinc-500 dark:hover:text-zinc-300 transition-colors"
+                        >
+                          {fpShowPw ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
+                        </button>
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-[11px] font-semibold text-slate-700 dark:text-zinc-300 mb-1.5">
+                        Confirm New Password
+                      </label>
+                      <div className="relative">
+                        <RotateCcw className="w-3.5 h-3.5 text-slate-400 dark:text-zinc-500 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+                        <input
+                          type={fpShowPw ? "text" : "password"}
+                          required
+                          minLength={6}
+                          value={fpConfirmPw}
+                          onChange={(e) => setFpConfirmPw(e.target.value)}
+                          placeholder="Re-enter new password"
+                          className="w-full bg-white dark:bg-[#090A0D] border border-slate-300 dark:border-zinc-800 focus:border-amber-500 rounded-xl pl-8 pr-4 py-2.5 text-sm text-slate-900 dark:text-zinc-100 placeholder-slate-400 dark:placeholder-zinc-500 focus:outline-none transition shadow-xs"
+                        />
+                      </div>
+                    </div>
+
+                    <button
+                      type="submit"
+                      disabled={loading || fpOtp.length !== 6}
+                      className="w-full py-2.5 rounded-xl bg-amber-600 hover:bg-amber-500 active:bg-amber-700 disabled:opacity-50 disabled:cursor-not-allowed text-white text-xs font-bold tracking-wide transition-all flex items-center justify-center gap-2 shadow-md shadow-amber-600/25"
+                    >
+                      {loading ? (
+                        <span className="flex items-center gap-2">
+                          <span className="w-3.5 h-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                          Resetting…
+                        </span>
+                      ) : (
+                        <>Reset Password <KeyRound className="w-3.5 h-3.5" /></>
+                      )}
+                    </button>
+                  </form>
+                )}
+              </div>
             )}
 
             {/* ─────────────── REGISTER FORM ─────────────── */}

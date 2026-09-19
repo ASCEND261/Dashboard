@@ -108,6 +108,16 @@ export const api = {
     return request<any>("/auth/me");
   },
   getDemoAccounts: () => request<any[]>("/auth/demo-accounts"),
+  forgotPassword: (email: string) =>
+    request<{ message: string; email: string; dev_otp?: string }>("/auth/forgot-password", {
+      method: "POST",
+      body: JSON.stringify({ email }),
+    }),
+  resetPassword: (data: { email: string; otp: string; new_password: string }) =>
+    request<{ message: string }>("/auth/reset-password", {
+      method: "POST",
+      body: JSON.stringify(data),
+    }),
 
   // Admin Access Control Queue
   getAccessRequests: () => {

@@ -39,6 +39,8 @@ pub fn create_api_router() -> Router<AppState> {
         .route("/auth/access-status", get(auth::get_access_status))
         .route("/auth/access-code/verify", post(auth::verify_access_code))
         .route("/auth/access-code", get(auth::get_my_access_code))
+        .route("/auth/forgot-password", post(auth::forgot_password))
+        .route("/auth/reset-password", post(auth::reset_password))
         // Admin Access Control Queue & Member Leaderboard
         .route("/admin/access-requests", get(admin::list_access_requests))
         .route("/admin/access-requests/:id/approve", post(admin::approve_access_request))

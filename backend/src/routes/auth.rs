@@ -813,3 +813,224 @@ pub async fn get_demo_accounts(
 
     Ok(Json(accounts))
 }
+
+// ─────────────── FORGOT PASSWORD ───────────────
+
+#[derive(Debug, Deserialize)]
+pub struct ForgotPasswordRequest {
+    pub email: String,
+}
+
+#[derive(Debug, Serialize)]
+pub struct ForgotPasswordResponse {
+    pub message: String,
+    pub email: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub dev_otp: Option<String>,
+}
+
+#[derive(Debug, Deserialize)]
+pub struct ResetPasswordRequest {
+    pub email: String,
+    pub otp: String,
+    pub new_password: String,
+}
+
+#[derive(Debug, Serialize)]
+pub struct ResetPasswordResponse {
+    pub message: String,
+}
+
+/// POST /auth/forgot-password
+/// Sends a 6-digit OTP to the user's email for password reset.
+pub async fn forgot_password(
+    State(state): State<AppState>,
+    Json(req): Json<ForgotPasswordRequest>,
+) -> Result<Json<ForgotPasswordResponse>, AppError> {
+    let email = req.email.trim().to_lowercase();
+    if email.len() < 5 || !email.contains('@') || !email.contains('.') {
+        return Err(AppError::BadRequest("Please provide a valid email address.".to_string()));
+    }
+
+    // User must exist to reset password
+    let _user = sqlx::query_as::<_, User>("SELECT * FROM users WHERE email = $1")
+        .bind(&email)
+        .fetch_optional(&state.db)
+        .await?
+        .ok_or_else(|| AppError::BadRequest("No account found with this email address.".to_string()))?;
+
+    // Rate limiting: max 5 requests per 10 minutes
+    let count: i64 = sqlx::query_scalar(
+        "SELECT COUNT(*) FROM email_otps WHERE email = $1 AND created_at > NOW() - INTERVAL '10 minutes'",
+    )
+    .bind(&email)
+    .fetch_one(&state.db)
+    .await?;
+
+    if count >= 5 {
+        return Err(AppError::RateLimited);
+    }
+
+    // Invalidate existing active OTPs
+    sqlx::query("UPDATE email_otps SET consumed = TRUE WHERE email = $1 AND consumed = FALSE")
+        .bind(&email)
+        .execute(&state.db)
+        .await?;
+
+    // Generate secure 6-digit OTP
+    let random_u128 = Uuid::new_v4().as_u128();
+    let raw_otp = format!("{:06}", (random_u128 % 900000) + 100000);
+    let otp_hash = hash_secret(&raw_otp);
+    let otp_id = format!("OTP-{}", Uuid::new_v4().simple());
+
+    tracing::info!("🔑 [PASSWORD RESET OTP] Code generated for {}: {}", email, raw_otp);
+
+    // Dispatch email via AI service SMTP + Resend fallback
+    let email_clone = email.clone();
+    let otp_clone = raw_otp.clone();
+    let ai_url = state.config.ai_service_url.clone();
+
+    tokio::spawn(async move {
+        let client = reqwest::Client::new();
+
+        // 1. AI service SMTP
+        let email_endpoint = format!("{}/api/email/send-otp", ai_url);
+        let payload = serde_json::json!({
+            "email": email_clone,
+            "otp": otp_clone,
+            "name": "Member",
+            "subject": "ASCEND Password Reset Code"
+        });
+
+        match client.post(&email_endpoint).json(&payload).send().await {
+            Ok(resp) => {
+                if let Ok(data) = resp.json::<serde_json::Value>().await {
+                    let status = data.get("status").and_then(|s| s.as_str()).unwrap_or("unknown");
+                    let provider = data.get("provider").and_then(|p| p.as_str()).unwrap_or("none");
+                    if status == "delivered" {
+                        tracing::info!("✅ [PASSWORD RESET EMAIL DELIVERED] Sent to {} via {}", email_clone, provider);
+                    } else {
+                        tracing::warn!("⚠️ [PASSWORD RESET EMAIL] Status for {}: {} ({})", email_clone, status, provider);
+                    }
+                }
+            }
+            Err(err) => {
+                tracing::warn!("⚠️ [PASSWORD RESET EMAIL] Could not reach email endpoint: {}", err);
+            }
+        }
+
+        // 2. Resend fallback
+        if let Ok(resend_key) = std::env::var("RESEND_API_KEY") {
+            if !resend_key.trim().is_empty() {
+                let resend_payload = serde_json::json!({
+                    "from": "ASCEND Security <onboarding@resend.dev>",
+                    "to": [email_clone],
+                    "subject": format!("ASCEND Password Reset Code: {}", otp_clone),
+                    "html": format!(
+                        "<div style='background:#07080A;color:#FFFFFF;padding:32px;font-family:system-ui,sans-serif;border-radius:12px;max-width:500px;margin:0 auto;border:1px solid #1E293B;'><h1 style='color:#F59E0B;font-size:20px;margin:0 0 12px 0;'>ASCEND Password Reset</h1><p style='color:#94A3B8;font-size:14px;line-height:1.6;'>Use the following 6-digit code to reset your password:</p><div style='background:#0F172A;border:1px solid #D97706;border-radius:8px;padding:16px;text-align:center;font-size:32px;font-weight:900;letter-spacing:8px;color:#FFFFFF;margin:24px 0;'>{}</div><p style='color:#64748B;font-size:12px;margin:0;'>This code expires in 10 minutes. If you did not request this, please ignore this email.</p></div>",
+                        otp_clone
+                    )
+                });
+                let _ = client
+                    .post("https://api.resend.com/emails")
+                    .header("Authorization", format!("Bearer {}", resend_key))
+                    .json(&resend_payload)
+                    .send()
+                    .await;
+            }
+        }
+    });
+
+    // Store OTP with 10-minute expiry
+    sqlx::query(
+        r#"
+        INSERT INTO email_otps (id, email, otp_hash, attempts, created_at, expires_at, consumed, dev_code)
+        VALUES ($1, $2, $3, 0, NOW(), NOW() + INTERVAL '10 minutes', FALSE, $4)
+        "#,
+    )
+    .bind(&otp_id)
+    .bind(&email)
+    .bind(&otp_hash)
+    .bind(&raw_otp)
+    .execute(&state.db)
+    .await?;
+
+    Ok(Json(ForgotPasswordResponse {
+        message: "Password reset code sent to your email.".to_string(),
+        email,
+        dev_otp: Some(raw_otp),
+    }))
+}
+
+/// POST /auth/reset-password
+/// Verifies OTP and sets a new password for the user.
+pub async fn reset_password(
+    State(state): State<AppState>,
+    Json(req): Json<ResetPasswordRequest>,
+) -> Result<Json<ResetPasswordResponse>, AppError> {
+    let email = req.email.trim().to_lowercase();
+    let otp = req.otp.trim().to_string();
+
+    if req.new_password.len() < 6 {
+        return Err(AppError::BadRequest("New password must be at least 6 characters.".to_string()));
+    }
+
+    // Find the latest active OTP for this email
+    let otp_record = sqlx::query_as::<_, OtpRecord>(
+        r#"
+        SELECT id, otp_hash, attempts, expires_at
+        FROM email_otps
+        WHERE email = $1 AND consumed = FALSE AND expires_at > NOW()
+        ORDER BY created_at DESC
+        LIMIT 1
+        "#,
+    )
+    .bind(&email)
+    .fetch_optional(&state.db)
+    .await?
+    .ok_or_else(|| AppError::BadRequest("No active reset code found. Please request a new one.".to_string()))?;
+
+    // Check max attempts
+    let attempts = otp_record.attempts.unwrap_or(0);
+    if attempts >= 5 {
+        sqlx::query("UPDATE email_otps SET consumed = TRUE WHERE id = $1")
+            .bind(&otp_record.id)
+            .execute(&state.db)
+            .await?;
+        return Err(AppError::BadRequest("Too many incorrect attempts. Please request a new code.".to_string()));
+    }
+
+    // Verify OTP
+    let provided_hash = hash_secret(&otp);
+    if provided_hash != otp_record.otp_hash {
+        sqlx::query("UPDATE email_otps SET attempts = COALESCE(attempts, 0) + 1 WHERE id = $1")
+            .bind(&otp_record.id)
+            .execute(&state.db)
+            .await?;
+        return Err(AppError::BadRequest("Incorrect reset code. Please try again.".to_string()));
+    }
+
+    // OTP is valid — consume it
+    sqlx::query("UPDATE email_otps SET consumed = TRUE WHERE id = $1")
+        .bind(&otp_record.id)
+        .execute(&state.db)
+        .await?;
+
+    // Hash new password and update user
+    let new_hashed = hash_password(&req.new_password)?;
+    let updated = sqlx::query("UPDATE users SET hashed_password = $1 WHERE email = $2")
+        .bind(&new_hashed)
+        .bind(&email)
+        .execute(&state.db)
+        .await?;
+
+    if updated.rows_affected() == 0 {
+        return Err(AppError::BadRequest("No account found with this email.".to_string()));
+    }
+
+    tracing::info!("🔐 [PASSWORD RESET SUCCESS] Password updated for {}", email);
+
+    Ok(Json(ResetPasswordResponse {
+        message: "Password reset successfully! You can now sign in with your new password.".to_string(),
+    }))
+}
